@@ -1,2 +1,3 @@
 // Se ignora los archivos
 /node_modules
+.env
