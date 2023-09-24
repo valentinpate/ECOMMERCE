@@ -15,23 +15,23 @@ app.use(express.static("public"))
 app.set("view engine","ejs")
 
 // Conexion de la base de datos mongo DB
-// const dbURL=""
-// mongoose.connect(dbURL)
-// .then((result)=>app.listen(4000))
-// .catch((error)=>console.log(error))
+const dbURL="mongodb+srv://martinbottaro34:JoT8VhALyqIxzzT2@cluster0.1kbibly.mongodb.net/"
+mongoose.connect(dbURL)
+.then((result)=>app.listen(4000))
+.catch((error)=>console.log(error))
 
 // Agrego la primera ruta
 app.get("/",(req,res)=>{
-    res.render("home")
+    res.render("home") 
 })
 
 // Conecto las rutas
 app.use(authRoutes)
 
 // levanto el servidor
-app.listen(4000,()=>{
-    console.log("servidor ejecutandose")
-})
+// app.listen(4000,()=>{
+//     console.log("servidor ejecutandose")
+// })
 
 
 
