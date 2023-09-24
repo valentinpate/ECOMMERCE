@@ -2,12 +2,15 @@
 const {Router}=require("express")
 const router=Router()
 
-// Seteo las rutas/direcciones
-router.post("/signup",(req,res)=>{})
-router.get("/signup",(req,res)=>{})
+// Importo el archvio authControllers con la logica de las rutas
+const authControllers=require("../controllers/authControllers")
 
-router.post("/signin",(req,res)=>{})
-router.get("/signin",(req,res)=>{})
+// Seteo las rutas/direcciones
+router.post("/signup",authControllers.signup_post)
+router.get("/signup",authControllers.signup_get)
+
+router.post("/signin",authControllers.login_post)
+router.get("/signin",authControllers.login_get)
 
 // Exporto las rutas
 module.exports=router
