@@ -7,7 +7,10 @@
 /* Etiquetas */
 
 header{
+    width:100%;
     background-color:white;
+    display:flex;
+    flex-direction:column;
 }
 
 input{
@@ -17,7 +20,7 @@ input{
     border-radius:0.2rem;
 }
 
-a{
+a, nav a{
     text-decoration:none;
 }
 
@@ -26,6 +29,21 @@ button{
 }
 
 /* Elementos en clases */
+
+.menu nav a{
+    color:#737373;
+    margin:0 1.5em;
+}
+
+.product-nav a{
+    color:#737373;
+    margin:0 1.2em;
+}
+
+.menu input{
+    width:50em;
+    margin:0 1.5em;
+}
 
 .icons img, .icons svg{
     width:26px;
@@ -38,9 +56,14 @@ button{
 }
 
 .products button, .offer-header button{
-    border:2px solid #001254;
+    padding:0.8em 1.5em;
     background-color:#001254;
+    color:white;
     font-weight:400;
+    border:2px solid #001254;
+    border-radius:2.5rem;
+    transition: background-color 0.5s,
+                border 0.5s;
 }
 
 .nav li, .products li{
@@ -57,7 +80,6 @@ button{
 }
 
 .offer-header button{
-    padding:0.8em 1.5em;
     font-size:1.1rem;
     box-shadow:1px 1px 3px black;
 }
@@ -164,6 +186,11 @@ a:hover{
     border: 2px solid black;
 }
 
+.products button:hover{
+    background-color:#2744ac;
+    border:2px solid #2744ac;
+}
+
 .orange-href:hover{
     color:black;
 }
@@ -188,6 +215,19 @@ a:hover{
 
 .logo{
     width:6em;
+    margin:0 1.5em;
+}
+
+.menu{
+    padding:1em 0 1.5em 0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.icon-container{
+    display:flex;
+    margin:0 1.5em;
 }
 
 .icon{
@@ -195,6 +235,13 @@ a:hover{
     border: 2px solid rgb(199, 199, 199);
     border-radius:100%;
     transition: border 0.5s;
+}
+
+.products{
+    padding-bottom:1em;
+    display:flex;
+    align-items:center;
+    justify-content:space-evenly;
 }
 
 .offer-header{
@@ -209,7 +256,7 @@ a:hover{
     transition: color 0.5s;
 }
 
-.buy-btn /*.product button*/ { 
+.buy-btn{ 
     width:7.2rem;
     margin-top:0.2em;
     border:1px solid #FB7821;
@@ -407,4 +454,19 @@ a:hover{
     border-radius:0.5rem;
     transition: background-color 0.5s,
                 color 0.5s;
+}
+
+/* Mi cuenta / Edición de cuenta */
+
+.account{
+    display:flex;
+}
+
+.my-account{
+    box-shadow:1px 1px 10px #999999;
+}
+
+.account-edit{
+    display:flex;
+    flex-direction:column;
 }
