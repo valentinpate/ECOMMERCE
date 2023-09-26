@@ -1,0 +1,410 @@
+*{
+    margin:0;
+    padding:0;
+    font-family:'Segoe UI', Tahoma, sans-serif;
+}
+
+/* Etiquetas */
+
+header{
+    background-color:white;
+}
+
+input{
+    padding:0.5em 0 0.5em 0.5em;
+    font-size:1.1rem;
+    border:2px solid lightgray;
+    border-radius:0.2rem;
+}
+
+a{
+    text-decoration:none;
+}
+
+button{
+    cursor:pointer;
+}
+
+/* Elementos en clases */
+
+.icons img, .icons svg{
+    width:26px;
+    height:26px;
+    transition: transform 0.5s;
+}
+
+.icons svg{
+    padding:0 0.3em;
+}
+
+.products button, .offer-header button{
+    border:2px solid #001254;
+    background-color:#001254;
+    font-weight:400;
+}
+
+.nav li, .products li{
+    margin:0 0.5em;
+}
+
+.orange-href, .offer-header span{
+    color:#FB7821;
+}
+
+.offer-header span, .offer-header p{
+    font-size:1.2rem;
+    font-weight:600;
+}
+
+.offer-header button{
+    padding:0.8em 1.5em;
+    font-size:1.1rem;
+    box-shadow:1px 1px 3px black;
+}
+
+.price span{
+    margin-right:0.5em;
+    color:gray;
+    font-size:0.8em;
+    text-decoration:line-through;
+}
+
+/* Elementos en clases - Productos */
+
+.product-data h2{
+    font-size:2.5rem;
+    font-weight:400;
+    margin-bottom:0.5em;
+}
+
+.product-data h2 span{
+    padding:0.1em 0.2em;
+    font-size:1.5rem;
+    background-color:#FEE1CD;
+    color:#FB7821;
+    border-radius:0.5rem;
+}
+
+.product-data h3{
+    font-size:1.5rem;
+    font-weight:500;
+    margin-bottom:0.5em;
+}
+
+.product-data h4{
+    width:60%;
+    font-size:1.2rem;
+    font-weight:400;
+    color:#737373;
+    margin-bottom:2em;
+}
+
+.product-data hr{
+    border:1px solid #E6E6E6;
+}
+
+.product-total p{
+    font-weight:600;
+    font-size:1.5rem;
+}
+
+.product-total span{
+    font-size:1.8rem;
+    margin-left:1em;
+    color:#001254;
+}
+
+.product-price p{
+    float:right;
+    margin-right:0.3em;
+    font-size:3rem;
+}
+
+.others img{
+    width:12em;
+    margin-bottom:0.3em;
+}
+
+.others h3{
+    font-size:1.5rem;
+}
+
+.other-card p{
+    margin-bottom:0.3em;
+}
+
+/* Elementos en clases - SignUp / SignIn */
+
+.signUpContainer img, .signInContainer img{
+    width:35em;
+    border-top-left-radius:0.5rem;
+    border-bottom-left-radius:0.5rem;
+}
+
+.signUpContainer form, .signInContainer form{
+    display:flex;
+    flex-direction:column;
+}
+
+.signUpContainer input, .signInContainer input{
+    margin:1em 0;
+}
+
+/* Pseudoclases */
+
+a:hover{
+    text-decoration:underline;
+}
+
+.icons svg:hover, .icons img:hover{
+    transform:scale(1.1)
+}
+
+.icon:hover{
+    border: 2px solid black;
+}
+
+.orange-href:hover{
+    color:black;
+}
+
+.sign-btn:hover, .add-to-cart-btn:hover{
+    background-color:white;
+    color:#FB7821;
+}
+
+.other-add-to-cart-btn:hover{
+    background-color:#FB7821;
+    color:white;
+}
+
+.counter-button:hover{
+    background-color:#001254;
+    border:1px solid #001254;
+    color:white;
+}
+
+/* Clases */
+
+.logo{
+    width:6em;
+}
+
+.icon{
+    padding:0.5em;
+    border: 2px solid rgb(199, 199, 199);
+    border-radius:100%;
+    transition: border 0.5s;
+}
+
+.offer-header{
+    margin-top:4em;
+    margin-bottom:0.5em;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+}
+
+.orange-href{
+    transition: color 0.5s;
+}
+
+.buy-btn /*.product button*/ { 
+    width:7.2rem;
+    margin-top:0.2em;
+    border:1px solid #FB7821;
+    background-color:#FB7821;
+    font-size:1.2rem;
+}
+
+/* Bootstrap Icons */
+
+.bi-x-lg{
+    cursor:pointer;
+}
+
+/* Clases - Productos */
+
+.product, .product-image{
+    position:relative;
+    margin-bottom:2em;
+}
+
+.discount{
+    padding:0.5em;
+    background-color:red;
+    color:white;
+    border-radius:0.5rem;
+    font-size:0.9rem;
+    position:absolute;
+    top:0.8em;
+    left:9.5em;
+}
+
+.price{
+    color:#001254;
+    font-size:1.3rem;
+    font-weight:600;
+}
+
+.product-img{
+    padding-top:1em;
+    width: 100%;
+    height: 15rem;
+}
+
+.product-header{
+    padding: 1.5em 2em;
+    margin-bottom:2em;
+    display:flex;
+    justify-content:space-between;
+    box-shadow:0 1px 4px rgb(90, 90, 90);
+}
+
+.goBack{
+    display:flex;
+    color:#737373;
+}
+
+.product-card{
+    display:flex;
+    justify-content:space-evenly;
+}
+
+.product-cart{
+    margin:2em;
+    display:flex;
+    justify-content:space-between;
+}
+
+.product-counter{
+    display:flex;
+    margin-bottom:0.5em;
+    font-size:1.5rem;
+}
+
+.other-product-counter{
+    font-size:1.2rem;
+}
+
+.product-card-discount{
+    position:absolute;
+    right:1em;
+}
+
+.counter-button{
+    background-color:transparent;
+    border:1px solid #999999;
+    border-radius:0.5rem;
+    padding:0 0.4em;
+    margin-left:1em;
+    margin-right:1em;
+    font-size:1.5rem;
+    transition: background-color 0.5s,
+                border 0.5s,
+                color 0.5s;
+}
+
+.other-counter-button{
+    font-size:1.2rem;
+    margin-left:0.8em;
+    margin-right:0.8em;
+}
+
+.add-to-cart-btn{
+    margin-top:1em;
+    padding:0.7em 1.1em;
+    font-weight:600;
+    background-color:#FB7821;
+    color:white;
+    border:2px solid #FB7821;
+    border-radius:2rem;
+    font-size:1.5rem;
+    transition: background-color 0.5s,
+                color 0.5s;
+}
+
+.other-add-to-cart-btn{
+    font-size:1rem;
+    background-color:white;
+    color:#FB7821;
+    transition: background-color 0.5s,
+    color 0.5s;
+}
+
+.others{
+    text-align:center;
+}
+
+.other-cards{
+    width:90%;
+    margin:2em auto;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.other-card{
+    margin:0 4em 4em 4em;
+}
+
+.other-card-flex{
+    margin-top:1em;
+    display:flex;
+}
+
+.other-title{
+    font-size:1.1rem;
+    font-weight:600;
+    margin-bottom:0.2em;
+}
+
+/* SignUp - SignIn */
+
+.signUpContainer{
+    width:70%;
+    margin:4em auto 0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:0.5rem;
+    box-shadow:2px 2px 12px lightgray;
+}
+
+.signInContainer{
+    width:70%;
+    margin:4em auto 0 auto;
+    display:flex;
+    justify-content:center;
+    border-radius:0.5rem;
+    box-shadow:2px 2px 12px lightgray;
+}
+
+.signForm{
+    width:80%;
+    margin:0 4em;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+}
+
+.formTitle{
+    padding-bottom:1.5em;
+}
+
+.formTitleIn{
+    padding-top:4em;
+}
+
+.sign-btn{
+    margin:0.5em 0;
+    padding:0.7em 1.2em;
+    background-color:#FB7821;
+    color:white;
+    font-size:1.2rem;
+    font-weight:600;
+    border:2px solid #FB7821;
+    border-radius:0.5rem;
+    transition: background-color 0.5s,
+                color 0.5s;
+}
