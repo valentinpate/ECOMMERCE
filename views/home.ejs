@@ -1,7 +1,147 @@
-<%- include("partials/head")  -%>
-
-<main>
-    <div>
-        pagina de inicio. Hola Mundo
+<%- include("partials/head") -%>
+<%- include("partials/header") -%>
+<p><%= prueba %></p>
+<main style="margin-top: 150px;">
+    <!-- primer seccion del main PUBLICIDAD -->
+  <section>
+        <div id="myCarousel" class="mt-5 carousel slide mb-6" data-bs-ride="carousel"> <!--esta parte tiene javascript de boostrap no cambiar los id-->
+            <div class="carousel-indicators d-flex justify-content-lg-start"> <!--los 3 botones son los que hay que hacer redondos-->
+              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active"><!--Imagen publicidad 1 -->
+                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/> <!--aca le cambiam el color de fondo al slide de publicidad -->
+                    <image href="./images/vegetales.jpg" x="50" y="20" width="5rem" height="6rem" /><!--esta es la imagen del slide para el tamaño y eso hay que borrar wl width y height de la etiqueta image-->
+                </svg>
+                <div class="container">
+                  <div class="carousel-caption text-start">
+                    <h1>Primer producto</h1>
+                    <p class="opacity-75">descripcion del producto, detalles, precio, nose.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item"><!--Imagen publicidad 2 -->
+                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/><!--aca le cambiam el color de fondo al slide de publicidad -->
+                     <image href="./images/vegetales.jpg" x="50" y="20" width="100" height="60" /><!--esta es la imagen del slide para el tamaño y eso hay que borrar wl width y height de la etiqueta image-->
+                </svg>
+                <div class="container">
+                  <div class="carousel-caption">
+                    <h1>segundo producto</h1>
+                    <p>descripcion del producto, detalles, precio, nose.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item"> <!--Imagen publicidad 3 -->
+                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"   aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/> <!--aca le cambiam el color de fondo al slide de publicidad -->
+                    <image href="./images/vegetales.jpg" x="50" y="20" width="5rem" height="6rem" /><!--esta es la imagen del slide para el tamaño y eso hay que borrar wl width y height de la etiqueta image-->
+                </svg>
+                <div class="container">
+                  <div class="carousel-caption text-end">
+                    <h1>tercer producto</h1>
+                    <p>descripcion del producto, detalles, precio, nose.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div> 
+  </section>
+    <div class="offer-header">
+      <a href="" class="orange-href">Ver todo</a>
+      <button class="all-btn btn btn-primary rounded-pill">Agregar al Carrito <span>(2)</span></button>
+      <p>Ofertas de hoy</p>
     </div>
+  <!-- Segunda seccion del main PRODUCTOS EN OFERTAS -->
+  <section class="d-flex flex-nowrap align-items-center justify-content-between justify-content-lg-between overflow-x-auto">
+    <!-- hay CUATRO cards en total -->
+    <div class="product col-md-4"><!-- CARD OFERTA UNO -->
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary-emphasis">GASEOSAS</strong>
+          <h3 class="mb-0">Coca-Cola</h3>
+          <div class="mb-1 text-body-secondary">12 unidades</div>
+          <p class="card-text mb-auto">resfrescante y deliciosa, quedas diabetico en dos años</p>
+          <p class="price card-text mb-auto"><span>$800</span>$400</p>
+          <button href="#" class="buy-btn icon-link gap-1 icon-link-hover stretched-link btn btn-primary rounded-pill">
+            COMPRAR
+            <!-- <svg class="bi"><use xlink:href="#chevron-right"/></svg> -->
+          </button>
+        </div>
+        <div class="col-auto d-none d-lg-block position-relative">
+          <img src="./images/coca-cola.JPG" class="product-img card-img-top" alt="">
+          <p class="discount">20% desc.</p>
+        </div>  
+      </div>
+    </div>
+
+    <div class="product col-md-4"><!-- CARD OFERTA DOS -->
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary-emphasis">GASEOSAS</strong>
+          <h3 class="mb-0">coca-cola</h3>
+          <div class="mb-1 text-body-secondary">12 unidades</div>
+          <p class="card-text mb-auto">resfrescante y deliciosa, quedas diabetico en dos años</p>
+          <p class="price card-text mb-auto"><span>$800</span>$400</p>
+          <button href="#" class="buy-btn icon-link gap-1 icon-link-hover stretched-link btn btn-primary rounded-pill">
+            COMPRAR
+            <!-- <svg class="bi"><use xlink:href="#chevron-right"/></svg> -->
+          </button>
+        </div>
+        <div class="col-auto d-none d-lg-block position-relative">
+          <img src="./images/coca-cola.JPG" class="product-img card-img-top" alt="" >
+          <p class="discount">20% desc.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="product col-md-4"><!-- CARD OFERTA TRES -->
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary-emphasis">GASEOSAS</strong>
+          <h3 class="mb-0">coca-cola</h3>
+          <div class="mb-1 text-body-secondary">12 unidades</div>
+          <p class="card-text mb-auto">resfrescante y deliciosa, quedas diabetico en dos años</p>
+          <p class="price card-text mb-auto"><span>$800</span>$400</p>
+          <button href="#" class="buy-btn icon-link gap-1 icon-link-hover stretched-link btn btn-primary rounded-pill">
+            COMPRAR
+            <!-- <svg class="bi"><use xlink:href="#chevron-right"/></svg> -->
+          </button>
+        </div>
+        <div class="col-auto d-none d-lg-block position-relative">
+          <img src="./images/coca-cola.JPG" class="product-img card-img-top" alt="">
+          <p class="discount">20% desc.</p>
+        </div>
+      </div>
+    </div>
+
+     <div class="product col-md-4"><!--CARD OFERTA CUATRO -->
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary-emphasis">GASEOSAS</strong>
+          <h3 class="mb-0">coca-cola</h3>
+          <div class="mb-1 text-body-secondary">12 unidades</div>
+          <p class="card-text mb-auto">resfrescante y deliciosa, quedas diabetico en dos años</p>
+          <a href="#" class="icon-link gap-1 icon-link-hover stretched-link btn btn-primary rounded-pill" style="width: 7rem;">
+            COMPRAR
+            <svg class="bi"><use xlink:href="#chevron-right"/></svg>
+          </a>
+        </div>
+        <div class="col-auto d-none d-lg-block position-relative">
+          <img src="./images/coca-cola.JPG" class="card-img-top" alt="" style="width: 100%; height: 15rem;">
+          <p class="discount">20% desc.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- prodcutos.ejs porductos generales -->
+<%- include("partials/productos") -%>
+  </section>      
 </main>
+<%- include("partials/footer") -%>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>

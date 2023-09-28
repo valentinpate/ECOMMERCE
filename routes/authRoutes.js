@@ -12,5 +12,12 @@ router.get("/signup",authControllers.signup_get)
 router.post("/signin",authControllers.login_post)
 router.get("/signin",authControllers.login_get)
 
+router.get("/miperfil",(req,res)=>{
+    res.render("miperfil")
+  })
+
+router.get("/ofertas",(req,res)=>{
+    res.render("ofertas")
+  })
 // Exporto las rutas
 module.exports=router

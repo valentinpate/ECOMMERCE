@@ -1,12 +1,10 @@
 // Importo los paquetes
 const express=require("express")
 const mongoose=require("mongoose")
-//importar variables de seguridad
-const dotenv = require ("dotenv")
-dotenv.config();
+const Productos=require("./models/Productos")
+
 // Importo el modulo de rutas
 const authRoutes=require("./routes/authRoutes")
-const Productos=require("./models/Productos")
 
 // Guardo el express en una constante
 const app=express()
@@ -18,7 +16,7 @@ app.use(express.static("public"))
 app.set("view engine","ejs")
 
 // Conexion de la base de datos mongo DB
-console.log("prueba")
+
 const dbURL="mongodb+srv://martinbottaro34:JoT8VhALyqIxzzT2@cluster0.1kbibly.mongodb.net/"
 mongoose.connect(dbURL)
 .then((result)=>app.listen(4000))
@@ -26,22 +24,11 @@ mongoose.connect(dbURL)
 
 
 // Agrego la primera ruta
-app.get("/",(req,res)=>{
-    res.render("home") 
+app.get("/",async(req,res)=>{
+
+    res.render("home",{prueba}) 
 })
 
-app.get("/prueba",async (req,res)=>{
-    try{
-        console.log("probando")
-        const productos = await Productos.find({})
-        console.log("probado")
-        res.status(201).json(productos)
-    }
-    catch(err){
-        console.log(err)
-        res.status(400).json(err)
-    }
-})
 
 // Conecto las rutas
 app.use(authRoutes)
