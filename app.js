@@ -26,7 +26,7 @@ mongoose.connect(dbURL)
 // Agrego la primera ruta
 app.get("/",async(req,res)=>{
 
-    res.render("home",{prueba}) 
+    res.render("home") 
 })
 
 
