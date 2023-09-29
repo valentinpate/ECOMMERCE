@@ -25,8 +25,10 @@ mongoose.connect(dbURL)
 
 // Agrego la primera ruta
 app.get("/",async(req,res)=>{
+  // creo costante para exportar porductos de ofertas en home
+  const homeofertas= await Productos.find({coleccion:"ofertas"})
 
-    res.render("home") 
+  await res.render("home",{homeofertas})
 })
 
 

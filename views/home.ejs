@@ -12,38 +12,38 @@
             <div class="carousel-inner ">
               <div class="carousel-item active"><!--Imagen publicidad 1 -->
                 <svg class="bd-placeholder-img" width="100%" height="20rem" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/> <!--aca le cambiam el color de fondo al slide de publicidad -->
+                    <rect width="100%" height="100%" fill="rgba(255, 0, 0, 0.2)"/> <!--aca le cambiam el color de fondo al slide de publicidad -->
                     <image href="https://kiwikmercadofacil.com/wp-content/uploads/2021/09/productos-slider-600x387.png.webp" x="750" y="20" height="20rem" ></image><!--esta es la imagen del slide para el tamaño y eso hay que borrar wl width y height de la etiqueta image-->
                 </svg>
                 <div class="container" >
                   <div class="carousel-caption text-start " >
-                    <p class="opacity-75" style=" width: 20rem;font-size: 1.5rem;">
-                       <strong> Con Delivery </strong><br>
+                    <p class="opacity-75" >
+                       <strong> Con Delivery! </strong><br>
                         Pide todo lo que necesitas y te lo entregaremos 
-                        en la puerta de tu casa</p>
+                        en la puerta de tu casa.</p>
                   </div>
                 </div>
               </div>
               <div class="carousel-item"><!--Imagen publicidad 2 -->
                 <svg class="bd-placeholder-img" width="100%"  height="20rem" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/><!--aca le cambiam el color de fondo al slide de publicidad -->
+                    <rect width="100%" height="100%" fill="rgba(0, 0, 128, 0.2)"/><!--aca le cambiam el color de fondo al slide de publicidad -->
                      <image href="/images/productocajaamrilla.png" x="50" y="20"height="20rem" /><!--esta es la imagen del slide para el tamaño y eso hay que borrar wl width y height de la etiqueta image-->
                 </svg>
                 <div class="container">
-                  <div class="container-fluid full-container carousel-caption text-end">
-                    <p class="opacity-75" style="font-size: 1.5rem;" >Muchas ofertas en productos con descuentos.
-                        Hasta <span style="color: red;">30%</span></p>
+                  <div class="container-fluid full-container carousel-caption" >
+                    <p class="opacity-755" >Muchas ofertas en productos con descuentos. <br>
+                        Hasta el <span style="color: red;">30%</span> de descuento.</p>
                   </div>
                 </div>
               </div>
               <div class="carousel-item"> <!--Imagen publicidad 3 -->
                 <svg class="bd-placeholder-img" width="100%" height="20rem" xmlns="http://www.w3.org/2000/svg"   aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/> <!--aca le cambiam el color de fondo al slide de publicidad -->
+                    <rect width="100%" height="100%" fill="rgba(0, 0, 128, 0.7)"/> <!--aca le cambiam el color de fondo al slide de publicidad -->
                     <image href="https://m.media-amazon.com/images/I/71FHwK3NbgL._AC_SX522_.jpg" x="750" y="20"  /><!--esta es la imagen del slide para el tamaño y eso hay que borrar wl width y height de la etiqueta image-->
                 </svg>
                 <div class="container">
                   <div class="carousel-caption text-start">
-                    <p class="opacity-75" style="font-size: 1.5rem;  width: 20rem;" >Recoge todos los productos que necesitas y recíbelos en tu domicilio</p>
+                    <p class="opacity-75"  >Recoge todos los productos que necesitas y recíbelos en tu domicilio.</p>
                   </div>
                 </div>
               </div>
@@ -57,85 +57,30 @@
     </div>
   <!-- Segunda seccion del main PRODUCTOS EN OFERTAS -->
   <section class="d-flex flex-nowrap align-items-center justify-content-between justify-content-lg-between overflow-x-auto">
+
     <!-- hay CUATRO cards en total -->
+    <%     homeofertas.forEach(function(elemento){     %>
     <div class="product col-md-4"><!-- CARD OFERTA UNO -->
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary-emphasis">GASEOSAS</strong>
+          <strong class="d-inline-block mb-2 text-primary-emphasis"><%= elemento.nombre  %></strong>
           <h3 class="mb-0">Coca-Cola</h3>
-          <div class="mb-1 text-body-secondary">12 unidades</div>
-          <p class="card-text mb-auto">resfrescante y deliciosa, quedas diabetico en dos años</p>
-          <p class="price card-text mb-auto"><span>$800</span>$400</p>
+          <div class="mb-1 text-body-secondary">
+          <p class="card-text mb-auto"><%= elemento.precio.replace(elemento.nombre,'')  %></p>
+          </div>
           <button href="#" class="buy-btn icon-link gap-1 icon-link-hover stretched-link btn btn-primary rounded-pill">
             COMPRAR
             <!-- <svg class="bi"><use xlink:href="#chevron-right"/></svg> -->
           </button>
         </div>
         <div class="col-auto d-none d-lg-block position-relative">
-          <img src="./images/coca-cola.JPG" class="product-img card-img-top" alt="">
+          <img src="<%= elemento.imagen  %>" class="product-img card-img-top" alt="">
           <p class="discount">20% desc.</p>
         </div>  
       </div>
     </div>
-
-    <div class="product col-md-4"><!-- CARD OFERTA DOS -->
-      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary-emphasis">GASEOSAS</strong>
-          <h3 class="mb-0">coca-cola</h3>
-          <div class="mb-1 text-body-secondary">12 unidades</div>
-          <p class="card-text mb-auto">resfrescante y deliciosa, quedas diabetico en dos años</p>
-          <p class="price card-text mb-auto"><span>$800</span>$400</p>
-          <button href="#" class="buy-btn icon-link gap-1 icon-link-hover stretched-link btn btn-primary rounded-pill">
-            COMPRAR
-            <!-- <svg class="bi"><use xlink:href="#chevron-right"/></svg> -->
-          </button>
-        </div>
-        <div class="col-auto d-none d-lg-block position-relative">
-          <img src="./images/coca-cola.JPG" class="product-img card-img-top" alt="" >
-          <p class="discount">20% desc.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="product col-md-4"><!-- CARD OFERTA TRES -->
-      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary-emphasis">GASEOSAS</strong>
-          <h3 class="mb-0">coca-cola</h3>
-          <div class="mb-1 text-body-secondary">12 unidades</div>
-          <p class="card-text mb-auto">resfrescante y deliciosa, quedas diabetico en dos años</p>
-          <p class="price card-text mb-auto"><span>$800</span>$400</p>
-          <button href="#" class="buy-btn icon-link gap-1 icon-link-hover stretched-link btn btn-primary rounded-pill">
-            COMPRAR
-            <!-- <svg class="bi"><use xlink:href="#chevron-right"/></svg> -->
-          </button>
-        </div>
-        <div class="col-auto d-none d-lg-block position-relative">
-          <img src="./images/coca-cola.JPG" class="product-img card-img-top" alt="">
-          <p class="discount">20% desc.</p>
-        </div>
-      </div>
-    </div>
-
-     <div class="product col-md-4"><!--CARD OFERTA CUATRO -->
-      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary-emphasis">GASEOSAS</strong>
-          <h3 class="mb-0">coca-cola</h3>
-          <div class="mb-1 text-body-secondary">12 unidades</div>
-          <p class="card-text mb-auto">resfrescante y deliciosa, quedas diabetico en dos años</p>
-          <a href="#" class="icon-link gap-1 icon-link-hover stretched-link btn btn-primary rounded-pill" style="width: 7rem;">
-            COMPRAR
-            <svg class="bi"><use xlink:href="#chevron-right"/></svg>
-          </a>
-        </div>
-        <div class="col-auto d-none d-lg-block position-relative">
-          <img src="./images/coca-cola.JPG" class="card-img-top" alt="" style="width: 100%; height: 15rem;">
-          <p class="discount">20% desc.</p>
-        </div>
-      </div>
-    </div>
+  <% }) %>  
+   
   </section>
 <!-- prodcutos.ejs porductos generales -->
 <%- include("partials/productos") -%>
