@@ -4,7 +4,16 @@
         <div class=" col-md-3 my-4">
                     <div class="position-relative" style="background-color: aliceblue;">
                         <img src="<%= elemento.imagen  %>" alt="">
-                        <p class="discount2-pageofertas">20% desc.</p>
+                        <% const texto = elemento.precio;  %>
+                        <% const regex = /(\d+)\s*(?=%)/g;  %>
+                        <% const descuento = texto.match(regex); %>
+
+                        <%  if (descuento) {  %>
+
+                        <p class="discount2-pageofertas"><%= descuento[0]  %>% desc.</p>
+                        <% } else { } %>
+                        
+                       
                     </div>
                     <p class="other-title"><%= elemento.nombre  %></p>
                     <p><%= elemento.precio.replace(elemento.nombre,'')  %></p>
@@ -17,10 +26,10 @@
                     <p><b>Añadir cantidad</b></p>
                 </div>
                 <button class="add-to-cart-btn other-add-to-cart-btn">Añadir al carrito</button>
-            
+            <a href="/product?id=<%= elemento.id %>&&coleccion=<%= elemento.coleccion %>"> ver producto</a>
         </div>  
         <% }) %>  
     </div>
  
-  
 </div>
+
