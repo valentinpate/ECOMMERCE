@@ -10,12 +10,12 @@ const Productos=require("./models/Productos")
 
 // Guardo el express en una constante
 const app=express()
+// Seteo el motor de plantilla
+app.set("view engine","ejs")
 
 // Hago que los archivos de la carpeta public sean estaticos
 app.use(express.static("public"))
 
-// Seteo el motor de plantilla
-app.set("view engine","ejs")
 
 // Conexion de la base de datos mongo DB
 console.log("prueba")

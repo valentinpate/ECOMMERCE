@@ -7,7 +7,7 @@
 /* Etiquetas */
 
 header{
-    width:100%;
+    /* width:100%; */
     background-color:white;
     display:flex;
     flex-direction:column;
@@ -301,6 +301,7 @@ a:hover{
 }
 
 .product-header{
+    flex-direction:row;
     padding: 1.5em 2em;
     margin-bottom:2em;
     display:flex;
