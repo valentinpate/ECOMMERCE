@@ -25,16 +25,22 @@ const UserSchema= new mongoose.Schema({
         type:String,
         required:[true,"Por favor ingrese una contraseña"],
         minlength:[6,"Por favor ingrese un minimo de 6 caracteres"],
+        unique:false,
     },
     phone:{
         type:Number,
         required:false,
-        unique:true,
+        unique:false,
     },
+    region:{
+        type:String,
+        required:false,
+        unique:false,
+    }
 })
 
 // Introduzco el esquema dentro una tabla en mongo
-const User=mongoose.model("Usuarios",UserSchema)
+const User=mongoose.model("UsuariosEcommerce",UserSchema)
 
 // Exporto la constante user
 module.exports=User
