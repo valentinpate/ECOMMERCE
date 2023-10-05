@@ -1,0 +1,285 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+/* -----------------------------header contactenos--------------------- */
+.headercontactenos{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: .5rem;
+    margin-bottom: 1.5rem;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url(./images/imgcontactanos.jpg);
+    background-position: center;
+    background-size: cover;
+}
+.textoconectate{
+    padding:1rem;
+    padding-right: 1.5rem;
+    color: white;
+}
+/* --------------------- seccion contactenos en nuestro sitio web ----------------------------- */
+.contactositioweb .titulocontactossitioweb{
+    text-align: center;
+    padding-bottom: 1rem;
+}
+.contactositioweb .ubicacioneinfo{
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+}
+.ubicacioneinfo .infocontacto{
+    background-color: #EEEFEF;
+    width: 50%;
+    padding: 1.5rem;  
+    margin-bottom: .2rem;
+}
+.infocontacto .tituloinfocontacto{
+    padding-bottom: .7rem;
+}
+.infocontacto .textoinfocontacto{
+    line-height: 1.5rem;
+}
+.infocontacto .contenedorinfocontacto{
+    display: flex;
+    padding-top: 1.3rem;
+}
+.contenedorinfocontacto .titulotel{
+    padding-right: 1.5rem;
+}
+.contenedorinfocontacto .tituloemail{
+    padding-right: 2.6rem;
+}
+.contenedorinfocontacto .titulodire{
+    padding-right: 1rem;
+}
+.ubicacioneinfo .mapaubicacion{
+    width: 50vw;
+}
+
+/* ------------------------------- seccion contactanos --------------------------- */
+.contactame{
+    width: 90%;
+    margin: 0 auto;
+}
+.contactame .titulocontacto{
+    text-align: center;
+    padding-top: 2.5rem;
+    padding-bottom: 1rem;
+}
+.contactame .formcontacto{
+    display: flex;
+    flex-direction: column;
+}
+.formcontacto .inputscontacto{
+    background-color: #FAFAFB;
+    border: gray 1px solid;
+    padding: .6rem;
+    margin-bottom: .7rem;
+    margin-top: .2rem;
+    border-radius: .3rem;
+    
+}
+.formcontacto .inputmensaje{
+    padding-bottom: 6rem;
+}
+.contactame .contenedorbtn{
+    text-align: center;
+}
+.contenedorbtn .btncontacto{
+    background-color: #001154;
+    color: white;
+    margin-top: 1.5rem;
+    padding: .5rem 9rem;
+    border: 1px solid #001154;
+    border-radius: .2rem;
+    cursor: pointer;
+    margin-bottom: 5rem;
+}
+
+/* -----------------------------seccion carrito----------------------------------- */
+.containercarrito{
+    box-shadow: 0 0 5px gray;
+    border-radius: 5px;
+    width: 66%;
+    margin-left: 11rem;
+    margin-top: 4rem;
+    padding-top: .5rem;
+}
+.containercarrito .iconcerrar{
+    padding-left: 1rem;
+}
+.containercarrito .carrito{
+    display: flex;
+}
+.carrito .tituloinfopago{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 1rem;
+}
+.carrito .infopago{
+    border: 1px solid #F6F6F6;
+    width: 20vw;
+    box-shadow: 0 0 5px gray;
+    border-radius: 5px;
+    margin: 1rem;
+    margin-top: .5rem;
+}
+.infopago .subtituloinfopago{
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem 1rem .5rem 1rem;
+}
+.infopago .containercodedescuento{
+    display: flex;
+    justify-content: space-evenly;
+}
+.containercodedescuento .btnconfirmarcodedescuento{
+    color: #FB6705;
+    background-color: #FFF0E6;
+    border: 1px solid #FFF0E6;
+    padding: .5rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.containercodedescuento .inputcodedescuento{
+    padding:.5rem;
+    width: 10vw;
+    border: 1px #F6F6F6 solid;
+    border-radius: 5px;
+}
+.infopago .lineaproductosuno{
+    width: 80%;
+    margin: 1rem 10%;
+    border: 1px solid #F6F6F6;
+}
+.infopago .containergastos{
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+    width: 85%;
+    margin: 0 auto;
+}
+.infopago .precioproductos{
+    margin-bottom: .5rem;
+}
+.infopago .containerconfirmarpago{
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+    border: 1px solid #F6F6F6;
+    padding: 0.5rem;
+    border-radius: 5px;
+    box-shadow: 0 0 5px gray;
+}
+.containerconfirmarpago .iconcheck{
+    cursor: pointer;
+    color: #001154;
+}
+.infopago .btnconfirmarpedido{
+    color: white;
+    background-color: #FB6705;
+    border: 1px solid #FB6705;
+    border-radius: 5px;
+    padding: .5rem 3.8rem;
+    margin-left: 1rem;
+    margin-bottom: 1.5rem;
+    margin-top: .5rem;
+    cursor: pointer;
+}
+
+/* --------------------componente producto carrito--------------------- */
+.productoscarrito{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.productoscarrito .eliminarproductos{
+    color: red;
+    cursor: pointer;
+}
+.productoscarrito .containernumerodepedidos{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+.containernumerodepedidos .numerodepedidos{
+    color: #FB6705;
+}
+.containerproductoscarrito{
+    box-shadow: 0 0 5px gray;
+    border-radius: 5px;
+    margin-top: .5rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+.containerproductoscarrito .containerproductocarrito{
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+    padding-left: 1.5rem;
+}
+.containerproductocarrito .iconeliminarproducto{
+    color: #FF0000;
+    cursor: pointer;
+}
+.containerproductocarrito .nombreproducto{
+    display: flex;
+    justify-content: flex-end;
+}
+.containerproductocarrito .containercantproducto{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: .5rem 0;
+}
+.containercantproducto .btnmenosproductos{
+    background-color: white;
+    border: 1px solid #001154;
+    padding: .2rem .5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: .5rem;
+    margin-left: 10rem;
+}
+.containercantproducto .btnmasproductos{
+    color: white;
+    background-color: #001154;
+    border: 1px solid #001154;
+    padding: .2rem .4rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 6rem;
+    margin-left: .5rem;
+}
+.containerproductocarrito .infoproducto{
+    display: flex;
+    justify-content: space-between;
+}
+.infoproducto .preciodesc{
+    display: flex;
+    gap: .5rem;
+}
+.preciodesc .precioporcantproducto{
+    text-decoration: line-through;
+    color: #727373;
+}
+.preciodesc .preciocondesc{
+    color: #FB6705;
+}
+.containerproductocarrito .imgproducto{
+    margin-left: 1rem;
+    width: 100px;
+    height: 100px;
+    background-color: #F6F6F6;
+}
+.preciosindesc{
+    padding-left: 3rem;
+    color: #FB6705;
+}
+.lineaproductosdos{
+    width: 88%;
+    margin-left: 3rem;
+    border: 1px solid #F6F6F6;
+}
