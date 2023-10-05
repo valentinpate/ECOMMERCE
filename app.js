@@ -1,12 +1,9 @@
 // Importo los paquetes
 const express=require("express")
 const mongoose=require("mongoose")
-
 //importar variables de seguridad
-require("dotenv").config()
-
-
-// Importo el modulo de rutas 
+require("dotenv").config();
+// Importo el modulo de rutas
 const authRoutes=require("./routes/authRoutes")
 const Productos=require("./models/Productos")
 
@@ -28,7 +25,7 @@ mongoose.connect(dbURL)
 .catch((error)=>console.log(error))
 
 
-// Agrego la primera ruta 
+// Agrego la primera ruta
 app.get("/",(req,res)=>{
     res.render('home') 
 })
