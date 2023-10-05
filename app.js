@@ -21,8 +21,8 @@ app.use(express.json())
 app.set("view engine","ejs")
 
 // Conexion de la base de datos mongo DB
-const dbURL="mongodb+srv://martinbottaro34:JoT8VhALyqIxzzT2@cluster0.1kbibly.mongodb.net/"
-
+// const dbURL="mongodb+srv://martinbottaro34:JoT8VhALyqIxzzT2@cluster0.1kbibly.mongodb.net/"
+const dbURL = "mongodb+srv://enzoburgos960:xBCUFy0SWYB4MlMM@cluster0.tr5lqnj.mongodb.net/?retryWrites=true&w=majority"
 mongoose.connect(dbURL)
 .then((result)=>app.listen(4000))
 .catch((error)=>console.log(error))
