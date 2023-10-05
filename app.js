@@ -8,12 +8,14 @@ require("dotenv").config()
 
 // Importo el modulo de rutas 
 const authRoutes=require("./routes/authRoutes")
+const Productos=require("./models/Productos")
 
 // Guardo el express en una constante
 const app=express()
 
 // Hago que los archivos de la carpeta public sean estaticos
 app.use(express.static("public"))
+app.use(express.json())
 
 // Seteo el motor de plantilla
 app.set("view engine","ejs")
@@ -28,16 +30,13 @@ mongoose.connect(dbURL)
 
 // Agrego la primera ruta 
 app.get("/",(req,res)=>{
-    res.render("home") 
+    res.render('home') 
 })
+
 
 // Conecto las rutas 
 app.use(authRoutes)
 
-// levanto el servidor
-// app.listen(4000,()=>{
-//     console.log("servidor ejecutandose")
-// })
 
 
 
