@@ -11,6 +11,9 @@ header{
     background-color:white;
     display:flex;
     flex-direction:column;
+    position: fixed;
+    top: 0;
+    z-index: 15;
 }
 
 input{
@@ -288,6 +291,17 @@ a:hover{
     left:9.5em;
 }
 
+.discount2-pageofertas{
+    padding:0.5em;
+    background-color:red;
+    color:white;
+    border-radius:0.5rem;
+    font-size:0.9rem;
+    position:absolute;
+    top:0;
+    right:0.5em;
+}
+
 .price{
     color:#001254;
     font-size:1.3rem;
@@ -469,4 +483,15 @@ a:hover{
 .account-edit{
     display:flex;
     flex-direction:column;
+}
+
+/* Slide publicidad*/
+.opacity-75{
+    font-size: 1.5rem; 
+     width: 20rem;
+     color:black;
+}
+.opacity-755{
+    font-size: 1.5rem; 
+     color:black;
 }

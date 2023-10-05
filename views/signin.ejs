@@ -1,0 +1,23 @@
+<%- include("partials/head") -%>
+<body>
+    <a href="home">  <button class="btn btn-primary"> ir a home</button></a>
+    <div class="signInContainer">
+        <img src="./images/pad.jpg" alt="">
+        <div class="signForm">
+            <form action="">
+                <div class="formTitleIn">
+                    <h1>¡Bienvenido!</h1>
+                    <h2>Inicia sesión para disfrutar de los beneficios de MOWARDIN.</h2>
+                </div>
+                <input type="text" name="name" placeholder="Nombre de usuario">
+                <div class="name error"></div>
+                <input type="password" name="password" placeholder="Contraseña">
+                <div class="password error"></div>
+                <button class="sign-btn">Iniciar sesión</button>
+            </form>
+            <p>¿No tienes una cuenta? <a href="signup" class="orange-href">Crea una nueva</a></p>
+        </div>
+    </div>
+
+</body>
+</html>
