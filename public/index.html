@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="icon" href="images/logo.png">
+    <title>Ecommerce</title>
+</head>
+<body>
+    <header class="p-3 mb-3 border-bottom fixed-top"> <!-- hacer un fondo blanco, ya esta fijo el menu! -->
+        <div class="container">
+          <div class="d-flex flex-nowrap align-items-center justify-content-center justify-content-lg-start mb-4">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
+             <img src="./images/logo.png"  alt=""  class="logo me-lg-4">
+            </a>
+            <ul class="nav col-12 col-lg-auto me-lg-3 justify-content-center mb-md-0">
+              <li><a href="#" class="nav-link px-2 link-body-emphasis">Mis compras</a></li>
+              <li><a href="#" class="nav-link px-2 link-body-emphasis">Ofertas</a></li>
+              <li><a href="product.html" class="nav-link px-2 link-body-emphasis">Productos</a></li>
+            </ul>
+            <form class="col-12 col-lg-6 mb-3 mb-lg-0 me-lg-5" role="search">
+              <input type="search" class="form-control" placeholder="Busque el producto que desea" aria-label="Search">
+            </form>
+            <div class="icons dropdown text-end me-lg-4"> <!-- falta hacer el borde redondo (FLECHA) -->
+              <a href="#" class="icon d-block link-body-emphasis text-decoration-none " data-bs-toggle="dropdown" aria-expanded="false">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+              </a>
+              <ul class="dropdown-menu text-small">
+                <li><a class="dropdown-item" href="#">nose</a></li>
+                <li><a class="dropdown-item" href="#">nose</a></li>
+                <li><a class="dropdown-item" href="#">nose</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="signin.html">Sign out</a></li>
+              </ul>
+            </div>
+             <div class="icons dropdown text-end me-lg-4"> <!-- falta hacer el borde redondo (USUARIO)-->
+                <a href="#" class="icon d-block link-body-emphasis text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+                </a>
+                <ul class="dropdown-menu text-small">
+                  <li><a class="dropdown-item" href="#">Mi perfil</a></li>
+                  <li><a class="dropdown-item" href="#">Settings</a></li>
+                  <li><a class="dropdown-item" href="#">nose</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="signin.html">Sign out</a></li>
+                </ul>
+              </div>
+              <div class="icons dropdown text-end me-lg-4"> <!-- falta hacer el borde redondo (CARRITO)-->
+                <a href="#" class="icon d-block link-body-emphasis text-decoration-none " data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="./images/market.svg" alt="mdo" class="rounded-circle">
+                </a>
+                <ul class="dropdown-menu text-small">
+                  <li><a class="dropdown-item" href="#">mis compras</a></li>
+                  <li><a class="dropdown-item" href="#">reclamos</a></li>
+                  <li><a class="dropdown-item" href="#">nose</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="signin.html">Sign out</a></li>
+                </ul>
+              </div>
+          </div>
+        </div>
+        <div class="products d-flex flex-nowrap align-items-center justify-content-center justify-content-lg-start">
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="#" class="nav-link px-1 link-secondary">Bebidas</a></li>
+                <li><a href="#" class="nav-link px-1 link-secondary">Aceites</a></li>
+                <li><a href="#" class="nav-link px-1 link-secondary">Legumbres</a></li>
+                <li><a href="#" class="nav-link px-1 link-secondary">Detergentes</a></li>
+                <li><a href="#" class="nav-link px-1 link-secondary">Lácteos</a></li>
+                <li><a href="#" class="nav-link px-1 link-secondary">Cosméticos</a></li>
+                <li><a href="#" class="nav-link px-1 link-secondary">Jugos</a></li>
+                <li><a href="#" class="nav-link px-1 link-secondary">Ofertas</a></li>
+                <li><a href="#" class="nav-link px-1 link-secondary">Productos</a></li>
+                <li><a href="#" class="nav-link px-1 link-secondary">Productos</a></li>
+                <li><a href="#" class="nav-link px-1 link-secondary">Productos</a></li>
+                <li><a href="#" class="nav-link px-1 link-secondary">Ofertas</a></li>
+                <li><a href="#" class="nav-link px-1 link-secondary">Productos</a></li>
+                <li><a href="#" class="nav-link px-1 link-secondary">Productos</a></li>
+                <li><a href="#" class="nav-link px-1 link-secondary">Ofertas</a></li>
+                <li><a href="#" class="nav-link px-1 link-secondary">Productos</a></li>
+                <li><a href="#" class="nav-link px-1 link-secondary">Productos</a></li>
+                <li><a href="#" class="nav-link px-1 link-secondary">Productos</a></li>
+                <!--<li><a href="#" class="nav-link px-1 link-secondary">Productos</a></li>
+                <li><a href="#" class="nav-link px-1 link-secondary">Productos</a></li> -->
+            </ul>
+            <button class="all-btn btn btn-primary rounded-pill">Todos los productos</button>
+        </div>
+      </header>
+
+    <main style="margin-top: 150px;">
+        <!-- primer seccion del main PUBLICIDAD -->
+      <section>
+            <div id="myCarousel" class="mt-5 carousel slide mb-6" data-bs-ride="carousel"> <!--esta parte tiene javascript de boostrap no cambiar los id-->
+                <div class="carousel-indicators d-flex justify-content-lg-start"> <!--los 3 botones son los que hay que hacer redondos-->
+                  <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                  <div class="carousel-item active"><!--Imagen publicidad 1 -->
+                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/> <!--aca le cambiam el color de fondo al slide de publicidad -->
+                        <image href="./images/vegetales.jpg" x="50" y="20" width="5rem" height="6rem" /><!--esta es la imagen del slide para el tamaño y eso hay que borrar wl width y height de la etiqueta image-->
+                    </svg>
+                    <div class="container">
+                      <div class="carousel-caption text-start">
+                        <h1>Primer producto</h1>
+                        <p class="opacity-75">descripcion del producto, detalles, precio, nose.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item"><!--Imagen publicidad 2 -->
+                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/><!--aca le cambiam el color de fondo al slide de publicidad -->
+                         <image href="./images/vegetales.jpg" x="50" y="20" width="100" height="60" /><!--esta es la imagen del slide para el tamaño y eso hay que borrar wl width y height de la etiqueta image-->
+                    </svg>
+                    <div class="container">
+                      <div class="carousel-caption">
+                        <h1>segundo producto</h1>
+                        <p>descripcion del producto, detalles, precio, nose.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item"> <!--Imagen publicidad 3 -->
+                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"   aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/> <!--aca le cambiam el color de fondo al slide de publicidad -->
+                        <image href="./images/vegetales.jpg" x="50" y="20" width="5rem" height="6rem" /><!--esta es la imagen del slide para el tamaño y eso hay que borrar wl width y height de la etiqueta image-->
+                    </svg>
+                    <div class="container">
+                      <div class="carousel-caption text-end">
+                        <h1>tercer producto</h1>
+                        <p>descripcion del producto, detalles, precio, nose.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div> 
+      </section>
+        <div class="offer-header">
+          <a href="" class="orange-href">Ver todo</a>
+          <button class="all-btn btn btn-primary rounded-pill">Agregar al Carrito <span>(2)</span></button>
+          <p>Ofertas de hoy</p>
+        </div>
+      <!-- Segunda seccion del main PRODUCTOS EN OFERTAS -->
+      <section class="d-flex flex-nowrap align-items-center justify-content-between justify-content-lg-between overflow-x-auto">
+        <!-- hay CUATRO cards en total -->
+        <div class="product col-md-4"><!-- CARD OFERTA UNO -->
+          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+              <strong class="d-inline-block mb-2 text-primary-emphasis">GASEOSAS</strong>
+              <h3 class="mb-0">Coca-Cola</h3>
+              <div class="mb-1 text-body-secondary">12 unidades</div>
+              <p class="card-text mb-auto">resfrescante y deliciosa, quedas diabetico en dos años</p>
+              <p class="price card-text mb-auto"><span>$800</span>$400</p>
+              <button href="#" class="buy-btn icon-link gap-1 icon-link-hover stretched-link btn btn-primary rounded-pill">
+                COMPRAR
+                <!-- <svg class="bi"><use xlink:href="#chevron-right"/></svg> -->
+              </button>
+            </div>
+            <div class="col-auto d-none d-lg-block position-relative">
+              <img src="./images/coca-cola.JPG" class="product-img card-img-top" alt="">
+              <p class="discount">20% desc.</p>
+            </div>  
+          </div>
+        </div>
+
+        <div class="product col-md-4"><!-- CARD OFERTA DOS -->
+          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+              <strong class="d-inline-block mb-2 text-primary-emphasis">GASEOSAS</strong>
+              <h3 class="mb-0">coca-cola</h3>
+              <div class="mb-1 text-body-secondary">12 unidades</div>
+              <p class="card-text mb-auto">resfrescante y deliciosa, quedas diabetico en dos años</p>
+              <p class="price card-text mb-auto"><span>$800</span>$400</p>
+              <button href="#" class="buy-btn icon-link gap-1 icon-link-hover stretched-link btn btn-primary rounded-pill">
+                COMPRAR
+                <!-- <svg class="bi"><use xlink:href="#chevron-right"/></svg> -->
+              </button>
+            </div>
+            <div class="col-auto d-none d-lg-block position-relative">
+              <img src="./images/coca-cola.JPG" class="product-img card-img-top" alt="" >
+              <p class="discount">20% desc.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="product col-md-4"><!-- CARD OFERTA TRES -->
+          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+              <strong class="d-inline-block mb-2 text-primary-emphasis">GASEOSAS</strong>
+              <h3 class="mb-0">coca-cola</h3>
+              <div class="mb-1 text-body-secondary">12 unidades</div>
+              <p class="card-text mb-auto">resfrescante y deliciosa, quedas diabetico en dos años</p>
+              <p class="price card-text mb-auto"><span>$800</span>$400</p>
+              <button href="#" class="buy-btn icon-link gap-1 icon-link-hover stretched-link btn btn-primary rounded-pill">
+                COMPRAR
+                <!-- <svg class="bi"><use xlink:href="#chevron-right"/></svg> -->
+              </button>
+            </div>
+            <div class="col-auto d-none d-lg-block position-relative">
+              <img src="./images/coca-cola.JPG" class="product-img card-img-top" alt="">
+              <p class="discount">20% desc.</p>
+            </div>
+          </div>
+        </div>
+
+         <div class="product col-md-4">
+          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+              <strong class="d-inline-block mb-2 text-primary-emphasis">GASEOSAS</strong>
+              <h3 class="mb-0">coca-cola</h3>
+              <div class="mb-1 text-body-secondary">12 unidades</div>
+              <p class="card-text mb-auto">resfrescante y deliciosa, quedas diabetico en dos años</p>
+              <a href="#" class="icon-link gap-1 icon-link-hover stretched-link btn btn-primary rounded-pill" style="width: 7rem;">
+                COMPRAR
+                <svg class="bi"><use xlink:href="#chevron-right"/></svg>
+              </a>
+            </div>
+            <div class="col-auto d-none d-lg-block position-relative">
+              <img src="./images/coca-cola.JPG" class="card-img-top" alt="" style="width: 100%; height: 15rem;">
+              <p class="discount">20% desc.</p>
+            </div>
+          </div>
+        </div><!--CARD OFERTA CUATRO -->
+      </section>
+      <!-- TERCER seccion del main PRODUCTOS EN GENERAL  -->
+      <section class="d-flex flex-wrap align-items-center justify-content-between justify-content-lg-between"> 
+        <!-- hay cinco cards en total -->
+        <div class="card text-center" style="width: 18rem;"> <!-- CARD GENERAL UNO -->
+          <img src="./images/vegetales.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">title</h5>
+            <p class="card-text">Some quick example text to build on the card </p>
+            <p class="card-text">$500</p>
+            <a href="#" class="btn btn-primary rounded-pill">Comprar</a>
+          </div>
+        </div>
+
+        <div class="card text-center" style="width: 18rem;"><!-- CARD GENERAL DOS -->
+          <img src="./images/vegetales.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">title</h5>
+            <p class="card-text">Some quick example text to build on the card </p>
+            <p class="card-text">$500</p>
+            <a href="#" class="btn btn-primary rounded-pill">Comprar</a>
+          </div>
+        </div>
+
+        </div>
+          <div class="card text-center" style="width: 18rem;"><!-- CARD GENERAL TRES -->
+          <img src="./images/vegetales.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">title</h5>
+            <p class="card-text">Some quick example text to build on the card </p>
+            <p class="card-text">$500</p>
+            <a href="#" class="btn btn-primary rounded-pill">Comprar</a>
+          </div>
+        </div>
+
+        </div>
+          <div class="card text-center" style="width: 18rem;"><!-- CARD GENERAL CUATRO -->
+          <img src="./images/vegetales.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">title</h5>
+            <p class="card-text">Some quick example text to build on the card </p>
+            <p class="card-text">$500</p>
+            <a href="#" class="btn btn-primary rounded-pill">Comprar</a>
+          </div>
+        </div>
+
+         </div>
+          <div class="card text-center" style="width: 18rem;"><!-- CARD GENERAL CINCO -->
+          <img src="./images/vegetales.jpg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">title</h5>
+            <p class="card-text">Some quick example text to build on the card </p>
+            <p class="card-text">$500</p>
+            <a href="#" class="btn btn-primary rounded-pill">Comprar</a>
+          </div>
+        </div>
+      </section>      
+    </main>
+   
+      
+    <footer class="py-5" style="background-color: rgb(71, 71, 71);">
+          <div class="row d-flex flex-column flex-sm-row justify-content-between">
+            <div class="col-6 col-md-2 mb-3">
+              <h5>Section</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home<img src="./images/market.svg" alt=""></a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features<img src="./images/market.svg" alt=""></a></li>
+              </ul>
+            </div>
+      
+            <div class="col-6 col-md-2 mb-3">
+              <h5>Section</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Globe<img src="./images/globe.svg" alt=""></a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Ubicacion<img src="./images/ubicacion.svg" alt=""></a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Telefono<img src="./images/phone-solid.svg" alt=""></a></li>
+              </ul>
+            </div>
+      
+            <div class="col-6 col-md-4 mb-3">
+              <h5>Section</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">market<img src="./images/market.svg" alt=""></a></li>
+                <li class="nav-item mb-2"><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores optio pariatur deleniti numquam cupiditate, beatae error quas non eligendi.</p></li>
+              </ul>
+              <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4">
+                <ul class="list-unstyled d-flex">
+                  <li class="ms-3"><a class="link-body-emphasis" href="#"><img src="./images/facebook.svg" alt=""></a></li>
+                  <li class="ms-3"><a class="link-body-emphasis" href="#"><img src="./images/twitter.svg" alt=""></a></li>
+                  <li class="ms-3"><a class="link-body-emphasis" href="#"><img src="./images/instagram.svg" alt=""></a></li>
+                </ul>
+              </div>
+            </div>
+          <div class="d-flex flex-column flex-sm-row justify-content-center py-4 my-4 border-top">
+            <p>&copy; 2023 Company, Inc. All rights reserved.</p>
+          </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
