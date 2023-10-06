@@ -12,6 +12,9 @@ const productosSchema = new mongoose.Schema({
     },
     coleccion:{
         type: String,
+    },
+    page:{
+        type: Number,
     }
 })
 
