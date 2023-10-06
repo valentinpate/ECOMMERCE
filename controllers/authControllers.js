@@ -32,9 +32,10 @@ const handleErrors=(err)=>{
     return error
 }
 
-// Creacion de token en los datos
+// Token
 const maxAge=3*24*60*60
 const createToken=(id)=>{
+    //se retorna el jwt con el metodo sign que seria para crear el token a traves del parametro id y con "secret" que es una cadena de texto secreta para terminar de concretar el token
     return jwt.sign({id},"secret",{
         expiresIn:maxAge
     })
