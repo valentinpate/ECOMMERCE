@@ -1,5 +1,6 @@
 // Se importa el archivo user con el esquema y los datos
 const User=require("../models/User")
+const jwt=require("jsonwebtoken")
 
 // Manejo de errores
 const handleErrors=(err)=>{
@@ -31,6 +32,14 @@ const handleErrors=(err)=>{
     return error
 }
 
+// Creacion de token en los datos
+const maxAge=3*24*60*60
+const createToken=(id)=>{
+    return jwt.sign({id},"secret",{
+        expiresIn:maxAge
+    })
+}
+
 // Se exporta la logica de las rutas a authRoutes
 module.exports.signup_post= async(req,res)=>{
     // Destructuring
@@ -39,6 +48,9 @@ module.exports.signup_post= async(req,res)=>{
     // Se usa un TRY y un CATCH para el manejo de errores
     try{
         const users= await User.create({email,name,user,password,phone,region})
+        // Encriptar datos como token
+        const token=createToken(users._id,users.email,users.password)
+        res.cookie("jwt",token,{httpOnly:true,maxAge:maxAge*1000})
         res.status(201).json(users)
     }
     catch(err){
@@ -50,9 +62,6 @@ module.exports.signup_post= async(req,res)=>{
 const Productos=require("../models/Productos")
 // se exporta la logica de las rutas a authRoutes
 
-module.exports.signup_post=(req,res)=>{
-
-}
 
 module.exports.signup_get=(req,res)=>{
     res.render("signup")
