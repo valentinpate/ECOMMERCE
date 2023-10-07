@@ -60,18 +60,19 @@ module.exports.signup_post= async(req,res)=>{
     }
 }
 
-const Productos=require("../models/Productos")
-// se exporta la logica de las rutas a authRoutes
-
-
 module.exports.signup_get=(req,res)=>{
     res.render("signup")
 }
 
-
 module.exports.login_post=(req,res)=>{
     
 }
+// module.exports.login_get=(req,res)=>{
+    
+// }
+
+const Productos=require("../models/Productos")
+
 
 //agrego la funcion para la page ofertas
 module.exports.ofertas_get= async (req,res)=>{
