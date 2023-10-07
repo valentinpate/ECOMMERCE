@@ -24,13 +24,26 @@ module.exports.ofertas_get= async (req,res)=>{
 
 //agrego la funcion para la page product
 module.exports.product_get= async (req,res)=>{
-    const paramid = req.query.id
-    const paramcolec = req.query.coleccion
+    const paramid = req.query.id //capturo el id
+    const paramcolec = req.query.coleccion //capturo la coleccion
 
-    const productrender= await Productos.find({_id:paramid})
-    const productsimilares= await Productos.find({coleccion:paramcolec})
- 
-     await res.render("product",{productrender,productsimilares})
+    const productrender= await Productos.find({_id:paramid}) // para renderizar el producto en el que se hizo click
+    const productsimilares= await Productos.find({coleccion:paramcolec})// para renderizar los prodcutos similares
+
+    let a = req.query.a
+    let llave = req.query.llave
+    let page = 2
+   
+     if(a == null){
+        llave=false
+        a= 5
+    }else if(llave){   
+        page = req.query.page
+        a=a+4
+        page++}
+        console.log(a)
+    console.log(llave)
+     await res.render("product",{productrender,productsimilares,page,a})
  }
 
 //agrego la funcion para la page home
