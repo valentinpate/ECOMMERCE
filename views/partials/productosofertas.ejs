@@ -1,22 +1,22 @@
 <div class="others" style="margin-top: 2em;">
     <div class="row">
-        <%     ofertasrender.docs.forEach((elemento){     %>
+        <%     ofertasrender.docs.forEach(function(elemento){     %>
         <div class=" col-md-3 my-4">
                     <div class="position-relative" style="background-color: aliceblue;">
                         <img src="<%= elemento.imagen  %>" alt="">
                         <% const texto = elemento.precio;  %>
-                         <% const regex = /(\d+)\s*(?=%)/g;  %><!-- condición para buscar: lee números seguidos de cero con porcentaje al final -->
-                        <% const descuento = texto.match(regex); %><!-- paso condición para buscar a descuento. Hace un array -->
+                        <% const regex = /(\d+)\s*(?=%)/g;  %>
+                        <% const descuento = texto.match(regex); %>
 
-                        <%  if (descuento) {  %> <!-- si hay descuento -->
+                        <%  if (descuento) {  %>
 
-                        <p class="discount2-pageofertas"><%= descuento[0]  %>% desc.</p><!-- agarras primer porcentaje -->
-                        <% } %>
-                        
-                       
+                        <p class="discount2-pageofertas"><%= descuento[0]  %>% desc.</p>
+                        <% } else { } %>
+
+
                     </div>
                     <p class="other-title"><%= elemento.nombre  %></p>
-                    <p><%= elemento.precio.replace(elemento.nombre,'')  %></p> <!-- quito nombre de elemento.precio -->
+                    <p><%= elemento.precio.replace(elemento.nombre,'')  %></p>
                 <div class="d-flex align-items-center justify-content-center">
                     <div class="product-counter other-product-counter">
                         <button class="counter-button other-counter-button">-</button>
@@ -26,11 +26,10 @@
                     <p><b>Añadir cantidad</b></p>
                 </div>
                 <button class="add-to-cart-btn other-add-to-cart-btn">Añadir al carrito</button>
-            <a href="/product?id=<%= elemento.id %>&coleccion=<%= elemento.coleccion %>"> ver producto</a>
-        </div>  
-        <% }) %>  
+            <a href="/product?id=<%= elemento.id %>&&coleccion=<%= elemento.coleccion %>"> ver producto</a>
+        </div>
+        <% }) %>
     </div>
-</div>
 <nav aria-label="...">
     <ul class="pagination pagination-sm justify-content-center">
       <li class="page-item active" aria-current="page">
