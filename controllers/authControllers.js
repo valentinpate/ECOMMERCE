@@ -17,9 +17,25 @@ module.exports.login_post=(req,res)=>{
 
 //agrego la funcion para la page ofertas
 module.exports.ofertas_get= async (req,res)=>{
-   const ofertasrender= await Productos.find({coleccion:"ofertas"})
 
-    await res.render("ofertas",{ofertasrender})
+    let page = req.query.page
+    if (page == null){page = 1}
+
+    const ofertasrender= await Productos.paginate({},{limit:5,page:page})
+
+   ////funcion que estoy probando
+   let a = 5
+   let llave = req.query.llave
+   page = ofertasrender.page
+  
+    if(page==1){
+       llave=false
+   }else if(llave){   
+        a=page+4
+       }
+   //console.log(ofertasrender)
+    await res.render("ofertas",{ofertasrender,a})
+
 }
 
 //agrego la funcion para la page product
@@ -28,22 +44,10 @@ module.exports.product_get= async (req,res)=>{
     const paramcolec = req.query.coleccion //capturo la coleccion
 
     const productrender= await Productos.find({_id:paramid}) // para renderizar el producto en el que se hizo click
-    const productsimilares= await Productos.find({coleccion:paramcolec})// para renderizar los prodcutos similares
+    const productsimilares= await Productos.paginate({coleccion:paramcolec},{limit:12,page:2})// para renderizar los prodcutos similares
 
-    let a = req.query.a
-    let llave = req.query.llave
-    let page = 2
-   
-     if(a == null){
-        llave=false
-        a= 5
-    }else if(llave){   
-        page = req.query.page
-        a=a+4
-        page++}
-        console.log(a)
-    console.log(llave)
-     await res.render("product",{productrender,productsimilares,page,a})
+    await res.render("ofertas",{productrender,productsimilares})
+    
  }
 
 //agrego la funcion para la page home

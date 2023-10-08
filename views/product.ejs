@@ -40,7 +40,7 @@
 <!-- Prodcutos similares -->
 <div class="others" style="margin-top: 2em;">
     <div class="row">
-        <%     productsimilares.forEach(function(elemento){     %>
+        <%     productsimilares.docs.forEach(function(elemento){     %>
         <div class=" col-md-3 my-4">
                     <div class="position-relative" style="background-color: aliceblue;">
                         <img src="<%= elemento.imagen  %>" alt="">
@@ -84,7 +84,7 @@
             <span>...</span>
             <% } %>
         <% } %>
-        <li class="page-item"><a class="page-link" href="#">10</a></li>
+        <li class="page-item"><a class="page-link" href="#"><%=  productsimilares.totalPages %></a></li>
 
     </ul>
   </nav>  
