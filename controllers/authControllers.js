@@ -17,9 +17,24 @@ module.exports.login_post=(req,res)=>{
 
 //agrego la funcion para la page ofertas
 module.exports.ofertas_get= async (req,res)=>{
-   const ofertasrender= await Productos.find({coleccion:"ofertas"})
+   let page = req.query.page
+   if (page == null){page = 1}
 
-    await res.render("ofertas",{ofertasrender})
+   const ofertasrender= await Productos.paginate({},{limit:5,page:page})
+
+  ////funcion que estoy probando
+  let a = 5
+  let llave = req.query.llave
+  page = ofertasrender.page
+ 
+   if(page==1){
+      llave=false
+  }else if(llave){   
+       a=page+4
+      }
+  //console.log(ofertasrender)
+   await res.render("ofertas",{ofertasrender,a})
+
 }
 
 //agrego la funcion para la page product
