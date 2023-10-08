@@ -7,10 +7,13 @@
 /* Etiquetas */
 
 header{
-    /* width:100%; */
+    width:100%;
     background-color:white;
     display:flex;
     flex-direction:column;
+    position: fixed;
+    top: 0;
+    z-index: 15;
 }
 
 input{
@@ -287,6 +290,16 @@ a:hover{
     top:0.8em;
     left:9.5em;
 }
+.discount2-pageofertas{
+    padding:0.5em;
+    background-color:red;
+    color:white;
+    border-radius:0.5rem;
+    font-size:0.9rem;
+    position:absolute;
+    top:0;
+    right:0.5em;
+}
 
 .price{
     color:#001254;
@@ -407,6 +420,13 @@ a:hover{
     margin-bottom:0.2em;
 }
 
+.page-button{
+    font-size:1.3rem;
+    margin-bottom:1em;
+    display:flex;
+    justify-content:center;
+}
+
 /* SignUp - SignIn */
 
 .signUpContainer{
@@ -437,6 +457,7 @@ a:hover{
 }
 
 .formTitle{
+    margin-top:1em;
     padding-bottom:1.5em;
 }
 
@@ -460,14 +481,41 @@ a:hover{
 /* Mi cuenta / Edición de cuenta */
 
 .account{
+    margin:0 auto;
     display:flex;
 }
 
 .my-account{
-    box-shadow:1px 1px 10px #999999;
+    margin:150px 16em 150px 0;
+    padding:3em 10em 25em 5em;
+    box-shadow:0 1px 5px #999999;
+}
+
+.my-account-links{
+    display:flex;
+    flex-direction:column;
 }
 
 .account-edit{
+    margin-top:2em;
+    width:30vw;
     display:flex;
     flex-direction:column;
+    justify-content:flex-end;
+}
+
+.save-btn{
+    border-radius:1rem;
+}
+
+/* Slide publicidad*/
+
+.opacity-75{
+    font-size: 1.5rem; 
+     width: 20rem;
+     color:black;
+}
+.opacity-755{
+    font-size: 1.5rem; 
+     color:black;
 }
