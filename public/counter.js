@@ -11,7 +11,6 @@ function deshabilitarInicio(){
         menos.toggleAttribute("disabled")
         menos.classList.add("disabled-counter-button")
     }
-    return contador
 }
 
 function deshabilitarMenos(){

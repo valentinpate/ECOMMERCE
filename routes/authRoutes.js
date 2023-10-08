@@ -2,7 +2,7 @@
 const {Router}=require("express")
 const router=Router()
 
-// Importo el archvio authControllers con la logica de las rutas
+// Importo el archo authControllers con la logica de las rutas
 const authControllers=require("../controllers/authControllers")
 
 // Seteo las rutas/direcciones
