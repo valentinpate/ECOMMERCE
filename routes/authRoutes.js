@@ -9,8 +9,10 @@ const authControllers=require("../controllers/authControllers")
 router.post("/signup",authControllers.signup_post)
 router.get("/signup",authControllers.signup_get)
 
+
 // router.post("/signin",authControllers.login_post)
 // router.get("/signin",authControllers.login_get)
+
 
 router.post("/",authControllers.login_post)
 

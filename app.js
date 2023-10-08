@@ -15,6 +15,8 @@ const Productos=require("./models/Productos")
 
 // Guardo el express en una constante
 const app=express()
+// Seteo el motor de plantilla
+app.set("view engine","ejs")
 
 // Guardo el puerto desde .env
 const puerto=process.env.PUERTO
@@ -22,9 +24,6 @@ const puerto=process.env.PUERTO
 // Hago que los archivos de la carpeta public sean estaticos
 app.use(express.static("public"))
 app.use(express.json())
-
-// Seteo el motor de plantilla
-app.set("view engine","ejs")
 
 // Conexion de la base de datos mongo DB
 const iniciar=async()=>{
@@ -44,6 +43,7 @@ app.get("/",(req,res)=>{
     res.render('home') 
 })
 
+
 // Conecto las rutas 
 app.use(authRoutes)
 
@@ -56,6 +56,10 @@ iniciar()
 // app.get("/tomar-cookie",(req,res)=>{
 //     res.cookie("NewUser",true,{maxAge:1000*60*60*24})
 //     res.send("datos enviados")
+
+
+// app.listen(4000,()=>{
+//     console.log("servidor ejecutandose")
 // })
 // app.get("/leer-cookie",(req,res)=>{
 //     const cookies=req.cookies

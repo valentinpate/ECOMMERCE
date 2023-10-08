@@ -1,6 +1,6 @@
 <div class="others" style="margin-top: 2em;">
     <div class="row">
-        <%     ofertasrender.forEach(function(elemento){     %>
+        <%     ofertasrender.docs.forEach(function(elemento){     %>
         <div class=" col-md-3 my-4">
                     <div class="position-relative" style="background-color: aliceblue;">
                         <img src="<%= elemento.imagen  %>" alt="">
@@ -12,8 +12,8 @@
 
                         <p class="discount2-pageofertas"><%= descuento[0]  %>% desc.</p>
                         <% } else { } %>
-                        
-                       
+
+
                     </div>
                     <p class="other-title"><%= elemento.nombre  %></p>
                     <p><%= elemento.precio.replace(elemento.nombre,'')  %></p>
@@ -27,9 +27,24 @@
                 </div>
                 <button class="add-to-cart-btn other-add-to-cart-btn">Añadir al carrito</button>
             <a href="/product?id=<%= elemento.id %>&&coleccion=<%= elemento.coleccion %>"> ver producto</a>
-        </div>  
-        <% }) %>  
+        </div>
+        <% }) %>
     </div>
- 
 </div>
+<nav aria-label="...">
+    <ul class="pagination pagination-sm justify-content-center">
+      <li class="page-item active" aria-current="page">
+        <a class="page-link" href="/ofertas?page=1&&a=1">1</a>
+      </li>
+      <% for ( var i = ofertasrender.page; i < ofertasrender.totalPages; i++) { %>
+        <%  if(i<=a && i != 1){%>
+        <li class="page-item"><a class="page-link" href="/ofertas?page=<%=i%>&&llave=true&&a=<%=i%>"><%= i %></a></li>
+        <% } else if(i>a && i < ofertasrender.totalPages){ %>
+            <span>.</span>
+            <% } %>
+        <% } %>
+        <li class="page-item"><a class="page-link" href="#"><%=  ofertasrender.totalPages %></a></li>
+
+    </ul>
+</nav>
 

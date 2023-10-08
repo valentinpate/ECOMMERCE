@@ -18,5 +18,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.5.3",
     "validator": "^13.11.0"
+    "mongoose": "^7.5.3",
+    "mongoose-paginate-v2": "^1.7.4"
+
   }
 }

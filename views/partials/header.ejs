@@ -1,100 +1,56 @@
-<%- include("partials/head")  -%>
-
-
-<header> 
-    <div class="menu">
-        <img src="images/logo.png" class="logo" alt="">
-        <nav>
-            <a href="">Mis compras</a>
-            <a href="">Ofertas</a>
-            <a href="product.html">Productos</a>
-=======
 <body>
     
-<header> <!-- ESTE HEADER ESTÁ DIRECTAMENTE COPIADO DE header.html, debe pasarse a head.ejs -->
-    <div class="menu">
-        <img src="/images/logo.png" class="logo" alt="">
-        <nav>
-            <a href="">Mis compras</a>
-            <a href="ofertas">Ofertas</a>
-            <a href="/home">Productos</a>
-        </nav>
-        <input type="text" placeholder="Buscar producto">
-        <div class="icon-container">
-            <div class="icons dropdown text-end me-lg-4">
-                <a href="#" class="icon d-block link-body-emphasis text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
-                </a>
-                <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="#">nose</a></li>
-                    <li><a class="dropdown-item" href="#">nose</a></li>
-                    <li><a class="dropdown-item" href="#">nose</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="signin.html">Sign out</a></li>
-                </ul>
-            </div>
-            <div class="icons me-lg-4">
-                <a href="#" class="icon d-block" data-bs-toggle="dropdown" aria-expanded="false">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
-                </a>
-            </div>
-            <div class="icons">
-                <a href="#" class="icon d-block">
-                    <img src="./images/market.svg" alt="mdo" class="rounded-circle">
-                    <li><a class="dropdown-item" href="signin">login</a></li>
-                    <li><a class="dropdown-item" href="signup">sinup</a></li>
-                    <li><a class="dropdown-item" href="miperfil">miperfil</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                </ul>
-            </div>
-            <div class="icons me-lg-4"><!--mi perfil-->
-                <a href="miperfil" class="icon d-block" aria-expanded="false">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
-                </a>
-            </div>
-            <div class="icons"><!--carrito-->
-                <a href="#" class="icon d-block">
-                    <img src="/images/market.svg" alt="mdo" class="rounded-circle">
-                </a>
+    <header> <!-- ESTE HEADER ESTÁ DIRECTAMENTE COPIADO DE header.html, debe pasarse a head.ejs -->
+        <div class="menu">
+            <a href="home"><img src="/images/logo.png" class="logo" alt=""></a>
+            <nav>
+                <a href="">Mis compras</a>
+                <a href="ofertas">Ofertas</a>
+                <a href="/home">Productos</a>
+            </nav>
+            <input type="text" placeholder="Buscar producto">
+            <div class="icon-container">
+                <div class="icons dropdown text-end me-lg-4">
+                    <a href="#" class="icon d-block link-body-emphasis text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+                    </a>
+                    <ul class="dropdown-menu text-small">
+                        <li><a class="dropdown-item" href="home">Home</a></li>
+                        <li><a class="dropdown-item" href="informacion">Información</a></li>
+                        <li><a class="dropdown-item" href="contacto">Contacto</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="signin">Cerrar sesión</a></li>
+                    </ul>
+                </div>
+                <div class="icons me-lg-4"><!--mi perfil-->
+                    <a href="miperfil" class="icon d-block" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+                    </a>
+                </div>
+                <div class="icons"><!--carrito-->
+                    <a href="carrito" class="icon d-block">
+                        <img src="/images/market.svg" alt="mdo" class="rounded-circle">
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="products">
-        <nav class="product-nav">
-            <a href="#">Bebidas</a>
-            <a href="#">Aceites</a>
-            <a href="#">Legumbres</a>
-            <a href="#">Detergentes</a>
-            <a href="#">Lácteos</a>
-            <a href="#">Cosméticos</a>
-            <a href="#">Jugos</a>
-            <a href="#">Aceites</a>
-            <a href="#">Jugos</a>
-            <a href="#">Detergentes</a>
-            <a href="#">Detergentes</a>
-            <a href="#">Detergentes</a>
-            <a href="#">Detergentes</a>
-        </nav>
-        <button class="all-btn">Todos los productos</button>
-    </div>
-</header>
-            <a href="#">Destacados</a>
-            <a href="#">Bebidas</a>
-            <a href="#">Lacteos</a>
-            <a href="#">Almacen</a>
-            <a href="#">Desayunos y meriendas</a>
-            <a href="#">Panaderia</a>
-            <a href="#">Frutas y verduras</a>
-            <a href="#">Carnes y pescados</a>
-            <a href="#">Congelados</a>
-            <a href="#">Permuferia</a>
-            <a href="#">Limpieza</a>
-            <a href="#">Mascotas</a>
-            <a href="#">Bazar</a>
-            
-        </nav>
-        <button class="all-btn">Todos los productos</button>
-    </div>
-</header>   
-
+        <div class="products">
+            <nav class="product-nav">
+                <a href="ofertas">Destacados</a>
+                <a href="/product?coleccion=bebidas">Bebidas</a>
+                <a href="/product?coleccion=lacteos">Lacteos</a>
+                <a href="#">Almacen</a>
+                <a href="#">Desayunos y meriendas</a>
+                <a href="#">Panaderia</a>
+                <a href="#">Frutas y verduras</a>
+                <a href="#">Carnes y pescados</a>
+                <a href="#">Congelados</a>
+                <a href="#">Permuferia</a>
+                <a href="#">Limpieza</a>
+                <a href="#">Mascotas</a>
+                <a href="#">Bazar</a>
+                
+            </nav>
+            <button class="all-btn">Todos los productos</button>
+        </div>
+    </header>   

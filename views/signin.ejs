@@ -1,6 +1,5 @@
 <%- include("partials/head") -%>
 <body>
-    <a href="home">  <button class="btn btn-primary"> ir a home</button></a>
     <div class="signInContainer">
         <img src="./images/pad.jpg" alt="">
         <div class="signForm">
@@ -13,9 +12,9 @@
                 <div class="name error"></div>
                 <input type="password" name="password" placeholder="Contraseña">
                 <div class="password error"></div>
-                <button class="sign-btn">Iniciar sesión</button>
+                <a class="sign-btn" style="text-decoration:none;cursor:pointer;" href="home">Iniciar sesión</a>
             </form>
-            <p>¿No tienes una cuenta? <a href="signup" class="orange-href">Crea una nueva</a></p>
+            <p>¿No tienes una cuenta? <a href="signup" class="orange-href" style="text-decoration:none;font-weight:600;">Crea una nueva</a></p>
         </div>
     </div>
 

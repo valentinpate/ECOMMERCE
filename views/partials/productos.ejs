@@ -7,9 +7,9 @@
             <p class="price">$400</p>
             <div class="other-card-flex">
                 <div class="product-counter other-product-counter">
-                    <button class="counter-button other-counter-button">-</button>
-                    <p>2</p>
-                    <button class="counter-button other-counter-button">+</button>
+                    <button class="counter-button other-counter-button" id="minusButton">-</button>
+                    <p><span id="counterNumber"></span></p>
+                    <button class="counter-button other-counter-button" id="plusButton">+</button>
                 </div>
                 <p><b>Añadir cantidad</b></p>
             </div>
@@ -182,3 +182,9 @@
         </div>
     </div>
 </div>
+<div class="page-button">
+    <% for(let i = 1; i<=5; i++){ %>
+        <a style="text-decoration:none;color:black" class="counter-button" href="/home?page=<%= i %>"><%= i %></a>
+    <% } %>
+</div>
+<script src="/counter.js"></script>
