@@ -18,10 +18,10 @@
                     <p class="other-title"><%= elemento.nombre  %></p>
                     <p><%= elemento.precio.replace(elemento.nombre,'')  %></p>
                 <div class="d-flex align-items-center justify-content-center">
-                    <div class="product-counter other-product-counter">
-                        <button class="counter-button other-counter-button">-</button>
-                        <p>2</p>
-                        <button class="counter-button other-counter-button">+</button>
+                    <div class="product-counter other-product-counter" style="align-items:center">
+                        <button class="counter-button other-counter-button minusButton">-</button>
+                        <p style="margin-top:0.6em;" class="counterNumber"></p>
+                        <button class="counter-button other-counter-button plusButton">+</button>
                     </div>
                     <p><b>Añadir cantidad</b></p>
                 </div>
