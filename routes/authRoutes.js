@@ -21,6 +21,9 @@ router.get("/product",authControllers.product_get)
 
 //ruta para la page home 
 router.get("/home",authControllers.home_get)
+
+//ruta para el carrito
+router.post("/carrito",authControllers.carrito_post)
  
 //ruta para la page mi perfil (falta agregar la funcion a authcontrollers)
 router.get("/miperfil",(req,res)=>{
@@ -31,6 +34,8 @@ router.get("/miperfil",(req,res)=>{
 router.get("/informacion",(req,res)=>{
   res.render("informacion")
 })
+
+
 
 // Exporto las rutas
 module.exports=router

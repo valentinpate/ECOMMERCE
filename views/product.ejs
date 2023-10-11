@@ -9,7 +9,9 @@
 </header> <!-- cabezado c/ dos SVG-->
 <!-- Producto principal -->
 <div class="product-card" style="margin-top: 100px;">
+ 
 <% productrender.forEach(function(elemento){   %>
+
     <div class="product-data">
         <h2><%= elemento.nombre %> <span>DISPONIBLE</span></h2>
         <h4><%= elemento.precio.replace(elemento.nombre,"") %>.</h4>
@@ -17,12 +19,12 @@
         <div class="product-cart">
             <div class="product-total">
                 <div class="product-counter">
-                    <button class="counter-button">-</button>
-                    <p>2</p>
-                    <button class="counter-button">+</button>
+                    <button class="counter-button .minusButton">-</button>
+                    <p class=".counterNumber">2</p>
+                    <button class="counter-button .plusButton">+</button>
                 </div>
                 <p>Total: <span>$800</span></p>
-                <button class="add-to-cart-btn">Añadir al carrito</button>
+                <button class="add-to-cart-btn añadir">Añadir al carrito</button>
             </div>
             <div class="product-price">
                 <h3>La cantidad mínima para pedir es de dos cajas.</h3>
@@ -39,10 +41,10 @@
 <!-- Prodcutos similares -->
 <div class="others" style="margin-top: 2em;">
     <div class="row">
-        <%     productsimilares.forEach(function(elemento){     %>
+        <%     productsimilares.docs.forEach(function(elemento){     %>
         <div class=" col-md-3 my-4">
                     <div class="position-relative" style="background-color: aliceblue;">
-                        <img src="<%= elemento.imagen  %>" alt="">
+                        <a href="/product?id=<%= elemento.id %>&&coleccion=<%= elemento.coleccion %>"><img src="<%= elemento.imagen  %>" alt=""></a>
                         <% const texto = elemento.precio;  %>
                         <% const regex = /(\d+)\s*(?=%)/g;  %>
                         <% const descuento = texto.match(regex); %>
@@ -57,14 +59,14 @@
                     <p><%= elemento.precio.replace(elemento.nombre,'')  %></p>
                 <div class="d-flex align-items-center justify-content-center">
                     <div class="product-counter other-product-counter">
-                        <button class="counter-button other-counter-button">-</button>
-                        <p>2</p>
-                        <button class="counter-button other-counter-button">+</button>
+                        <button class="counter-button other-counter-button minusButton">-</button>
+                        <p class="counterNumber">2</p>
+                        <button class="counter-button other-counter-button plusButton">+</button>
                     </div>
                     <p><b>Añadir cantidad</b></p>
                 </div>
-                <button class="add-to-cart-btn other-add-to-cart-btn">Añadir al carrito</button>
-            <a href="/product?id=<%= elemento.id %>&&coleccion=<%= elemento.coleccion %>">ver producto</a>
+                <button class="add-to-cart-btn other-add-to-cart-btn añadir">Añadir al carrito</button>
+          
         </div>  
         <% }) %>  
     </div>
@@ -74,12 +76,19 @@
 <nav aria-label="...">
     <ul class="pagination pagination-sm justify-content-center">
       <li class="page-item active" aria-current="page">
-        <span class="page-link">1</span>
+        <a class="page-link" href="/product?id=<%= idproduct %>&&coleccion=<%= coleccionproduct %>&&page=1&&a=1">1</a>
       </li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <% for ( var i = productsimilares.page; i < productsimilares.totalPages; i++) { %>
+        <%  if(i<=a && i != 1){%>
+        <li class="page-item"><a class="page-link" href="/product?id=<%=idproduct %>&&coleccion=<%= coleccionproduct %>&&page=<%=i%>&&llave=true&&a=<%=i%>"><%= i %></a></li>
+        <% } else if(i>a && i <  productsimilares.totalPages){ %>
+            <span>.</span>
+            <% } %>
+        <% } %>
+        <li class="page-item"><a class="page-link" href="#"><%=   productsimilares.totalPages %></a></li>
+
     </ul>
-  </nav>  
+</nav>
 </main>
 <%- include("partials/footer") -%>
 </body>
