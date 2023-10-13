@@ -4,12 +4,12 @@ let numCantidad = document.querySelectorAll(".counterNumber")
 let añadir = document.querySelectorAll(".añadir")
 
 
+
 const variables= []
 // Funciones
 // deshablitar botón -
 for (let i = 0; i < numCantidad.length;i++ ){
     variables.push("contador"+i)
-console.log(i)
     variables[i] = 1;
 function deshabilitarInicio(i){
     if(variables[i]==1){
@@ -54,7 +54,6 @@ deshabilitarInicio(i)
 // Eventos
 
 menos[i].addEventListener("click",()=>{
-    console.log("funciona")
     variables[i]--
     deshabilitarMenos(i)
 })
@@ -86,20 +85,11 @@ añadir[i].addEventListener("click", async ()=>{
         let cantidad = variables[i]
         //id del producto es el mismo del id del boton(seteados en html)
         let iden= event.target.id;
-        console.log( "son",cantidad," ",nombre,"su id es",iden,"y su imagen es", src , "y vale", precio)
+        //console.log( "son",cantidad," ",nombre,"su id es",iden,"y su imagen es", src , "y vale", precio)
         variables[i]=1
         deshabilitarMenos(i)
-    
-    //renderizado de carrito
-    //hay que buscar los elementos del carito y renderizar los datos que tenemos arriba
-    //nose si se puede renderizar a medida que van agregando al carrito o renderizar cuando se hace click en el carrito
-    //algo asi pero creando el contenido html, ya que esto solo lo cambia pero funciona
-    //sino pensar la logica para un array, guardarlo y renderizarlo cada vez que se abra el carrito, resetearlo cuando
-    //se realice o cancele la compra y .push cuando agreguen.
-    //son las dos formas que se me ocurren nose cual es mas facil creo que la del array xq esta tiene que crear y borrar
-    //elemntos html, bueno hasta aca llegue por hoy! hay que ver los event ya no se usan nose porque cambiarlos!
-    let nombreproductocarrito= await document.querySelector('.nombreproducto');
-    nombreproductocarrito.innerHTML=nombre
+
 })
+
 }
 // Las funciones dentro del addEventListener actualizan el contador en el document por cada click.

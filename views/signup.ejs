@@ -4,26 +4,29 @@
         <img src="./images/pad.jpg" alt="">
         <div class="signForm">
             <form action="">
-                <div class="formTitle">
+                <div style="margin-top:1em; padding-bottom:1em;">
                     <h1>Crea una cuenta nueva</h1>
                     <h2>¡Comienza a ordenar productos en un sitio web de proveedores!</h2>
                 </div>
-                <input type="text" name="email" id="" placeholder="E-mail">
+                <input type="text" name="email" id="" placeholder="E-mail" required>
                 <div class="email error"></div>
-                <input type="text" name="fullname" placeholder="Nombre completo">
+                <input type="text" name="name" placeholder="Nombre completo" required>
                 <div class="fullname error"></div>
-                <input type="text" name="name" placeholder="Nombre de usuario">
+                <input type="text" name="user" placeholder="Nombre de usuario" required>
                 <div class="name error"></div>
-                <input type="text" name="region" placeholder="Región">
-                <div class="region error"></div>
+                <input type="password" name="password" placeholder="Contraseña" required>
+                <div class="password error"></div>
                 <input type="text" name="phone" placeholder="Número de teléfono">
                 <div class="phone error"></div>
-                <input type="password" name="password" placeholder="Contraseña">
-                <div class="password error"></div>
+                <input type="text" name="region" placeholder="Región">
+                <div class="region error"></div>
+
+
                 <button class="sign-btn">Crear una cuenta nueva</button>
             </form>
             <p>¿Ya tienes una cuenta? <a href="signin" class="orange-href" style="text-decoration:none;font-weight:600;">Inicia sesión</a></p>
         </div>
     </div>
+    <script src="/signup.js"></script>
 </body>
 </html>

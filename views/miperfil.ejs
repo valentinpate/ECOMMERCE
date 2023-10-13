@@ -1,7 +1,8 @@
 <%- include("partials/head") -%>
 <%- include("partials/header") -%>
+<%- include("partials/carrito") -%>
 <body>
-    <div class="account">
+    <div class="account" style="margin:0 auto;display:flex;">
         <div class="my-account">
             <img src="images/blank_user.png" style="margin-bottom:1em;opacity:80%;" alt=""><!-- <=% usuario.imagen propiedad imagen??? \%> -->
             <h2>Juan Giménez</h2><!-- <=% usuario.nombre \%> -->
@@ -10,7 +11,7 @@
                 <a href="#" class="orange-href" style="text-decoration:none;padding:1em 0;font-size:1.2rem;">Mi carrito</a>
             </div>
         </div>
-        <div class="info" style="margin-top:12.5em;">
+        <div class="info" style="margin-top:12.5em">
             <h2>Mi cuenta personal</h2>
             <form action="" method="" class="account-edit">
                     <!-- en los placeholders de estos inputs debería ir <=% usuario.(propiedad) \%> (el \ está para que el ejs no lo tome como inclusión)-->
@@ -23,7 +24,7 @@
                     <label for="" style="color:#FB7821;font-weight:600;margin:0.5em 0;">Número de teléfono:</label>
                     <input type="text" placeholder="12345678" style="margin:0.5em 0;">
 
-                    <button class="add-to-cart-btn save-btn">Guardar</button>
+                    <button class="add-to-cart-btn" style="border-radius:1rem;">Guardar</button>
             </form>
         </div>
     </div>

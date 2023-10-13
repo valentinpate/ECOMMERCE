@@ -2,7 +2,9 @@
 const User=require("../models/User")
 const jwt=require("jsonwebtoken")
 const Productos=require("../models/Productos")
+const bcrypt=require("bcrypt")
 
+let username = null
 // Manejo de errores
 const handleErrors=(err)=>{
     // se imprime el mensaje de error y el código del error en la consola.
@@ -47,14 +49,14 @@ const createToken=(id)=>{
 module.exports.signup_post= async(req,res)=>{
     // Destructuring
     const {email,name,user,password,phone,region}=req.body
-
     // Se usa un TRY y un CATCH para el manejo de errores
     try{
         const users= await User.create({email,name,user,password,phone,region})
         // Encriptar datos como token
-        const token=createToken(users._id,users.email,users.password)
-        res.cookie("jwt",token,{httpOnly:true,maxAge:maxAge*1000})
-        res.status(201).json(users)
+        const token= createToken(users._id,users.email,users.password)
+         res.cookie("jwt",token,{httpOnly:true,maxAge:maxAge*1000})
+         res.status(201).json(users)
+        username = user
     }
     catch(err){
         const errors=handleErrors(err)
@@ -67,12 +69,23 @@ module.exports.signup_get=(req,res)=>{
     
 }
 
-module.exports.login_post=(req,res)=>{
-    res.render("signin")
+module.exports.login_post=async(req,res)=>{
+    const {name, password} = req.body
+    const busqueda = await User.find({user:name})
+   // console.log(password)
+   // console.log(busqueda[0].password)
+    //const match = await bcrypt.compare(password, busqueda[0].password);
+    if(busqueda[0].user === name && match){
+        username = busqueda[0].user
+        res.redirect("home")
+    }else{
+        res.send("Su cuenta no existe")
+    }
 }
-// module.exports.login_get=(req,res)=>{
-    
-// }
+
+module.exports.login_get=(req,res)=>{
+    res.render("signin",{username})
+}
 
 //agrego la funcion para la page ofertas
 module.exports.ofertas_get= async (req,res)=>{
@@ -93,14 +106,13 @@ module.exports.ofertas_get= async (req,res)=>{
   }else if(llave){   
        a=page+4
     }
-   await res.render("ofertas",{productosrender,a})
+   await res.render("ofertas",{productosrender,a,username})
 }
 
 //agrego la funcion para la page product
 module.exports.product_get= async (req,res)=>{
     const paramid = req.query.id
     const paramcolec = req.query.coleccion
-
     const productrender= await Productos.find({_id:paramid})// producto en particular(en el que se hizo click)
   
 
@@ -124,7 +136,7 @@ module.exports.product_get= async (req,res)=>{
        a=page+4
     }
  
-    res.render("product",{productrender, productsimilares,a,idproduct, coleccionproduct})
+    res.render("product",{productrender, productsimilares,a,idproduct, coleccionproduct,username})
  }
 
 //agrego la funcion para la page home
@@ -157,10 +169,35 @@ module.exports.product_get= async (req,res)=>{
           a=page+4
        }
 
-     res.render("home",{homeofertas,i,j,arraycarrito,productosrender,a})
+    //variable para login
+    const user = false
+
+     res.render("home",{homeofertas,i,j,arraycarrito,productosrender,a,username})
   } 
 
 // funcion para enviar los datos a db
-  module.exports.carrito_post= async(req,res)=>{
-    
+module.exports.agregarAlCarrito=async(req,res)=>{
+    await Productos.findById(req.body.id)
+    .then (producto => {
+         req.user.agregarAlCarrito(producto) //acá en esta promesa se haría async / await ?
+        .then(result => {
+            res.redirect("/home")
+        })
+    })
+    .catch(err => console.log (err))
+} 
+
+//agrego la funcion para la page de contacto
+  module.exports.contacto_get= async(req,res)=>{
+    res.render("contacto",{username})
+  }
+  
+  //agrego la funcion para la page de miscompras
+  module.exports.miscompras_get= async(req,res)=>{
+    res.render("miscompras",{username})
+  }
+
+  module.exports.signout_get= async(req,res)=>{
+    username = null
+    res.render("signout",{username})
   }

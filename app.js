@@ -24,7 +24,8 @@ app.use(express.json())
 // Seteo el motor de plantilla
 app.set("view engine","ejs")
 
-// Conexion de la base de datos mongo DB
+//middelware para leer lo datos del front
+app.use(express.urlencoded({extended:false}))
 
 // Conexion de la base de datos mongo DB
 const iniciarDB=async()=>{
@@ -45,7 +46,7 @@ const iniciarDB=async()=>{
 // Agrego la primera ruta
 app.get("/",async(req,res)=>{
 
-   res.render("signin")
+   res.redirect("home")
 })
 
 // Conecto las rutas

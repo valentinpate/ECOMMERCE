@@ -23,10 +23,6 @@ input{
     border-radius:0.2rem;
 }
 
-a, nav a{
-    text-decoration:none;
-}
-
 button{
     cursor:pointer;
 }
@@ -46,6 +42,10 @@ button{
 .menu input{
     width:50em;
     margin:0 1.5em;
+}
+
+.nav li, .products li{
+    margin:0 0.5em;
 }
 
 .icons img, .icons svg{
@@ -69,10 +69,6 @@ button{
                 border 0.5s;
 }
 
-.nav li, .products li{
-    margin:0 0.5em;
-}
-
 .orange-href, .offer-header span{
     color:#FB7821;
 }
@@ -82,17 +78,7 @@ button{
     font-weight:600;
 }
 
-.offer-header button{
-    font-size:1.1rem;
-    box-shadow:1px 1px 3px black;
-}
 
-.price span{
-    margin-right:0.5em;
-    color:gray;
-    font-size:0.8em;
-    text-decoration:line-through;
-}
 
 /* Elementos en clases - Productos */
 
@@ -145,6 +131,13 @@ button{
     font-size:3rem;
 }
 
+.price span{
+    margin-right:0.5em;
+    color:gray;
+    font-size:0.8em;
+    text-decoration:line-through;
+}
+
 .others img{
     width:12em;
     margin-bottom:0.3em;
@@ -189,7 +182,7 @@ a:hover{
     border: 2px solid black;
 }
 
-.products button:hover{
+.products button:hover, .offer-header button:hover{
     background-color:#2744ac;
     border:2px solid #2744ac;
 }
@@ -346,12 +339,9 @@ a:hover{
 
 .product-counter{
     display:flex;
+    align-items:center;
     margin-bottom:0.5em;
     font-size:1.5rem;
-}
-
-.other-product-counter{
-    font-size:1.2rem;
 }
 
 .product-card-discount{
@@ -372,11 +362,11 @@ a:hover{
                 color 0.5s;
 }
 
-.other-counter-button{
+/* .other-counter-button{
     font-size:1.2rem;
     margin-left:0.8em;
     margin-right:0.8em;
-}
+} */
 
 .add-to-cart-btn{
     margin-top:1em;
@@ -462,14 +452,14 @@ a:hover{
     flex-direction:column;
 }
 
-.formTitle{
+/* .formTitle{
     margin-top:1em;
     padding-bottom:1.5em;
 }
 
 .formTitleIn{
     padding-top:4em;
-}
+} */
 
 .sign-btn{
     margin:0.5em 0;
@@ -486,10 +476,10 @@ a:hover{
 
 /* Mi cuenta / Edición de cuenta */
 
-.account{
+/* .account{
     margin:0 auto;
     display:flex;
-}
+} */
 
 .my-account{
     margin:150px 16em 150px 0;
@@ -510,9 +500,6 @@ a:hover{
     justify-content:flex-end;
 }
 
-.save-btn{
-    border-radius:1rem;
-}
 
 /* Slide publicidad*/
 
