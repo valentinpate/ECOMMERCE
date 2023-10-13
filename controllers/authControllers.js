@@ -74,7 +74,7 @@ module.exports.login_post=async(req,res)=>{
     const busqueda = await User.find({user:name})
    // console.log(password)
    // console.log(busqueda[0].password)
-    //const match = await bcrypt.compare(password, busqueda[0].password);
+    const match = await bcrypt.compare(password, busqueda[0].password);
     if(busqueda[0].user === name && match){
         username = busqueda[0].user
         res.redirect("home")
@@ -200,4 +200,12 @@ module.exports.agregarAlCarrito=async(req,res)=>{
   module.exports.signout_get= async(req,res)=>{
     username = null
     res.render("signout",{username})
+  }
+
+  module.exports.miperfil_get=  (req,res)=>{
+    res.render("miperfil",{username})
+  }
+
+  module.exports.info_get=  (req,res)=>{
+    res.render("informacion",{username})
   }

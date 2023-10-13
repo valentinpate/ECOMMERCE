@@ -34,15 +34,11 @@ router.get("/miscompras",authControllers.miscompras_get)
 //ruta para el carrito
 router.get("/signout",authControllers.signout_get)
 
-//ruta para la page mi perfil (falta agregar la funcion a authcontrollers)
-router.get("/miperfil",(req,res)=>{
-    res.render("miperfil")
-  })
+//ruta para la page mi perfil 
+router.get("/miperfil",authControllers.miperfil_get)
 
-//ruta para la page mi perfil (falta agregar la funcion a authcontrollers)
-router.get("/informacion",(req,res)=>{
-  res.render("informacion")
-})
+//ruta para la page mi perfil
+router.get("/informacion",authControllers.info_get)
 
 
 
