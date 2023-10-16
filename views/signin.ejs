@@ -12,15 +12,17 @@
                 <div class="name error"></div>
                 <input type="password" name="password" placeholder="Contraseña">
                 <div class="password error"></div>
-                <button class="sign-btn" style="text-decoration:none;cursor:pointer;" type="submit">Iniciar sesión</button>
-                <%   if (msj_login){%>
-                    <p style="color:red;" id="error">Usuario y/o contraseñas incorrectas</p>
-                <%  } %>
+                <button class="sign-btn" style="text-decoration:none;cursor:pointer;" type="submit" id="btn">Iniciar sesión</button>
             </form>
+            <% if(msj_login==false){ %>
+                <p style="font-size:1.3rem;font-weight:600;color:rgb(255, 51, 51);" id="error"></p>
+            <% }else{ %>
+                <p style="font-size:1.3rem;font-weight:600;color:rgb(255, 51, 51);"><%=errorText%></p>
+            <% } %>
             <p>¿No tienes una cuenta? <a href="signup" class="orange-href" style="text-decoration:none;font-weight:600;">Crea una nueva</a></p>
         </div>
     </div>
 
+<script src="/msj_log.js"></script>
 </body>
-
 </html>

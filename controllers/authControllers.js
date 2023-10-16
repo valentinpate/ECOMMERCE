@@ -72,8 +72,10 @@ module.exports.signup_get=(req,res)=>{
 
 module.exports.login_post=async(req,res)=>{
     const {name, password} = await req.body
+    // if(password == "abc" || name == "123"){
+    //     msj_login=true
+    // }
     if(password == "" || name == ""){
-        msj_login=true //mensaje de que no se pudo concretar el login por distintos motivos. EJ: "no rellenaste campo"
         res.redirect("signin")
     }else{
         msj_login=false
@@ -96,7 +98,8 @@ module.exports.login_post=async(req,res)=>{
 }
 
 module.exports.login_get=(req,res)=>{
-    res.render("signin",{username,msj_login})
+    let errorText = "Hubo un error en su petición. Por favor, intente más tarde"
+    res.render("signin",{username, msj_login, errorText})
 }
 
 //agrego la funcion para la page ofertas
