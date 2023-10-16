@@ -9,8 +9,8 @@ const authControllers=require("../controllers/authControllers")
 router.post("/signup",authControllers.signup_post)
 router.get("/signup",authControllers.signup_get)
 
-router.post("/",authControllers.login_post)
-router.get("/signin",authControllers.login_post)
+router.post("/signin",authControllers.login_post)
+router.get("/signin",authControllers.login_get)
 
 
 //ruta para la page ofertas
@@ -21,6 +21,15 @@ router.get("/product",authControllers.product_get)
 
 //ruta para la page home 
 router.get("/home",authControllers.home_get)
+
+//ruta para la page home 
+router.get("/contacto",authControllers.contacto_get)
+
+// Carrito
+router.post("/carrito",authControllers.agregarAlCarrito)
+ 
+//ruta para mis compras
+router.get("/miscompras",authControllers.miscompras_get)
  
 //ruta para la page mi perfil (falta agregar la funcion a authcontrollers)
 router.get("/miperfil",(req,res)=>{

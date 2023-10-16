@@ -37,6 +37,20 @@ const UserSchema= new mongoose.Schema({
         type:String,
         required:false,
         unique:false,
+    },
+    cart:{
+        items:[{
+            productId:{
+                type:mongoose.Types.ObjectId,
+                ref:"Productos",
+                required:true,
+            },
+            cantidad:{
+                type:Number,
+                required:true,
+            },
+        }],
+        precioTotal:Number,
     }
 })
 
@@ -54,6 +68,28 @@ UserSchema.post("save",function(doc,next){
     console.log("el nuevo usuario fue creado y guardado",doc)
     next()
 })
+
+UserSchema.methods.agregarAlCarrito = function(producto){
+    let carrito = this.cart
+
+    if(carrito.items.length == 0){
+        carrito.items.push({productId:producto._id,cantidad:1})
+        carrito.precioTotal = producto.precio
+    }else{
+        const existe = carrito.items.findIndex(objeto => objeto.productId == producto._id)
+
+        if(existe == -1){
+            carrito.items.push({productId:producto._id,cantidad:1})
+            carrito.precioTotal += producto.precio
+        }else{
+            let productoQueExiste = carrito.items[existe]
+            productoQueExiste.cantidad+1
+            carrito.precioTotal += producto.precio
+        }
+    }
+    console.log("Usuario en esquema: ", this)
+    return this.save()
+}
 
 // Introduzco el esquema dentro una tabla en mongo
 const User=mongoose.model("UsuariosEcommerce",UserSchema)

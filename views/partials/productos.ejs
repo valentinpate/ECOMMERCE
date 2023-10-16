@@ -1,190 +1,52 @@
-<div class="others">
-    <div class="other-cards">
-        <div class="other-card">
-            <img src="./images/detergente.jpg" alt="">
-            <p class="other-title">Detergente Arm & Hammer</p>
-            <p>Caja de 4 kg. con 12 unidades c/u.</p>
-            <p class="price">$400</p>
-            <div class="other-card-flex">
-                <div class="product-counter other-product-counter">
-                    <button class="counter-button other-counter-button minusButton">-</button>
-                    <p><span class="counterNumber"></span></p>
-                    <button class="counter-button other-counter-button plusButton">+</button>
+<div class="others" style="margin-top: 2em;">
+    <div class="row">
+        <%     productosrender.docs.forEach(function(elemento){     %>
+        <div class=" col-md-3 my-4">
+                    <div class="position-relative" style="background-color: aliceblue;">
+                        <a href="/product?id=<%= elemento.id %>&&coleccion=<%= elemento.coleccion %>"><img src="<%= elemento.imagen  %>" alt=""></a>
+                        <% const texto = elemento.precio;  %>
+                        <% const regex = /(\d+)\s*(?=%)/g;  %>
+                        <% const descuento = texto.match(regex); %>
+
+                        <%  if (descuento) {  %>
+
+                        <p class="discount2-pageofertas"><%= descuento[0]  %>% desc.</p>
+                        <% } else { } %>
+
+
+                    </div>
+                    <p class="other-title"><%= elemento.nombre  %></p>
+                    <p><%= elemento.precio.replace(elemento.nombre,'')  %></p>
+                <div class="d-flex align-items-center justify-content-center">
+                    <div class="product-counter" style="font-size:1.2rem;">
+                        <button style="font-size:1.2rem; margin-left:0.8em; margin-right:0.8em;" class="counter-button minusButton">-</button>
+                        <p style="margin-top:0.6em;font-weight:600;" class="counterNumber"></p>
+                        <button style="font-size:1.2rem; margin-left:0.8em; margin-right:0.8em;" class="counter-button plusButton">+</button>
+                    </div>
+                    <p style="margin-top:0.4em;font-weight:700;">Añadir cantidad</p>
                 </div>
-                <p><b>Añadir cantidad</b></p>
-            </div>
-            <button class="add-to-cart-btn other-add-to-cart-btn">Añadir al carrito</button>
+                <form action="/carrito" method="post">
+                    <input type="hidden" name="id"  value="<%= elemento.id %>">
+                    <button id="<%= elemento.id %>" type="submit" class="add-to-cart-btn other-add-to-cart-btn añadir">Añadir al carrito</button>
+                </form>
         </div>
-        <div class="other-card">
-            <img src="./images/detergente.jpg" alt="">
-            <p class="other-title">Detergente Arm & Hammer</p>
-            <p>Caja de 4 kg. con 12 unidades c/u.</p>
-            <p class="price">$400</p>
-            <div class="other-card-flex">
-                <div class="product-counter other-product-counter">
-                    <button class="counter-button other-counter-button minusButton">-</button>
-                    <p><span class="counterNumber"></span></p>
-                    <button class="counter-button other-counter-button plusButton">+</button>
-                </div>
-                <p><b>Añadir cantidad</b></p>
-            </div>
-            <button class="add-to-cart-btn other-add-to-cart-btn">Añadir al carrito</button>
-        </div>
-        <div class="other-card">
-            <img src="./images/detergente.jpg" alt="">
-            <p class="other-title">Detergente Arm & Hammer</p>
-            <p>Caja de 4 kg. con 12 unidades c/u.</p>
-            <p class="price">$400</p>
-            <div class="other-card-flex">
-                <div class="product-counter other-product-counter">
-                    <button class="counter-button other-counter-button minusButton">-</button>
-                    <p><span class="counterNumber"></span></p>
-                    <button class="counter-button other-counter-button plusButton">+</button>
-                </div>
-                <p><b>Añadir cantidad</b></p>
-            </div>
-            <button class="add-to-cart-btn other-add-to-cart-btn">Añadir al carrito</button>
-        </div>
-        <div class="other-card">
-            <img src="./images/detergente.jpg" alt="">
-            <p class="other-title">Detergente Arm & Hammer</p>
-            <p>Caja de 4 kg. con 12 unidades c/u.</p>
-            <p class="price">$400</p>
-            <div class="other-card-flex">
-                <div class="product-counter other-product-counter">
-                    <button class="counter-button other-counter-button minusButton">-</button>
-                    <p><span class="counterNumber"></span></p>
-                    <button class="counter-button other-counter-button plusButton">+</button>
-                </div>
-                <p><b>Añadir cantidad</b></p>
-            </div>
-            <button class="add-to-cart-btn other-add-to-cart-btn">Añadir al carrito</button>
-        </div>
-        <div class="other-card">
-            <img src="./images/detergente.jpg" alt="">
-            <p class="other-title">Detergente Arm & Hammer</p>
-            <p>Caja de 4 kg. con 12 unidades c/u.</p>
-            <p class="price">$400</p>
-            <div class="other-card-flex">
-                <div class="product-counter other-product-counter">
-                    <button class="counter-button other-counter-button minusButton">-</button>
-                    <p><span class="counterNumber"></span></p>
-                    <button class="counter-button other-counter-button plusButton">+</button>
-                </div>
-                <p><b>Añadir cantidad</b></p>
-            </div>
-            <button class="add-to-cart-btn other-add-to-cart-btn">Añadir al carrito</button>
-        </div>
-        <div class="other-card">
-            <img src="./images/detergente.jpg" alt="">
-            <p class="other-title">Detergente Arm & Hammer</p>
-            <p>Caja de 4 kg. con 12 unidades c/u.</p>
-            <p class="price">$400</p>
-            <div class="other-card-flex">
-                <div class="product-counter other-product-counter">
-                    <button class="counter-button other-counter-button">-</button>
-                    <p>2</p>
-                    <button class="counter-button other-counter-button">+</button>
-                </div>
-                <p><b>Añadir cantidad</b></p>
-            </div>
-            <button class="add-to-cart-btn other-add-to-cart-btn">Añadir al carrito</button>
-        </div>
-        <div class="other-card">
-            <img src="./images/detergente.jpg" alt="">
-            <p class="other-title">Detergente Arm & Hammer</p>
-            <p>Caja de 4 kg. con 12 unidades c/u.</p>
-            <p class="price">$400</p>
-            <div class="other-card-flex">
-                <div class="product-counter other-product-counter">
-                    <button class="counter-button other-counter-button">-</button>
-                    <p>2</p>
-                    <button class="counter-button other-counter-button">+</button>
-                </div>
-                <p><b>Añadir cantidad</b></p>
-            </div>
-            <button class="add-to-cart-btn other-add-to-cart-btn">Añadir al carrito</button>
-        </div>
-        <div class="other-card">
-            <img src="./images/detergente.jpg" alt="">
-            <p class="other-title">Detergente Arm & Hammer</p>
-            <p>Caja de 4 kg. con 12 unidades c/u.</p>
-            <p class="price">$400</p>
-            <div class="other-card-flex">
-                <div class="product-counter other-product-counter">
-                    <button class="counter-button other-counter-button">-</button>
-                    <p>2</p>
-                    <button class="counter-button other-counter-button">+</button>
-                </div>
-                <p><b>Añadir cantidad</b></p>
-            </div>
-            <button class="add-to-cart-btn other-add-to-cart-btn">Añadir al carrito</button>
-        </div>
-        <div class="other-card">
-            <img src="./images/detergente.jpg" alt="">
-            <p class="other-title">Detergente Arm & Hammer</p>
-            <p>Caja de 4 kg. con 12 unidades c/u.</p>
-            <p class="price">$400</p>
-            <div class="other-card-flex">
-                <div class="product-counter other-product-counter">
-                    <button class="counter-button other-counter-button">-</button>
-                    <p>2</p>
-                    <button class="counter-button other-counter-button">+</button>
-                </div>
-                <p><b>Añadir cantidad</b></p>
-            </div>
-            <button class="add-to-cart-btn other-add-to-cart-btn">Añadir al carrito</button>
-        </div>
-        <div class="other-card">
-            <img src="./images/detergente.jpg" alt="">
-            <p class="other-title">Detergente Arm & Hammer</p>
-            <p>Caja de 4 kg. con 12 unidades c/u.</p>
-            <p class="price">$400</p>
-            <div class="other-card-flex">
-                <div class="product-counter other-product-counter">
-                    <button class="counter-button other-counter-button">-</button>
-                    <p>2</p>
-                    <button class="counter-button other-counter-button">+</button>
-                </div>
-                <p><b>Añadir cantidad</b></p>
-            </div>
-            <button class="add-to-cart-btn other-add-to-cart-btn">Añadir al carrito</button>
-        </div>
-        <div class="other-card">
-            <img src="./images/detergente.jpg" alt="">
-            <p class="other-title">Detergente Arm & Hammer</p>
-            <p>Caja de 4 kg. con 12 unidades c/u.</p>
-            <p class="price">$400</p>
-            <div class="other-card-flex">
-                <div class="product-counter other-product-counter">
-                    <button class="counter-button other-counter-button">-</button>
-                    <p>2</p>
-                    <button class="counter-button other-counter-button">+</button>
-                </div>
-                <p><b>Añadir cantidad</b></p>
-            </div>
-            <button class="add-to-cart-btn other-add-to-cart-btn">Añadir al carrito</button>
-        </div>
-        <div class="other-card">
-            <img src="./images/detergente.jpg" alt="">
-            <p class="other-title">Detergente Arm & Hammer</p>
-            <p>Caja de 4 kg. con 12 unidades c/u.</p>
-            <p class="price">$400</p>
-            <div class="other-card-flex">
-                <div class="product-counter other-product-counter">
-                    <button class="counter-button other-counter-button">-</button>
-                    <p>2</p>
-                    <button class="counter-button other-counter-button">+</button>
-                </div>
-                <p><b>Añadir cantidad</b></p>
-            </div>
-            <button class="add-to-cart-btn other-add-to-cart-btn">Añadir al carrito</button>
-        </div>
+        <% }) %>
     </div>
 </div>
-<div class="page-button">
-    <% for(let i = 1; i<=5; i++){ %>
-        <a style="text-decoration:none;color:black" class="counter-button" href="/home?page=<%= i %>"><%= i %></a>
-    <% } %>
-</div>
-<script src="/counter.js"></script>
+<nav aria-label="...">
+    <ul class="pagination pagination-sm justify-content-center">
+      <li class="page-item active" aria-current="page">
+        <a class="page-link" href="/ofertas?page=1&&a=1">1</a>
+      </li>
+      <% for ( var i = productosrender.page; i < productosrender.totalPages; i++) { %>
+        <%  if(i<=a && i != 1){%>
+        <li class="page-item"><a class="page-link" href="/ofertas?page=<%=i%>&&llave=true&&a=<%=i%>"><%= i %></a></li>
+        <% } else if(i>a && i < productosrender.totalPages){ %>
+            <span>.</span>
+            <% } %>
+        <% } %>
+        <li class="page-item"><a class="page-link" href="#"><%=  productosrender.totalPages %></a></li>
+
+    </ul>
+</nav>
+

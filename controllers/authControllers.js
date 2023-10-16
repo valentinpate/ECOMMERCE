@@ -2,6 +2,10 @@
 const User=require("../models/User")
 const jwt=require("jsonwebtoken")
 const Productos=require("../models/Productos")
+const bcrypt = require("bcrypt")
+
+let username = null
+let msj_login = false
 
 // Manejo de errores
 const handleErrors=(err)=>{
@@ -47,7 +51,6 @@ const createToken=(id)=>{
 module.exports.signup_post= async(req,res)=>{
     // Destructuring
     const {email,name,user,password,phone,region}=req.body
-
     // Se usa un TRY y un CATCH para el manejo de errores
     try{
         const users= await User.create({email,name,user,password,phone,region})
@@ -67,31 +70,53 @@ module.exports.signup_get=(req,res)=>{
     
 }
 
-module.exports.login_post=(req,res)=>{
-    res.render("signin")
+module.exports.login_post=async(req,res)=>{
+    const {name, password} = await req.body
+    if(password == "" || name == ""){
+        msj_login=true //mensaje de que no se pudo concretar el login por distintos motivos. EJ: "no rellenaste campo"
+        res.redirect("signin")
+    }else{
+        msj_login=false
+        try{
+            const busqueda = await User.findOne({user:name})
+            const match = await bcrypt.compare(password,busqueda.password) //compara contraseña ingresada en el signin con contraseña de la base de datos
+            if(busqueda.user === name && match){
+                username = busqueda.user
+                res.redirect("home")
+            }else{
+                res.redirect("signin")
+                msj_login=true
+            }
+        }
+        catch(err){
+            console.log(err)
+            msj_login=true
+        }
+    }
 }
-// module.exports.login_get=(req,res)=>{
-    
-// }
+
+module.exports.login_get=(req,res)=>{
+    res.render("signin",{username,msj_login})
+}
 
 //agrego la funcion para la page ofertas
 module.exports.ofertas_get= async (req,res)=>{
    let page = req.query.page
    if (page == null){page = 1}
 
-   const ofertasrender= await Productos.paginate({},{limit:5,page:page})
+   const productosrender= await Productos.paginate({},{limit:12,page:page})
 
   ////funcion que estoy probando
   let a = 5
   let llave = req.query.llave
-  page = ofertasrender.page
+  page = productosrender.page
  
    if(page==1){
       llave=false
   }else if(llave){   
        a=page+4
     }
-   await res.render("ofertas",{ofertasrender,a})
+   await res.render("ofertas",{productosrender,a})
 }
 
 //agrego la funcion para la page product
@@ -99,34 +124,82 @@ module.exports.product_get= async (req,res)=>{
     const paramid = req.query.id
     const paramcolec = req.query.coleccion
 
-    const productrender= await Productos.find({_id:paramid})
-    const productsimilares= await Productos.find({coleccion:paramcolec})
+    const productrender= await Productos.find({_id:paramid})// producto en particular(en el que se hizo click)
+  
 
-    // let a = req.query.a
-    // let key = req.query.key
-    // let page = 2
+     //paginacion (primera parte)
+    let idproduct = productrender[0]._id //variable para seguir viendo el producto seleccionado atraves de las paginas
+    let coleccionproduct = productrender[0].coleccion// variable para recorrer paginas de productos similares
+   let page = req.query.page
+   if (page == null){page = 1}
 
-    // if(a==null){
-    //     key=false
-    //     a = 5
-    // }else if(key){
-    //     page=req.query.page
-    //     a=a+4
-    //     page++
-    // }
+   // llamdos a db
+    const productsimilares= await Productos.paginate({coleccion:paramcolec},{limit:12,page:page})
 
-    // console.log(a)
-    // console.log(key)
+    ////paginacion (segundaparte)
+  let a = 5 //catidad de botones visibles
+  let llave = req.query.llave
+  page = productsimilares.page
  
-    res.render("product",{productrender, productsimilares})
+   if(page==1){
+      llave=false
+  }else if(llave){   
+       a=page+4
+    }
+ 
+    res.render("product",{productrender, productsimilares, a, idproduct, coleccionproduct})
  }
 
+
 //agrego la funcion para la page home
- module.exports.home_get=async(req,res)=>{
-    // creo costante para exportar porductos de ofertas en home
+module.exports.home_get=async(req,res)=>{
+
+
+    // llamado a db para ofertas
     const homeofertas= await Productos.find({coleccion:"ofertas"})
     let i = 2;
     let j = 5;
-   //let i y let j para slide automático
-     res.render("home",{homeofertas,i,j})
-  } 
+
+   //llamado para carrito
+   const arraycarrito=await Productos.find({})
+   const user = false
+      //paginacion (primera parte)
+      let page = req.query.page
+      if (page == null){page = 1}
+   
+      // llamdos a db
+      const productosrender= await Productos.paginate({},{limit:12,page:page})
+   
+     ////paginacion (segundaparte)
+     let a = 5 //catidad de botones visibles
+     let llave = req.query.llave
+     page = productosrender.page
+    
+      if(page==1){
+         llave=false
+     }else if(llave){   
+          a=page+4
+       }
+    res.render("home",{homeofertas,i,j,arraycarrito,productosrender,a, user})
+}
+
+module.exports.agregarAlCarrito=async(req,res)=>{
+    await Productos.findById(req.body.id)
+    .then (producto => {
+        req.user.agregarAlCarrito(producto) //acá en esta promesa se haría async / await ?
+        .then(result => {
+            res.redirect("/ofertas")
+        })
+    })
+    .catch(err => console.log (err))
+}
+
+//agrego la funcion para la page de contacto
+module.exports.contacto_get= async(req,res)=>{
+    res.render("contacto")
+  }
+  
+  //agrego la funcion para la page de miscompras
+module.exports.miscompras_get= async(req,res)=>{
+    res.render("miscompras")
+  }
