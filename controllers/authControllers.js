@@ -5,6 +5,7 @@ const Productos=require("../models/Productos")
 const bcrypt=require("bcrypt")
 
 let username = null
+let msj_login = false
 // Manejo de errores
 const handleErrors=(err)=>{
     // se imprime el mensaje de error y el código del error en la consola.
@@ -27,12 +28,15 @@ const handleErrors=(err)=>{
 
     // Validacion de errores
     if(err.message.includes("Usuarios validation failed")){
+       
         // Si el error es una validación de errores generados por el modelo de usuario ("Usuarios validation failed"), se procesan estos errores y se almacenan los mensajes de error específicos para cada campo en el objeto "error".
         object.values(err.errors).forEach(({properties})=>{
             error[properties.path]=properties.message
         })
     }
+    console.log(error)
     return error
+
 }
 
 // Token
@@ -50,6 +54,7 @@ module.exports.signup_post= async(req,res)=>{
     // Destructuring
     const {email,name,user,password,phone,region}=req.body
     // Se usa un TRY y un CATCH para el manejo de errores
+   
     try{
         const users= await User.create({email,name,user,password,phone,region})
         // Encriptar datos como token
@@ -60,31 +65,46 @@ module.exports.signup_post= async(req,res)=>{
     }
     catch(err){
         const errors=handleErrors(err)
-        res.status(400).json({errors})
+        //res.status(400).json({errors})
     }
 }
 
 module.exports.signup_get=(req,res)=>{
-    res.render("signup")
+    res.render("signup",{msj_login})
     
 }
 
 module.exports.login_post=async(req,res)=>{
-    const {name, password} = req.body
-    const busqueda = await User.find({user:name})
-   // console.log(password)
-   // console.log(busqueda[0].password)
-    const match = await bcrypt.compare(password, busqueda[0].password);
-    if(busqueda[0].user === name && match){
-        username = busqueda[0].user
-        res.redirect("home")
-    }else{
-        res.send("Su cuenta no existe")
+    const {name, password} = await req.body
+ 
+   if(password == "" || name == "")
+   {
+        msj_login=true
+        res.redirect("signin")
+   }else
+   {
+    msj_login=false
+    try{
+        const busqueda = await User.find({user:name})
+        const match = await bcrypt.compare(password, busqueda[0].password);
+        if(busqueda[0].user === name && match)
+        {
+            username = busqueda[0].user
+            res.redirect("home")
+        }else{
+                res.redirect("signin")
+                msj_login=true
+            }
+        
+        }catch(error){
+            console.log(error)
+            msj_login=true
+        }
     }
 }
 
 module.exports.login_get=(req,res)=>{
-    res.render("signin",{username})
+    res.render("signin",{username,msj_login})
 }
 
 //agrego la funcion para la page ofertas
@@ -142,6 +162,12 @@ module.exports.product_get= async (req,res)=>{
 //agrego la funcion para la page home
  module.exports.home_get=async(req,res)=>{
 
+    //Buscador
+    //declaro variable
+    const palabraclave = req.query.palabraclave // el ejs en header esta definimos por un form y lo tengo que capturar con u00n req.query no era req.body
+    const expresionregular = new RegExp(palabraclave, 'i');//se crea a expresion relugular apartir de la variable palabraclave, la "i" es para que sea insensible a las mayusculas
+    let productosrender = llamado(expresionregular);// funcion de llamado a DB con la logica del buscador incluida
+    
 
     // llamado a db para ofertas
     const homeofertas= await Productos.find({coleccion:"ofertas"})
@@ -156,7 +182,16 @@ module.exports.product_get= async (req,res)=>{
       if (page == null){page = 1}
    
       // llamdos a db
-      const productosrender= await Productos.paginate({},{limit:12,page:page})
+     async function llamado (expresionregular,page){
+      if(palabraclave == ""){
+        productosrender= await Productos.paginate({},{limit:12,page:page})
+       
+      }else{
+        productosrender= await Productos.paginate({nombre:{ $regex: expresionregular }},{limit:12,page:page})
+        console.log("paso", productosrender)
+      }
+      return productosrender
+    }
    
      ////paginacion (segundaparte)
      let a = 5 //catidad de botones visibles
@@ -179,6 +214,7 @@ module.exports.product_get= async (req,res)=>{
 module.exports.agregarAlCarrito=async(req,res)=>{
     await Productos.findById(req.body.id)
     .then (producto => {
+        console.log(req.user)
          req.user.agregarAlCarrito(producto) //acá en esta promesa se haría async / await ?
         .then(result => {
             res.redirect("/home")

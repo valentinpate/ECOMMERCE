@@ -3,12 +3,16 @@
     <div class="signInContainer">
         <img src="./images/pad.jpg" alt="">
         <div class="signForm">
+          
             <form action="/signin" method="post">
                 <div style="padding-top:4em;">
                     <h1>¡Bienvenido<span><%=username %></span>!</h1>
                     <h2>Inicia sesión para disfrutar de los beneficios de MOWARDIN.</h2>
+                    <%   if (msj_login){%>
+                        <p>Usuario y/o contraseñas incorrectas</p>
+                        <%  } %>
                 </div>
-                <input type="text" name="name" placeholder="Nombre de usuario">
+                <input type="text" name="name"  placeholder="Nombre de usuario">
                 <div class="name error"></div>
                 <input type="password" name="password" placeholder="Contraseña">
                 <div class="password error"></div>
