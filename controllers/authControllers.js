@@ -3,6 +3,7 @@ const User=require("../models/User")
 const jwt=require("jsonwebtoken")
 const Productos=require("../models/Productos")
 const bcrypt = require("bcrypt")
+const passport = require("passport")
 
 let username = null
 let msj_login = false
@@ -48,6 +49,8 @@ const createToken=(id)=>{
 
 // se exporta la logica de las rutas a authRoutes
 
+// SignUp, LogIn y LogOut
+
 module.exports.signup_post= async(req,res)=>{
     // Destructuring
     const {email,name,user,password,phone,region}=req.body
@@ -58,6 +61,7 @@ module.exports.signup_post= async(req,res)=>{
         const token=createToken(users._id,users.email,users.password)
         res.cookie("jwt",token,{httpOnly:true,maxAge:maxAge*1000})
         res.status(201).json(users)
+        username = user
     }
     catch(err){
         const errors=handleErrors(err)
@@ -71,35 +75,25 @@ module.exports.signup_get=(req,res)=>{
 }
 
 module.exports.login_post=async(req,res)=>{
-    const {name, password} = await req.body
-    // if(password == "abc" || name == "123"){
-    //     msj_login=true
-    // }
-    if(password == "" || name == ""){
-        res.redirect("signin")
-    }else{
+    if(req.isAuthenticated()){
+        console.log("login",req.user)
+        username=req.user.name
         msj_login=false
-        try{
-            const busqueda = await User.findOne({user:name})
-            const match = await bcrypt.compare(password,busqueda.password) //compara contraseña ingresada en el signin con contraseña de la base de datos
-            if(busqueda.user === name && match){
-                username = busqueda.user
-                res.redirect("home")
-            }else{
-                res.redirect("signin")
-                msj_login=true
-            }
-        }
-        catch(err){
-            console.log(err)
-            msj_login=true
-        }
+        res.redirect("home")
+    }else{
+        msj_login=true
     }
 }
 
 module.exports.login_get=(req,res)=>{
     let errorText = "Hubo un error en su petición. Por favor, intente más tarde"
-    res.render("signin",{username, msj_login, errorText})
+    let passportText = "passport.AuthenticateOptions.failureMessage"
+    res.render("signin",{username, msj_login, errorText, passportText})
+}
+
+module.exports.signOut_get=(req,res)=>{
+    let username = null
+    res.render("signout",{username})
 }
 
 //agrego la funcion para la page ofertas
@@ -119,7 +113,7 @@ module.exports.ofertas_get= async (req,res)=>{
   }else if(llave){   
        a=page+4
     }
-   await res.render("ofertas",{productosrender,a})
+   await res.render("ofertas",{username, productosrender,a})
 }
 
 //agrego la funcion para la page product
@@ -156,6 +150,11 @@ module.exports.product_get= async (req,res)=>{
 
 //agrego la funcion para la page home
 module.exports.home_get=async(req,res)=>{
+    //Buscador
+    //declaro variable
+    const palabraclave = req.query.palabraclave //aca tengo una duda tuve que usar req.query y nose porque sera por es get
+    const expresionregular = new RegExp(palabraclave, 'i');//se crea a expresion relugular apartir de la variable palabraclave, la "i" es para que sea insensible a las mayusculas
+    let productosrender = llamado(expresionregular);// funcion de llamado a DB con la logica del buscador incluida
 
 
     // llamado a db para ofertas
@@ -165,13 +164,20 @@ module.exports.home_get=async(req,res)=>{
 
    //llamado para carrito
    const arraycarrito=await Productos.find({})
-   const user = false
       //paginacion (primera parte)
       let page = req.query.page
       if (page == null){page = 1}
    
       // llamdos a db
-      const productosrender= await Productos.paginate({},{limit:12,page:page})
+      async function llamado (expresionregular,page){
+        if(palabraclave == ""){
+          productosrender= await Productos.paginate({},{limit:12,page:page})
+  
+        }else{
+          productosrender= await Productos.paginate({nombre:{ $regex: expresionregular }},{limit:12,page:page})
+        }
+        return productosrender
+      }
    
      ////paginacion (segundaparte)
      let a = 5 //catidad de botones visibles
@@ -183,26 +189,38 @@ module.exports.home_get=async(req,res)=>{
      }else if(llave){   
           a=page+4
        }
-    res.render("home",{homeofertas,i,j,arraycarrito,productosrender,a, user})
+    res.render("home",{username, homeofertas,i,j,arraycarrito,productosrender,a})
 }
 
 module.exports.agregarAlCarrito=async(req,res)=>{
-    await Productos.findById(req.body.id)
-    .then (producto => {
-        req.user.agregarAlCarrito(producto) //acá en esta promesa se haría async / await ?
-        .then(result => {
-            res.redirect("/ofertas")
-        })
-    })
-    .catch(err => console.log (err))
+    try{
+        if(req.isAuthenticated()) {
+            console.log(req.user.id)
+            await User.findById(req.user.id) //busca id del usuario
+            const producto= await Productos.findById(req.body.id) //busca el id del producto en la base
+            const result= await req.user.agregarAlCarrito(producto) //agrega al carrit
+            if(result){
+                res.redirect("/home")
+            }
+        }
+    }
+    catch(err){ console.log (err) }
 }
 
 //agrego la funcion para la page de contacto
 module.exports.contacto_get= async(req,res)=>{
-    res.render("contacto")
+    res.render("contacto",{username})
   }
   
   //agrego la funcion para la page de miscompras
 module.exports.miscompras_get= async(req,res)=>{
-    res.render("miscompras")
+    res.render("miscompras",{username})
   }
+
+module.exports.miperfil_get = (req, res)=>{
+    res.render("miperfil",{username})
+}
+
+module.exports.informacion_get = (req, res)=>{
+    res.render("informacion",{username})
+}

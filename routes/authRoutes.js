@@ -4,14 +4,20 @@ const router=Router()
 
 // Importo el archo authControllers con la logica de las rutas
 const authControllers=require("../controllers/authControllers")
+const passport = require("passport")
 
 // Seteo las rutas/direcciones
 router.post("/signup",authControllers.signup_post)
 router.get("/signup",authControllers.signup_get)
 
-router.post("/signin",authControllers.login_post)
+router.post("/signin",passport.authenticate("local",{
+    failureRedirect: "/signin", // Redirige en caso de fallo de autenticación
+    failureMessage: 'Credenciales incorrectas, inténtelo de nuevo'
+}),authControllers.login_post)
+
 router.get("/signin",authControllers.login_get)
 
+router.get("/signout",authControllers.signOut_get)
 
 //ruta para la page ofertas
 router.get("/ofertas",authControllers.ofertas_get)
@@ -32,14 +38,10 @@ router.post("/carrito",authControllers.agregarAlCarrito)
 router.get("/miscompras",authControllers.miscompras_get)
  
 //ruta para la page mi perfil (falta agregar la funcion a authcontrollers)
-router.get("/miperfil",(req,res)=>{
-    res.render("miperfil")
-  })
+router.get("/miperfil",authControllers.miperfil_get)
 
 //ruta para la page mi perfil (falta agregar la funcion a authcontrollers)
-router.get("/informacion",(req,res)=>{
-  res.render("informacion")
-})
+router.get("/informacion",authControllers.informacion_get)
 
 // Exporto las rutas
 module.exports=router

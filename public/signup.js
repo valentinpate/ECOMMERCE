@@ -19,7 +19,11 @@ form.addEventListener("click",async (e)=>{
             body:JSON.stringify({email,name,user,password,phone,region}),
             headers:{"Content-Type":"application/json"}
         })
-
+        if(fer.ok){
+            window.location.href="http://localhost:4000/signin"
+        } else {
+            console.log("no funciono")
+        }
     }
     catch(error){
         console.log(error)

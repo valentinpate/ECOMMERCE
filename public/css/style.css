@@ -176,6 +176,10 @@ a:hover{
     text-decoration:underline;
 }
 
+.search-btn:hover{
+    transform:scale(1.1);
+}
+
 .icons svg:hover, .icons img:hover{
     transform:scale(1.1)
 }
@@ -191,6 +195,10 @@ a:hover{
 
 .orange-href:hover{
     color:black;
+}
+
+.orange-bg:hover{
+    background-color:#FDBE94;
 }
 
 .sign-btn:hover, .add-to-cart-btn:hover{
@@ -227,6 +235,17 @@ a:hover{
     display:flex;
     align-items:center;
     justify-content:center;
+}
+
+.search-btn{
+    background:transparent;
+    border:none;
+    font-size:1.2rem;
+    color:#999999;
+    position:absolute;
+    top:0.4em;
+    right:2.5em;
+    transition: transform 0.5s;
 }
 
 .icon-container{
