@@ -58,11 +58,14 @@ const UserSchema= new mongoose.Schema({
 
 // Mensaje de usuario
 UserSchema.pre("save", async function(next){
+
+    if (this.skipPreSave) {
+        return next(); // No ejecutar el middleware
+      }
     // encriptar contraseñas
-    const salt= await bcrypt.genSalt()
+      const salt= await bcrypt.genSalt()
     this.password= await bcrypt.hash(this.password,salt)
    // console.log("el nuevo usuario esta siendo creado y se pasara a guardar",this)
-   console.log("paso por save")
     next()
 })
 
@@ -72,24 +75,39 @@ UserSchema.post("save",function(doc,next){
 })
 
 UserSchema.methods.agregarAlCarrito = function(producto){
+    this.skipPreSave = true;
     let carrito = this.cart
+    const regex = /\$([0-9,]+)/g;
 
     if(carrito.items.length == 0){
         carrito.items.push({productId:producto._id,cantidad:1})
-        carrito.precioTotal = producto.precio
+        let numero=  producto.precio.match(regex);
+        let precio = parseFloat(numero[0].replace(/\$|,/g, '')).toFixed(2);
+        precio= (precio/100).toFixed(2);
+        precio = Number(precio); 
+        carrito.precioTotal = precio
     }else{
         const existe = carrito.items.findIndex(objeto => objeto.productId == producto._id)
 
         if(existe == -1){
             carrito.items.push({productId:producto._id,cantidad:1})
-            carrito.precioTotal += producto.precio
+            let numero=  producto.precio.match(regex);
+            let precio = parseFloat(numero[0].replace(/\$|,/g, '')).toFixed(2);
+            precio= (precio/100).toFixed(2);
+            precio = Number(precio); 
+            carrito.precioTotal += precio
         }else{
             let productoQueExiste = carrito.items[existe]
             productoQueExiste.cantidad+1
-            carrito.precioTotal += producto.precio
+            let numero=  producto.precio.match(regex);
+            let precio = parseFloat(numero[0].replace(/\$|,/g, '')).toFixed(2);
+            precio= (precio/100).toFixed(2);
+            precio = Number(precio); 
+            console.log(typeof precio)
+            carrito.precioTotal += precio
         }
     }
-    console.log("Usuario en esquema: ", this)
+    //console.log("Usuario en esquema: ", this.cart)
     return this.save()
 }
 

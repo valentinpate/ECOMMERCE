@@ -40,56 +40,51 @@
                                     <div class="productoscarrito">
                                         <p class="eliminarproductos">Eliminar todo</p>
                                         <div class="containernumerodepedidos">
-                                            <p class="numerodepedidos">(2)</p> 
+                                            <p class="numerodepedidos">(<%= arrayCarrito.length  %>)</p> 
                                             <h3>Numero de pedidos</h3>     
                                         </div>
                                     </div>
-                                    <div class="containerproductoscarrito">
-                                        <div class="containerproductocarrito">
+                                    <div class="containerproductoscarrito" style="overflow-y: auto; height: 30em;">
+                                        <% const regex = /\$([0-9,]+)/g;%>
+                                        <%arrayCarrito.forEach((elemento,index)=>{%> 
+                                            <% const precio = elemento.precio.match(regex)%>
+                                        <div class="containerproductocarrito" >
                                             <div>
-                                                <i class="bi bi-trash-fill iconeliminarproducto"></i>                           
+                                                <i class="bi bi-trash-fill iconeliminarproducto"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/></svg></i>                           
                                                 <div>
                                                     <!-- traer info del producto -->
-                                                    <p class="nombreproducto">Pepsi 2.25 Lts</p> 
+                                                    <p class="nombreproducto"><%= elemento.nombre  %></p> 
                                                     <div class="containercantproducto">
                                                         <!-- agregar contador -->
-                                                        <button class="btnmenosproductos">-</button>
-                                                        <p>2</p>
-                                                        <button class="btnmasproductos">+</button>
+                                                       <button class="btnmenosproductos minusButton">-</button>
+                                                        <p class="counterNumber"><%=items[index].cantidad%></p>
+                                                       <button class="btnmasproductos plusButton">+</button>
                                                         <p>Cantidad</p>
                                                     </div>
                                                     <div class="infoproducto">
                                                         <div class="preciodesc">
-                                                            <p class="precioporcantproducto">$1200</p>
-                                                            <p class="preciocondesc">$900</p>
+                                                            <% const texto = elemento.precio;  %>
+                                                            <% const regex2 = /(\d+)\s*(?=%)/g;  %>
+                                                            <% const descuento = texto.match(regex2); %>
+                                  
+                                                            <%  if (descuento) {  %>
+                                                            <input type="hidden" class="descuento" value="<%= descuento[0] %>">
+                                                            <input type="hidden" class="descuentoIndex" value="<%= index %>">
+                                                            <p class="precioporcantproducto"><%=precio[0] %></p>
+                                                            <p class="preciocondesc"></p>
+                                                            <% } else{%>
+                                                                <p class="preciocondesc"><%= precio[0] %></p>  
+                                                                <%  }%>
                                                         </div>
                                                         <!-- traer precio producto -->
-                                                        <p>Precio/u $600</p> 
+                                                        <p class="precio">Precio/u <%= precio[0]  %></p> 
                                                     </div>
                                                 </div>
                                             </div>           
-                                            <img class="imgproducto" src="./images/pepsi.png" alt="">
+                                            <img class="imgproducto" src="<%= elemento.imagen  %>" alt="">
                                         </div>
                                         <hr class="lineaproductosdos"> <!-- linea se separacion -->
-                                        <div class="containerproductocarrito">
-                                            <div>
-                                                <i class="bi bi-trash-fill iconeliminarproducto"></i>                           
-                                                <div>
-                                                    <p class="nombreproducto">Pepsi 2.25 Lts</p> 
-                                                    <div class="containercantproducto">
-                                                        <button class="btnmenosproductos">-</button>
-                                                        <p>2</p>
-                                                        <button class="btnmasproductos">+</button>
-                                                        <p>Cantidad</p>
-                                                    </div>
-                                                    <div class="infoproducto">
-                                                        <p class="preciosindesc">$1200</p>                                
-                                                        <p>Precio/u $600</p>
-                                                    </div>
-                                                </div>
-                                            </div>           
-                                            <img class="imgproducto" src="./images/pepsi.png" alt="">
-                                        </div>
+                                        <% }) %>
                                     </div>
                      </div>
                  </div>

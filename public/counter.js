@@ -1,14 +1,19 @@
 let menos = document.querySelectorAll(".minusButton")
 let mas = document.querySelectorAll(".plusButton")
 let numCantidad = document.querySelectorAll(".counterNumber")
-let añadir = document.querySelectorAll(".añadir")
+let anadir = document.querySelectorAll(".anadir")
+let inputcantidad= document.querySelectorAll(".inputcantidad")
 
 
-
-const variables= []
+document.addEventListener('DOMContentLoaded', () => {
 // Funciones
 // deshablitar botón -
+
+const variables= []
+let cantidad=0
+let id=null
 for (let i = 0; i < numCantidad.length;i++ ){
+  
     variables.push("contador"+i)
     variables[i] = 1;
 function deshabilitarInicio(i){
@@ -45,7 +50,11 @@ function deshabilitarMas(i){
 }
 
 function mostrarContador(){
-    numCantidad[i].innerHTML=variables[i]
+    if(variables[i]!=numCantidad[i].innerHTML){
+       numCantidad[i].innerHTML=variables[i]
+       cantidad = numCantidad[i].innerHTML
+    }
+    
 }
 
 mostrarContador()
@@ -62,34 +71,23 @@ mas[i].addEventListener("click",()=>{
     variables[i]++
     deshabilitarMas(i)
 })
-
-añadir[i].addEventListener("click", async ()=>{
-
-    //busqueda de datos
-        //consigo el src de la imagen
-        let contenedor = await event.target.closest('.contendorproductos'); //elemtno padre del boton
-
-        // busco la imagen
-        let imagen = await contenedor.querySelector('img');
-        let src=  await imagen.getAttribute('src');//src
-
-        // busco el nombre
-        let clasenombre= await contenedor.querySelector('.nombreproducto');
-        let nombre= await clasenombre.innerHTML
-
-        // busco el precio
-        let claseprecio= await contenedor.querySelector('.precioproducto');
-        let precio= await claseprecio.innerHTML // aca hay que hacer un regex para que solo tome el precio
-
-        //catidad de prodcutos
-        let cantidad = variables[i]
-        //id del producto es el mismo del id del boton(seteados en html)
-        let iden= event.target.id;
-        //console.log( "son",cantidad," ",nombre,"su id es",iden,"y su imagen es", src , "y vale", precio)
-        variables[i]=1
-        deshabilitarMenos(i)
-
-})
-
 }
+for (let j = 0; j < anadir.length;j++ ){//hago un nuevo for para los botones añadir carrito, ya que al renderizar productos en el carrito el numcantidad aumenta y la variable i del primer for toma un valor mas alto de los botones añadircarrito que hay, entonces cuando no habia productos en carrito andaba bien y cuando ponias productos en carrito ya no!
+
+ anadir[j].addEventListener('click', async (e) => { //uso un fetch para enviar la info cantidad y el id a carrito
+
+    e.preventDefault()
+    
+   id= anadir[j].id
+        const fer= await fetch("/carrito",{
+            method:"POST",
+            body:JSON.stringify({cantidad,id}),//esta cantidad es la que hay que usar para agregar a DB
+            headers:{"Content-Type":"application/json"}
+        })
+        if(fer.ok){
+            window.location.reload();}
+            else{console.log("no funciono")}
+  });
+}
+})
 // Las funciones dentro del addEventListener actualizan el contador en el document por cada click.

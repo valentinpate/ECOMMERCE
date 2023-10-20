@@ -215,7 +215,7 @@
     padding-left: 1.5rem;
 }
 .containerproductocarrito .iconeliminarproducto{
-    color: #FF0000;
+    fill:#e70404;
     cursor: pointer;
 }
 .containerproductocarrito .nombreproducto{

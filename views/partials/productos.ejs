@@ -20,14 +20,14 @@
                     <div class="d-flex align-items-center justify-content-center">
                         <div class="product-counter" style="font-size:1.2rem;">
                             <button style="font-size:1.2rem; margin-left:0.8em; margin-right:0.8em;" class="counter-button minusButton">-</button>
-                            <p style="margin-top:0.6em;font-weight:600;" class="counterNumber"></p>
+                            <p style="margin-top:0.6em;font-weight:600;" class="counterNumber">1</p>
                             <button style="font-size:1.2rem; margin-left:0.8em; margin-right:0.8em;" class="counter-button plusButton">+</button>
                         </div>
                         <p style="margin-top:0.4em;font-weight:700;">Añadir cantidad</p>
                     </div>
-                <form action="/carrito" method="post">
+                <form action="/carrito" class="carritoform">
                     <input type="hidden" name="id"  value="<%= elemento.id %>">
-                    <button id="<%= elemento.id %>" type="submit" class="add-to-cart-btn other-add-to-cart-btn añadir">Añadir al carrito</button>
+                    <button id="<%= elemento.id %>" class="add-to-cart-btn other-add-to-cart-btn anadir">Añadir al carrito</button>
                 </form>
         </div>
         <% }) %>
@@ -36,16 +36,17 @@
 <nav aria-label="...">
     <ul class="pagination pagination-sm justify-content-center">
       <li class="page-item active" aria-current="page">
-        <a class="page-link" href="/ofertas?page=1&&a=1">1</a>
+        <a class="page-link" href="/<%=miRuta%>?page=1&&a=1">1</a>
       </li>
       <% for ( var i = productosrender.page; i < productosrender.totalPages; i++) { %>
         <%  if(i<=a && i != 1){%>
-        <li class="page-item"><a class="page-link" href="/ofertas?page=<%=i%>&&llave=true&&a=<%=i%>"><%= i %></a></li>
+            
+        <li class="page-item"><a class="page-link" href="/<%=miRuta%>?page=<%=i%>&&llave=true&&a=<%=i%>"><%= i %></a></li>
         <% } else if(i>a && i <  productosrender.totalPages){ %>
             <span>.</span>
             <% } %>
         <% } %>
-        <li class="page-item"><a class="page-link" href="#"><%=   productosrender.totalPages %></a></li>
+        <li class="page-item"><a class="page-link" href="/<%=miRuta%>?page=<%=productosrender.totalPages%>"><%=   productosrender.totalPages %></a></li>
 
     </ul>
 </nav>

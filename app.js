@@ -1,6 +1,8 @@
 // Importo los paquetes
 const express=require("express")
 const cookieParser=require("cookie-parser")
+const session = require("express-session");
+const passport = require("passport");
 
 //Importar variables de seguridad
 require("dotenv").config()
@@ -26,6 +28,25 @@ app.set("view engine","ejs")
 
 //middelware para leer lo datos del front
 app.use(express.urlencoded({extended:false}))
+
+//configuracion de cookie-parser
+app.use(cookieParser("mi secreto"));
+
+//consgiguracion de express-session
+app.use(session({
+    secret: 'miClaveSecreta',
+    resave: false,
+    saveUninitialized: true,
+  }));
+
+
+  // Configurar Passport.js
+const estrategiaLocal = require('./config/passport')
+estrategiaLocal.estrategia(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 // Conexion de la base de datos mongo DB
 const iniciarDB=async()=>{
