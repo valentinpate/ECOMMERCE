@@ -53,6 +53,9 @@ function mostrarContador(){
     if(variables[i]!=numCantidad[i].innerHTML){
        numCantidad[i].innerHTML=variables[i]
        cantidad = numCantidad[i].innerHTML
+       const evento = new CustomEvent('valorCambiado', { detail: cantidad });
+       document.dispatchEvent(evento);
+       return cantidad
     }
     
 }

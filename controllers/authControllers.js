@@ -7,6 +7,7 @@ const passport = require ("passport")
 
 let username = null
 let msj_login = false
+let incomplete = false
 let arrayCarrito=[]
 let miRuta= null
 
@@ -312,7 +313,7 @@ module.exports.agregarAlCarrito=async(req,res)=>{
     nombre=req.user.name
     username=req.user.user
     telefono = req.user.phone
-    res.render("miperfil",{username,miRuta,arrayCarrito})
+    res.render("miperfil",{username,miRuta,arrayCarrito,incomplete})
   }
 
   module.exports.info_get=async (req,res)=>{
@@ -331,3 +332,19 @@ module.exports.agregarAlCarrito=async(req,res)=>{
   };
     res.render("informacion",{username,arrayCarrito,miRuta})
   }
+
+  module.exports.editarMiPerfil = async (req,res)=>{
+    try{
+        const {name,user,phone} = req.body
+        const usuario = req.user.id
+        if(name == "" || user == "" || phone == ""){
+            incomplete = true
+            res.redirect("miperfil")
+        }else{
+            incomplete = false
+            await User.findByIdAndUpdate({_id:usuario},{name:name,user:user,phone:phone})
+            res.redirect("miperfil")
+        }
+    }
+    catch(err){ console.log (err) }
+}

@@ -40,6 +40,8 @@ router.get("/home",authControllers.home_get)
 //ruta para la page home 
 router.get("/contacto",authControllers.contacto_get)
 
+router.post("/editar-mi-perfil",authControllers.editarMiPerfil)
+
 //ruta para el carrito
 router.post("/carrito",  (req,res,next)=>{
     if(req.isAuthenticated()){
