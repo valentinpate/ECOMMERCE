@@ -57,6 +57,9 @@ const UserSchema= new mongoose.Schema({
 
 // Mensaje de usuario
 UserSchema.pre("save", async function(next){
+    if (this.skipPreSave) {
+        return next(); // No ejecutar el middleware
+    }
     // encriptar contraseñas
     const salt= await bcrypt.genSalt()
     this.password= await bcrypt.hash(this.password,salt)
@@ -70,21 +73,31 @@ UserSchema.post("save",function(doc,next){
 })
 
 UserSchema.methods.agregarAlCarrito = function(producto){
+    this.skipPreSave = true;
     let carrito = this.cart
+    const regex = /\$([0-9,]+)/g //caracter $ + ([todos los caracteres del 0 a 9 y comas]el + indica que debe haber más de un dígito o coma) + /g = lo busca de forma global. no se queda en el 1ro
 
     if(carrito.items.length == 0){
         carrito.items.push({productId:producto._id,cantidad:1})
-        carrito.precioTotal = producto.precio
+        let numero = producto.precio.match(regex) //me trae el precio del producto que coincide con el regex
+        console.log("Número:", numero)
+        let precio = parseFloat(numero[0].replace(/$|,/g, '')) // / $ | , (selecciono todos los carácteres "$" y "," para reemplazarlos por un vacío -> , "")
+        console.log("Precio:", precio)
+        // carrito.precioTotal = precio
     }else{
         const existe = carrito.items.findIndex(objeto => objeto.productId == producto._id)
 
         if(existe == -1){
             carrito.items.push({productId:producto._id,cantidad:1})
-            carrito.precioTotal += producto.precio
+            let numero = producto.precio.match(regex)
+            let precio = parseFloat(numero[0].replace(/$|,/g, '')).toFixed(2)
+            carrito.precioTotal += precio
         }else{
             let productoQueExiste = carrito.items[existe]
             productoQueExiste.cantidad+1
-            carrito.precioTotal += producto.precio
+            let numero = producto.precio.match(regex)
+            let precio = parseFloat(numero[0].replace(/$|,/g, '')).toFixed(2)
+            carrito.precioTotal += precio
         }
     }
     console.log("Usuario en esquema: ", this)

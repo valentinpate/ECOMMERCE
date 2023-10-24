@@ -1,6 +1,12 @@
 let menos = document.querySelectorAll(".minusButton")
 let mas = document.querySelectorAll(".plusButton")
 let numCantidad = document.querySelectorAll(".counterNumber")
+let anadir = document.querySelectorAll(".anadir")
+let inputcantidad= document.querySelectorAll(".inputcantidad")
+let precio = document.querySelectorAll(".precio")
+let descuento = document.querySelectorAll(".descuento")
+let precioFinal = document.querySelectorAll(".preciocondesc")
+let descuentoIndex = document.querySelectorAll(".descuentoIndex")
 
 const variables= []
 
@@ -46,7 +52,7 @@ function deshabilitarMas(){
 function mostrarContador(){
     numCantidad[i].innerHTML=variables[i]
 } // Se inserta cada valor i del array variables en cada numCantidad de las cards. RECORDAR QUE NUMCANTIDAD ES UN ARRAY
-//EJ: valor de variables de index 0 del array se inserta en el HTML en el span vacio del index 0 en la card
+//EJ: valor de "variables" index 0 del array se inserta en el HTML en el span vacio del index 0 en la card
 
 mostrarContador()
 deshabilitarInicio()

@@ -1,8 +1,8 @@
 <div class="modal" id="mimodal" >
     <div class="modal-dialog ">
         <div class="modal-content">
-             <div class="modal-header" >
-                 <div class="carrito">
+            <div class="modal-header" >
+                <div class="carrito">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 <div class="tituloinfopago">
                                     <h3>Información del pago</h3>
@@ -35,8 +35,7 @@
                                     </div>
                                     <button class="btnconfirmarpedido">Confirmar pedido</button>
                                 </div>
-                 </div>
-                 <div>
+                    </div>
                                 <div class="productoscarrito">
                                     <p class="eliminarproductos">Eliminar todo</p>
                                     <div class="containernumerodepedidos">
@@ -44,55 +43,47 @@
                                         <h3>Numero de pedidos</h3>     
                                     </div>
                                 </div>
-                                <div class="containerproductoscarrito">
+                                <div class="containerproductoscarrito" style="overflow-y: auto; height: 30em;">
+                                    <%arraycarrito.forEach((elemento,index)=>{%>
                                     <div class="containerproductocarrito">
                                         <div>
                                             <i class="bi bi-trash-fill iconeliminarproducto"></i>                           
                                             <div>
                                                 <!-- traer info del producto -->
-                                                <p class="nombreproducto">Pepsi 2.25 Lts</p> 
+                                                <p class="nombreproducto"><%= elemento.nombre  %></p> 
                                                 <div class="containercantproducto">
                                                     <!-- agregar contador -->
-                                                    <button class="btnmenosproductos">-</button>
-                                                    <p>2</p>
-                                                    <button class="btnmasproductos">+</button>
+                                                    <button class="btnmenosproductos minusButton">-</button>
+                                                    <p class="counterNumber"></p>
+                                                    <button class="btnmasproductos plusButton">+</button>
                                                     <p>Cantidad</p>
                                                 </div>
                                                 <div class="infoproducto">
                                                     <div class="preciodesc">
-                                                        <p class="precioporcantproducto">$1200</p>
-                                                        <p class="preciocondesc">$900</p>
+                                                        <% const texto = elemento.precio;  %>
+                                                        <% const regex2 = /(\d+)\s*(?=%)/g;  %>
+                                                        <% const descuento = texto.match(regex2); %>
+                                                        <%  if (descuento) {  %>
+                                                            <input type="hidden" class="descuento" value="<%= descuento[0] %>">
+                                                            <input type="hidden" class="descuentoIndex" value="<%= index %>">
+                                                            <p class="precioporcantproducto"><%=precio[0] %></p>
+                                                            <p class="preciocondesc"></p>
+                                                        <% } else {%>
+                                                            <p class="preciocondesc"><%= precio[0] %></p>
+                                                        <% } %>
                                                     </div>
                                                     <!-- traer precio producto -->
-                                                    <p>Precio/u $600</p> 
+                                                    <p>Precio/u <%= elemento.precio.replace(elemento.nombre,'')  %></p> 
                                                 </div>
                                             </div>
                                         </div>           
-                                        <img class="imgproducto" src="./images/pepsi.png" alt="">
+                                        <img class="imgproducto" src="<%= elemento.imagen  %>" alt="">
                                     </div>
                                     <hr class="lineaproductosdos"> <!-- linea se separacion -->
-                                    <div class="containerproductocarrito">
-                                        <div>
-                                            <i class="bi bi-trash-fill iconeliminarproducto"></i>                           
-                                            <div>
-                                                <p class="nombreproducto">Pepsi 2.25 Lts</p> 
-                                                <div class="containercantproducto">
-                                                    <button class="btnmenosproductos">-</button>
-                                                    <p>2</p>
-                                                    <button class="btnmasproductos">+</button>
-                                                    <p>Cantidad</p>
-                                                </div>
-                                                <div class="infoproducto">
-                                                    <p class="preciosindesc">$1200</p>                                
-                                                    <p>Precio/u $600</p>
-                                                </div>
-                                            </div>
-                                        </div>           
-                                        <img class="imgproducto" src="./images/pepsi.png" alt="">
-                                    </div>
+                                    <% }) %>
                                 </div>
-                 </div>
-             </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-</div>
+    </div>

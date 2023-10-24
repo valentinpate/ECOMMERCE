@@ -7,6 +7,8 @@ const passport = require("passport")
 
 let username = null
 let msj_login = false
+let incomplete = false
+let arraycarrito=[]
 
 // Manejo de errores
 const handleErrors=(err)=>{
@@ -47,6 +49,31 @@ const createToken=(id)=>{
     })
 }
 
+module.exports.middleware = {
+    middle: (req,res,next)=>{
+        if(req.isAuthenticated()){
+            next();
+        }else{
+            res.redirect("signin")
+        }
+    },
+    arrayCartPromise: async (req,res,next) =>{ 
+        if(req.user){
+            username=req.user.name
+            items=req.user.cart.items
+            if(items.length>arraycarrito.length){
+                let promesa =  items.map(async(elemento)=> {
+                let producto = await Productos.findById(elemento.productId)
+                return producto
+            });
+            arraycarrito = await Promise.all(promesa); 
+            }
+        }
+        console.log("productos a renderizar", arraycarrito)
+        next()
+    }
+}
+
 // se exporta la logica de las rutas a authRoutes
 
 // SignUp, LogIn y LogOut
@@ -76,7 +103,6 @@ module.exports.signup_get=(req,res)=>{
 
 module.exports.login_post=async(req,res)=>{
     if(req.isAuthenticated()){
-        console.log("login",req.user)
         username=req.user.name
         msj_login=false
         res.redirect("home")
@@ -87,8 +113,7 @@ module.exports.login_post=async(req,res)=>{
 
 module.exports.login_get=(req,res)=>{
     let errorText = "Hubo un error en su petición. Por favor, intente más tarde"
-    let passportText = "passport.AuthenticateOptions.failureMessage"
-    res.render("signin",{username, msj_login, errorText, passportText})
+    res.render("signin",{username, msj_login, errorText})
 }
 
 module.exports.signOut_get=(req,res)=>{
@@ -113,7 +138,7 @@ module.exports.ofertas_get= async (req,res)=>{
   }else if(llave){   
        a=page+4
     }
-   await res.render("ofertas",{username, productosrender,a})
+   await res.render("ofertas",{username, productosrender,a, arraycarrito})
 }
 
 //agrego la funcion para la page product
@@ -162,8 +187,8 @@ module.exports.home_get=async(req,res)=>{
     let i = 2;
     let j = 5;
 
-   //llamado para carrito
-   const arraycarrito=await Productos.find({})
+//    //llamado para carrito
+//    const arraycarrito=await Productos.find({})
       //paginacion (primera parte)
       let page = req.query.page
       if (page == null){page = 1}
@@ -194,6 +219,9 @@ module.exports.home_get=async(req,res)=>{
 
 module.exports.agregarAlCarrito=async(req,res)=>{
     try{
+        if(!req.isAuthenticated()){
+            res.redirect("signin")
+        }
         if(req.isAuthenticated()) {
             console.log(req.user.id)
             await User.findById(req.user.id) //busca id del usuario
@@ -209,18 +237,39 @@ module.exports.agregarAlCarrito=async(req,res)=>{
 
 //agrego la funcion para la page de contacto
 module.exports.contacto_get= async(req,res)=>{
-    res.render("contacto",{username})
+    res.render("contacto",{username, arraycarrito})
   }
   
   //agrego la funcion para la page de miscompras
 module.exports.miscompras_get= async(req,res)=>{
-    res.render("miscompras",{username})
+    res.render("miscompras",{username, arraycarrito})
   }
 
-module.exports.miperfil_get = (req, res)=>{
-    res.render("miperfil",{username})
+module.exports.miperfil_get= (req,res)=>{
+    nombre=req.user.name
+    username=req.user.user
+    telefono = req.user.phone
+    res.render("miperfil",{username, arraycarrito, incomplete})
+}
+
+module.exports.editarMiPerfil = async (req,res)=>{
+    console.log(req.body)
+    console.log(req.user.id)
+    try{
+        const {name,user,phone} = req.body
+        const usuario = req.user.id
+        if(name == "" || user == "" || phone == ""){
+            incomplete = true
+            res.redirect("miperfil")
+        }else{
+            incomplete = false
+            await User.findByIdAndUpdate({_id:usuario},{name:name,user:user,phone:phone})
+            res.redirect("miperfil")
+        }
+    }
+    catch(err){ console.log (err) }
 }
 
 module.exports.informacion_get = (req, res)=>{
-    res.render("informacion",{username})
+    res.render("informacion",{username, arraycarrito})
 }

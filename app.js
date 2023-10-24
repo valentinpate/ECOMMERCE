@@ -5,8 +5,7 @@ const session = require("express-session");
 const passport = require("passport");
 const estrategiaLocal = require('./config/passport')
 
-//Importar variables de seguridad
-require("dotenv").config()
+require("dotenv").config() //Importar variables de entorno
 
 // Importo la conexión a la URL
 const connectDB=require("./db/conexion")
