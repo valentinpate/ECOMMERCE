@@ -51,7 +51,7 @@ if(precioFinal[index].innerHTML == ""){
 render()
 
 })
-let llave = true
+
 let descuentoFinal = null
 document.addEventListener('valorCambiado', (event) => {
     const nuevoValor = event.detail;
@@ -60,14 +60,14 @@ document.addEventListener('valorCambiado', (event) => {
 
         let subtotal = null
     if(elementoCantidad[index].innerHTML ==  nuevoValor &&  precioXcantidad[index].innerHTML != ""){
-    if(elementoCantidad[index].innerHTML == 2 && llave){
+  
         let precioTotal= precioFinal[index].innerHTML
         precioTotal= Number(precioTotal)
         subtotal = precioXcantidad[index].innerHTML
         subtotal = Number(subtotal)
         descuentoFinal = (100 * precioTotal - 100 * subtotal) / -subtotal
-        llave = false
-    }
+       
+    
         //subtotal = precioXcantidad[index].innerHTML
         cantidad =elementoCantidad[index].innerHTML
         subtotal=arrayprecio[index]*cantidad
@@ -76,12 +76,14 @@ document.addEventListener('valorCambiado', (event) => {
         precioTotal = subtotal-((subtotal*descuentoFinal)/100)
         console.log("precioTotal= ",precioTotal)
         precioTotal= precioTotal.toFixed(2);//hago el descuento pre es el precio comun y le resto el descuento, lo del parentesis es un porcenatje comun
+        subtotal= subtotal.toFixed(2)
         precioFinal[index].innerHTML=precioTotal//imprimo el precio
         precioXcantidad[index].innerHTML=subtotal
     
     }else if(elementoCantidad[index].innerHTML ==  nuevoValor &&  precioXcantidad[index].innerHTML == ""){
         cantidad =elementoCantidad[index].innerHTML
         subtotal=arrayprecio[index]*cantidad
+        subtotal= subtotal.toFixed(2)
         precioFinal[index].innerHTML=subtotal
     }
 })

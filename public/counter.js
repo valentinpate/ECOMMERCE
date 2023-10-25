@@ -2,7 +2,7 @@ let menos = document.querySelectorAll(".minusButton")
 let mas = document.querySelectorAll(".plusButton")
 let numCantidad = document.querySelectorAll(".counterNumber")
 let anadir = document.querySelectorAll(".anadir")
-let inputcantidad= document.querySelectorAll(".inputcantidad")
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,12 +10,15 @@ document.addEventListener('DOMContentLoaded', () => {
 // deshablitar botón -
 
 const variables= []
-let cantidad=0
+let cantidad=1
 let id=null
+let llaveContador= false
 for (let i = 0; i < numCantidad.length;i++ ){
   
     variables.push("contador"+i)
-    variables[i] = 1;
+    variables[i] = Number(numCantidad[i].innerHTML)
+    
+  
 function deshabilitarInicio(i){
     if(variables[i]==1){
         menos[i].toggleAttribute("disabled")
@@ -50,11 +53,12 @@ function deshabilitarMas(i){
 }
 
 function mostrarContador(){
-    if(variables[i]!=numCantidad[i].innerHTML){
+    if(variables[i]!=numCantidad[i].innerHTML && llaveContador){
        numCantidad[i].innerHTML=variables[i]
        cantidad = numCantidad[i].innerHTML
        const evento = new CustomEvent('valorCambiado', { detail: cantidad });
        document.dispatchEvent(evento);
+       llaveContador = false
        return cantidad
     }
     
@@ -66,11 +70,13 @@ deshabilitarInicio(i)
 // Eventos
 
 menos[i].addEventListener("click",()=>{
+    llaveContador=true
     variables[i]--
     deshabilitarMenos(i)
 })
 
 mas[i].addEventListener("click",()=>{
+    llaveContador=true
     variables[i]++
     deshabilitarMas(i)
 })

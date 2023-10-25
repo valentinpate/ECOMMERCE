@@ -47,23 +47,23 @@
                                     <div class="containerproductoscarrito" style="overflow-y: auto; height: 30em;">
                                         <% const regex = /\$([0-9,]+)/g;%>
                                         <%arrayCarrito.forEach((elemento,index)=>{%> 
-                                            <% const precio = elemento.precio.match(regex)%>
+                                            <% const precio = elemento.producto.precio.match(regex)%>
                                         <div class="containerproductocarrito" >
                                             <div>
                                                 <i class="bi bi-trash-fill iconeliminarproducto"></i>                           
                                                 <div>
                                                     <!-- traer info del producto -->
-                                                    <p class="nombreproducto"><%= elemento.nombre  %></p> 
+                                                    <p class="nombreproducto"><%= elemento.producto.nombre  %></p> 
                                                     <div class="containercantproducto">
                                                         <!-- agregar contador -->
                                                        <button class="btnmenosproductos minusButton">-</button>
-                                                        <p class="counterNumber"><%=items[index].cantidad%></p>
+                                                        <p class="counterNumber" style="margin-top:0.8em;font-weight:600;"><%= elemento.cantidad %></p>
                                                        <button class="btnmasproductos plusButton">+</button>
                                                         <p>Cantidad</p>
                                                     </div>
                                                     <div class="infoproducto">
                                                         <div class="preciodesc">
-                                                            <% const texto = elemento.precio;  %>
+                                                            <% const texto = elemento.producto.precio;  %>
                                                             <% const regex2 = /(\d+)\s*(?=%)/g;  %>
                                                             <% const descuento = texto.match(regex2); %>
                                   
@@ -82,7 +82,7 @@
                                                     </div>
                                                 </div>
                                             </div>           
-                                            <img class="imgproducto" src="<%= elemento.imagen  %>" alt="">
+                                            <img class="imgproducto" src="<%= elemento.producto.imagen  %>" alt="">
                                         </div>
                                         <hr class="lineaproductosdos"> <!-- linea se separacion -->
                                         <% }) %>

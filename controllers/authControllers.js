@@ -33,15 +33,12 @@ const handleErrors=(err)=>{
 
     // Validacion de errores
     if(err.message.includes("Usuarios validation failed")){
-       
         // Si el error es una validación de errores generados por el modelo de usuario ("Usuarios validation failed"), se procesan estos errores y se almacenan los mensajes de error específicos para cada campo en el objeto "error".
         object.values(err.errors).forEach(({properties})=>{
             error[properties.path]=properties.message
         })
     }
-    console.log(error)
     return error
-
 }
 
 // Token
@@ -53,13 +50,40 @@ const createToken=(id)=>{
     })
 }
 
+module.exports.middleware = {
+  middle: (req,res,next)=>{
+      if(req.isAuthenticated()){
+          next();
+      }else{
+          res.redirect("signin")
+      }
+  },
+  arrayCartPromise: async (req,res,next) =>{ 
+      if(req.user){
+          username=req.user.user
+          items=req.user.cart.items
+
+          let promesa =  items.map(async(elemento)=> {
+            let producto = await Productos.findById(elemento.productId)
+            let cantidad = elemento.cantidad
+            return {producto,cantidad}
+          });
+          arrayCarrito = await Promise.all(promesa); 
+          
+      }
+
+      next()
+  }
+}
+
 // se exporta la logica de las rutas a authRoutes
+
+// SignUp, LogIn y LogOut
 
 module.exports.signup_post= async(req,res)=>{
     // Destructuring
     const {email,name,user,password,phone,region}=req.body
     // Se usa un TRY y un CATCH para el manejo de errores
-   
     try{
         const users= await User.create({email,name,user,password,phone,region})
         // Encriptar datos como token
@@ -75,40 +99,34 @@ module.exports.signup_post= async(req,res)=>{
 }
 
 module.exports.signup_get=(req,res)=>{
-    res.render("signup",{msj_login})
+    res.render("signup")
     
 }
 
  module.exports.login_post=async(req,res)=>{
     if(req.isAuthenticated()){
-        //console.log("login",req.user)
-        username=req.user.user
+        username=req.user.name
         msj_login=false
         res.redirect("home")
     }else{
         msj_login=true
     }
 }
+
 module.exports.login_get=(req,res)=>{
-    res.render("signin",{username,msj_login})
+  let errorText = "Hubo un error en su petición. Por favor, intente más tarde"
+  res.render("signin",{username, msj_login, errorText})
+}
+
+module.exports.signOut_get=(req,res)=>{
+  let username = null
+  res.render("signout",{username})
 }
 
 //agrego la funcion para la page ofertas
 module.exports.ofertas_get= async (req,res)=>{
-  miRuta="ofertas"
-  //logica y variables de carrito
-  if(req.user){
-    username=req.user.user
-    items=req.user.cart.items
-    if(items.length>arrayCarrito.length){
-        let promesa =  items.map(async(elemento)=> {
-        let producto = await Productos.findById(elemento.productId)
-        return producto
-        });
-        arrayCarrito = await Promise.all(promesa); 
-      }    
-  };
-    //paginacion (primera parte)
+    miRuta="ofertas"
+  //paginacion (primera parte)
    let page = req.query.page
    if (page == null){page = 1}
 
@@ -131,21 +149,9 @@ module.exports.ofertas_get= async (req,res)=>{
 //agrego la funcion para la page product
 module.exports.product_get= async (req,res)=>{
   miRuta="product"
-  //logica y variables de carrito
-  if(req.user){
-    username=req.user.user
-    items=req.user.cart.items
-    if(items.length>arrayCarrito.length){
-        let promesa =  items.map(async(elemento)=> {
-        let producto = await Productos.findById(elemento.productId)
-        return producto
-        });
-        arrayCarrito = await Promise.all(promesa); 
-      }    
-  };
-  //llamado al id del producto
     const paramid = req.query.id
     const paramcolec = req.query.coleccion
+
     const productrender= await Productos.find({_id:paramid})// producto en particular(en el que se hizo click)
   
 
@@ -169,27 +175,14 @@ module.exports.product_get= async (req,res)=>{
        a=page+4
     }
  
-    res.render("product",{productrender, productsimilares,a,idproduct, coleccionproduct,username,miRuta,arrayCarrito})
+    res.render("product",{productrender, productsimilares,a,idproduct, coleccionproduct,miRuta,arrayCarrito})
  }
+
 
 //agrego la funcion para la page home
  module.exports.home_get=async(req,res)=>{
   miRuta="home"
-//logica y variables de carrito
-   if(req.user){
-    username=req.user.user
-        items=req.user.cart.items
-        if(items.length>arrayCarrito.length){
-            let promesa =  items.map(async(elemento)=> {
-            let producto = await Productos.findById(elemento.productId)
-            return producto
-            });
-            arrayCarrito = await Promise.all(promesa); 
-          }    
-      };
-   //console.log("productos a renderizar", arrayCarrito)
-
-    //Buscador
+  //Buscador
     //declaro variable
     const palabraclave = req.query.palabraclave // el ejs en header esta definimos por un form y lo tengo que capturar con u00n req.query no era req.body
     const expresionregular = new RegExp(palabraclave, 'i');//se crea a expresion relugular apartir de la variable palabraclave, la "i" es para que sea insensible a las mayusculas
@@ -205,17 +198,16 @@ module.exports.product_get= async (req,res)=>{
       if (page == null || page == undefined){page = 1}
    
       
-      // llamdos a db
-     async function llamados(expresionregular,page){
+     // llamdos a db
+     async function llamados (expresionregular,page){
       if(palabraclave == ""){
-        productos= await Productos.paginate({},{limit:12,page:page})
-       
+        return productosResponse= await Productos.paginate({},{limit:12,page:page})
+
       }else{
-        productos= await Productos.paginate({nombre:{ $regex: expresionregular }},{limit:12,page:page})
+        return productosResponse= await Productos.paginate({nombre:{ $regex: expresionregular }},{limit:12,page:page})
       }
-      //console.log(productos)
-      return productos
-    };
+     
+    }
 
     let productosrender = await llamados(expresionregular,page);
     
@@ -233,104 +225,48 @@ module.exports.product_get= async (req,res)=>{
      res.render("home",{homeofertas,i,j,arrayCarrito,productosrender,a,username,miRuta})
   } 
 
-// funcion para enviar los datos a db
 module.exports.agregarAlCarrito=async(req,res)=>{
   const { cantidad, id } = req.body;
-  console.log("cantidad de productos",cantidad, "y el id es ", id)
-    try{
-      console.log("paso")
-        if (req.isAuthenticated()) {
-        await User.findById(req.user.id)
-        const producto= await Productos.findById(req.body.id)
-         //console.log(producto)
-         const result= await req.user.agregarAlCarrito(producto) //acá en esta promesa se haría async / await ?
-             if(result){
-                 res.redirect("/home")
-             }
-            }
+  console.log("cantidad= ", cantidad)
+  try{
+    if(!req.isAuthenticated()){
+        res.redirect("signin")
     }
-  catch(err){
-    console.log (err)
-  }
+    if(req.isAuthenticated()) {
+      let usuarioCarrito= await User.findById(req.user.id) //busca id del usuario
+      // usuarioCarrito.cart.items.map(elemento =>{
+      //  if(elemento.productId == id) {
+      //   cantidad++
+      //  }
+      //   })
+        const producto= await Productos.findById(req.body.id) //busca el id del producto en la base
+        const result= await req.user.agregarAlCarrito(producto,cantidad) //agrega al carrit
+        if(result){
+            res.redirect("/home")
+        }
+    }
+}
+catch(err){ console.log (err) }
 } 
 
 //agrego la funcion para la page de contacto
   module.exports.contacto_get= async(req,res)=>{
     miRuta="contacto"
-    //logica y variables de carrito
-   if(req.user){
-    username=req.user.user
-    items=req.user.cart.items
-    if(items.length>arrayCarrito.length){
-        let promesa =  items.map(async(elemento)=> {
-        let producto = await Productos.findById(elemento.productId)
-        return producto
-        });
-        arrayCarrito = await Promise.all(promesa); 
-      }    
-  };
     res.render("contacto",{username,miRuta,arrayCarrito})
   }
   
   //agrego la funcion para la page de miscompras
   module.exports.miscompras_get= async(req,res)=>{
     miRuta="miscompras"
-    //logica y variables de carrito
-   if(req.user){
-    username=req.user.user
-    items=req.user.cart.items
-    if(items.length>arrayCarrito.length){
-        let promesa =  items.map(async(elemento)=> {
-        let producto = await Productos.findById(elemento.productId)
-        return producto
-        });
-        arrayCarrito = await Promise.all(promesa); 
-      }    
-  };
     res.render("miscompras",{username,miRuta,arrayCarrito})
   }
-
-  module.exports.signout_get= async(req,res)=>{
-    username = null
-    res.render("signout",{username})
-  }
-
+ 
   module.exports.miperfil_get= async (req,res)=>{
     miRuta="miperfil"
-    //logica y variables de carrito
-   if(req.user){
-    username=req.user.user
-    items=req.user.cart.items
-    if(items.length>arrayCarrito.length){
-        let promesa =  items.map(async(elemento)=> {
-        let producto = await Productos.findById(elemento.productId)
-        return producto
-        });
-        arrayCarrito = await Promise.all(promesa); 
-      }    
-  };
-  //datos del usuario///xq no hace falta pasarlo en el objeto para renderizar en el ejs
     nombre=req.user.name
     username=req.user.user
     telefono = req.user.phone
     res.render("miperfil",{username,miRuta,arrayCarrito,incomplete})
-  }
-
-  module.exports.info_get=async (req,res)=>{
-    miRuta="informacion"
-        //logica y variables de carrito
-   if(req.user){
-    username=req.user.user
-    items=req.user.cart.items
-    if(items.length>arrayCarrito.length){
-        let promesa =  items.map(async(elemento)=> {
-        let producto = await Productos.findById(elemento.productId)
-        return producto
-        });
-        arrayCarrito = await Promise.all(promesa); 
-      }    
-  };
-    res.render("informacion",{username,arrayCarrito,miRuta})
   }
 
   module.exports.editarMiPerfil = async (req,res)=>{
@@ -348,3 +284,8 @@ module.exports.agregarAlCarrito=async(req,res)=>{
     }
     catch(err){ console.log (err) }
 }
+  module.exports.informacion_get=async (req,res)=>{
+    miRuta="informacion"
+    res.render("informacion",{username,arrayCarrito,miRuta})
+  }
+

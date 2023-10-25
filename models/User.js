@@ -2,7 +2,6 @@
 const mongoose=require("mongoose")
 const {isEmail}=require("validator")
 const bcrypt=require("bcrypt")
-// const agregarAlCarrito= require("../controllers/authControllers")
 
 // Creo el esquema con los datos
 const UserSchema= new mongoose.Schema({
@@ -63,34 +62,38 @@ UserSchema.pre("save", async function(next){
         return next(); // No ejecutar el middleware
       }
     // encriptar contraseñas
-      const salt= await bcrypt.genSalt()
+    const salt= await bcrypt.genSalt()
     this.password= await bcrypt.hash(this.password,salt)
-   // console.log("el nuevo usuario esta siendo creado y se pasara a guardar",this)
     next()
 })
 
 UserSchema.post("save",function(doc,next){
-    //console.log("el nuevo usuario fue creado y guardado",doc)
     next()
 })
 
-UserSchema.methods.agregarAlCarrito = function(producto){
+UserSchema.methods.agregarAlCarrito = function (producto,cantidad){
     this.skipPreSave = true;
     let carrito = this.cart
-    const regex = /\$([0-9,]+)/g;
+    const regex = /\$([0-9,]+)/g //caracter $ + ([todos los caracteres del 0 a 9 y comas]el + indica que debe haber más de un dígito o coma) + /g = lo busca de forma global. no se queda en el 1ro
 
     if(carrito.items.length == 0){
-        carrito.items.push({productId:producto._id,cantidad:1})
-        let numero=  producto.precio.match(regex);
+        carrito.items.push({productId:producto._id,cantidad:cantidad})
+        let numero = producto.precio.match(regex) //me trae el precio del producto que coincide con el regex
         let precio = parseFloat(numero[0].replace(/\$|,/g, '')).toFixed(2);
         precio= (precio/100).toFixed(2);
         precio = Number(precio); 
         carrito.precioTotal = precio
-    }else{
-        const existe = carrito.items.findIndex(objeto => objeto.productId == producto._id)
-
+    } else{
+            
+        const existe = carrito.items.findIndex(objeto => {
+            console.log("id del producto que ya tengo",new String (objeto.productId).trim())
+            console.log("id del producto que busco",new String (producto._id).trim())
+            return new String (objeto.productId).trim()  == new String (producto._id).trim()
+            })
+        console.log("existe= ",existe)
         if(existe == -1){
-            carrito.items.push({productId:producto._id,cantidad:1})
+            console.log("paso por -1")
+            carrito.items.push({productId:producto._id,cantidad:cantidad})
             let numero=  producto.precio.match(regex);
             let precio = parseFloat(numero[0].replace(/\$|,/g, '')).toFixed(2);
             precio= (precio/100).toFixed(2);
@@ -98,16 +101,15 @@ UserSchema.methods.agregarAlCarrito = function(producto){
             carrito.precioTotal += precio
         }else{
             let productoQueExiste = carrito.items[existe]
-            productoQueExiste.cantidad+1
+            productoQueExiste.cantidad++
+            console.log("despues es= ",productoQueExiste.cantidad)
             let numero=  producto.precio.match(regex);
             let precio = parseFloat(numero[0].replace(/\$|,/g, '')).toFixed(2);
             precio= (precio/100).toFixed(2);
             precio = Number(precio); 
-            console.log(typeof precio)
             carrito.precioTotal += precio
         }
     }
-    //console.log("Usuario en esquema: ", this.cart)
     return this.save()
 }
 
