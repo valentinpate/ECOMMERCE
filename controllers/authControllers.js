@@ -2,13 +2,14 @@
 const User=require("../models/User")
 const jwt=require("jsonwebtoken")
 const Productos=require("../models/Productos")
-const bcrypt = require("bcrypt")
-const passport = require("passport")
+const bcrypt=require("bcrypt")
+const passport=require("passport")
 
 let username = null
 let msj_login = false
 let incomplete = false
-let arraycarrito=[]
+let arrayCarrito=[]
+let miRuta= null
 
 // Manejo de errores
 const handleErrors=(err)=>{
@@ -59,17 +60,18 @@ module.exports.middleware = {
     },
     arrayCartPromise: async (req,res,next) =>{ 
         if(req.user){
-            username=req.user.name
+            username=req.user.user
             items=req.user.cart.items
-            if(items.length>arraycarrito.length){
+            if(items.length>arrayCarrito.length){
                 let promesa =  items.map(async(elemento)=> {
                 let producto = await Productos.findById(elemento.productId)
-                return producto
+                let cantidad = elemento.cantidad
+                return {producto, cantidad}
             });
-            arraycarrito = await Promise.all(promesa); 
+            arrayCarrito = await Promise.all(promesa); 
             }
         }
-        console.log("productos a renderizar", arraycarrito)
+        console.log("productos a renderizar", arrayCarrito)
         next()
     }
 }
@@ -85,7 +87,7 @@ module.exports.signup_post= async(req,res)=>{
     try{
         const users= await User.create({email,name,user,password,phone,region})
         // Encriptar datos como token
-        const token=createToken(users._id,users.email,users.password)
+        const token= createToken(users._id,users.email,users.password)
         res.cookie("jwt",token,{httpOnly:true,maxAge:maxAge*1000})
         res.status(201).json(users)
         username = user
@@ -123,13 +125,17 @@ module.exports.signOut_get=(req,res)=>{
 
 //agrego la funcion para la page ofertas
 module.exports.ofertas_get= async (req,res)=>{
+   miRuta="ofertas"
+
+   //paginacion(primera parte)
    let page = req.query.page
    if (page == null){page = 1}
 
+   //llamados a db
    const productosrender= await Productos.paginate({},{limit:12,page:page})
 
   ////funcion que estoy probando
-  let a = 5
+  let a = 5 //catidad de botones visibles
   let llave = req.query.llave
   page = productosrender.page
  
@@ -138,11 +144,12 @@ module.exports.ofertas_get= async (req,res)=>{
   }else if(llave){   
        a=page+4
     }
-   await res.render("ofertas",{username, productosrender,a, arraycarrito})
+   await res.render("ofertas",{username, productosrender,a, miRuta, arrayCarrito})
 }
 
 //agrego la funcion para la page product
 module.exports.product_get= async (req,res)=>{
+    miRuta="product"
     const paramid = req.query.id
     const paramcolec = req.query.coleccion
 
@@ -169,17 +176,17 @@ module.exports.product_get= async (req,res)=>{
        a=page+4
     }
  
-    res.render("product",{productrender, productsimilares, a, idproduct, coleccionproduct})
+    res.render("product",{productrender, productsimilares, a, idproduct, coleccionproduct,miRuta,arrayCarrito})
  }
 
 
 //agrego la funcion para la page home
 module.exports.home_get=async(req,res)=>{
+    miRuta="home"
     //Buscador
     //declaro variable
-    const palabraclave = req.query.palabraclave //aca tengo una duda tuve que usar req.query y nose porque sera por es get
+    const palabraclave = req.query.palabraclave //el ejs en header esta definimos por un form y lo tengo que capturar con u00n req.query no era req.body
     const expresionregular = new RegExp(palabraclave, 'i');//se crea a expresion relugular apartir de la variable palabraclave, la "i" es para que sea insensible a las mayusculas
-    let productosrender = llamado(expresionregular);// funcion de llamado a DB con la logica del buscador incluida
 
 
     // llamado a db para ofertas
@@ -188,21 +195,21 @@ module.exports.home_get=async(req,res)=>{
     let j = 5;
 
 //    //llamado para carrito
-//    const arraycarrito=await Productos.find({})
+//    const arrayCarrito=await Productos.find({})
       //paginacion (primera parte)
       let page = req.query.page
-      if (page == null){page = 1}
+      if (page == null || page == undefined){page = 1}
    
       // llamdos a db
-      async function llamado (expresionregular,page){
+    async function llamados (expresionregular,page){
         if(palabraclave == ""){
-          productosrender= await Productos.paginate({},{limit:12,page:page})
-  
+            return productosResponse= await Productos.paginate({},{limit:12,page:page})
         }else{
-          productosrender= await Productos.paginate({nombre:{ $regex: expresionregular }},{limit:12,page:page})
+            return productosResponse= await Productos.paginate({nombre:{ $regex: expresionregular }},{limit:12,page:page})
         }
-        return productosrender
       }
+
+      let productosrender = await llamados(expresionregular,page);
    
      ////paginacion (segundaparte)
      let a = 5 //catidad de botones visibles
@@ -214,10 +221,11 @@ module.exports.home_get=async(req,res)=>{
      }else if(llave){   
           a=page+4
        }
-    res.render("home",{username, homeofertas,i,j,arraycarrito,productosrender,a})
+    res.render("home",{username, homeofertas,i,j,arrayCarrito,productosrender,a,username,miRuta})
 }
 
 module.exports.agregarAlCarrito=async(req,res)=>{
+    const { cantidad, id } = req.body
     try{
         if(!req.isAuthenticated()){
             res.redirect("signin")
@@ -225,8 +233,8 @@ module.exports.agregarAlCarrito=async(req,res)=>{
         if(req.isAuthenticated()) {
             console.log(req.user.id)
             await User.findById(req.user.id) //busca id del usuario
-            const producto= await Productos.findById(req.body.id) //busca el id del producto en la base
-            const result= await req.user.agregarAlCarrito(producto) //agrega al carrit
+            const producto= await Productos.findById(id) //busca el id del producto en la base
+            const result= await req.user.agregarAlCarrito(producto,cantidad) //agrega al carrit
             if(result){
                 res.redirect("/home")
             }
@@ -237,24 +245,25 @@ module.exports.agregarAlCarrito=async(req,res)=>{
 
 //agrego la funcion para la page de contacto
 module.exports.contacto_get= async(req,res)=>{
-    res.render("contacto",{username, arraycarrito})
+    miRuta="contacto"
+    res.render("contacto",{username, miRuta, arrayCarrito})
   }
   
   //agrego la funcion para la page de miscompras
 module.exports.miscompras_get= async(req,res)=>{
-    res.render("miscompras",{username, arraycarrito})
+    miRuta="miscompras"
+    res.render("miscompras",{username, miRuta, arrayCarrito})
   }
 
 module.exports.miperfil_get= (req,res)=>{
+    miRuta="miperfil"
     nombre=req.user.name
     username=req.user.user
     telefono = req.user.phone
-    res.render("miperfil",{username, arraycarrito, incomplete})
+    res.render("miperfil",{username, miRuta, arrayCarrito, incomplete})
 }
 
 module.exports.editarMiPerfil = async (req,res)=>{
-    console.log(req.body)
-    console.log(req.user.id)
     try{
         const {name,user,phone} = req.body
         const usuario = req.user.id
@@ -271,5 +280,5 @@ module.exports.editarMiPerfil = async (req,res)=>{
 }
 
 module.exports.informacion_get = (req, res)=>{
-    res.render("informacion",{username, arraycarrito})
+    res.render("informacion",{username, arrayCarrito})
 }

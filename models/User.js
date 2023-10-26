@@ -72,31 +72,40 @@ UserSchema.post("save",function(doc,next){
     next()
 })
 
-UserSchema.methods.agregarAlCarrito = function(producto){
+UserSchema.methods.agregarAlCarrito = function(producto,cantidad){
     this.skipPreSave = true;
     let carrito = this.cart
     const regex = /\$([0-9,]+)/g //caracter $ + ([todos los caracteres del 0 a 9 y comas]el + indica que debe haber más de un dígito o coma) + /g = lo busca de forma global. no se queda en el 1ro
 
     if(carrito.items.length == 0){
-        carrito.items.push({productId:producto._id,cantidad:1})
+        carrito.items.push({productId:producto._id,cantidad:cantidad})
         let numero = producto.precio.match(regex) //me trae el precio del producto que coincide con el regex
-        console.log("Número:", numero)
-        let precio = parseFloat(numero[0].replace(/$|,/g, '')) // / $ | , (selecciono todos los carácteres "$" y "," para reemplazarlos por un vacío -> , "")
-        console.log("Precio:", precio)
-        // carrito.precioTotal = precio
+        let precio = parseFloat(numero[0].replace(/\$|,/g, '')) // / $ | , (selecciono todos los carácteres "$" y "," para reemplazarlos por un vacío -> , "")
+        precio= (precio/100).toFixed(2);
+        precio = Number(precio); //Precio lo paso a número
+        console.log("Precio:", precio, "-", typeof(precio))
+        carrito.precioTotal = precio
     }else{
-        const existe = carrito.items.findIndex(objeto => objeto.productId == producto._id)
+        const existe = carrito.items.findIndex(objeto => {
+            return new String (objeto.productId).trim() == new String (producto._id).trim()
+        })
 
         if(existe == -1){
-            carrito.items.push({productId:producto._id,cantidad:1})
+            carrito.items.push({productId:producto._id,cantidad:cantidad})
             let numero = producto.precio.match(regex)
-            let precio = parseFloat(numero[0].replace(/$|,/g, '')).toFixed(2)
+            let precio = parseFloat(numero[0].replace(/\$|,/g, '')).toFixed(2)
+            precio= (precio/100).toFixed(2);
+            precio = Number(precio);
+            console.log("Precio:", precio, "-", typeof(precio))
             carrito.precioTotal += precio
         }else{
             let productoQueExiste = carrito.items[existe]
             productoQueExiste.cantidad+1
             let numero = producto.precio.match(regex)
-            let precio = parseFloat(numero[0].replace(/$|,/g, '')).toFixed(2)
+            let precio = parseFloat(numero[0].replace(/\$|,/g, '')).toFixed(2)
+            precio= (precio/100).toFixed(2);
+            precio = Number(precio);
+            console.log("Precio:", precio, "-", typeof(precio))
             carrito.precioTotal += precio
         }
     }

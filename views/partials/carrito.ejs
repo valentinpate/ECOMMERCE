@@ -1,8 +1,8 @@
 <div class="modal" id="mimodal" >
     <div class="modal-dialog ">
         <div class="modal-content">
-            <div class="modal-header" >
-                <div class="carrito">
+             <div class="modal-header" >
+                 <div class="carrito">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 <div class="tituloinfopago">
                                     <h3>Información del pago</h3>
@@ -35,55 +35,60 @@
                                     </div>
                                     <button class="btnconfirmarpedido">Confirmar pedido</button>
                                 </div>
-                    </div>
+                 </div>
+                 <div>
                                 <div class="productoscarrito">
                                     <p class="eliminarproductos">Eliminar todo</p>
                                     <div class="containernumerodepedidos">
-                                        <p class="numerodepedidos">(2)</p> 
+                                        <p class="numerodepedidos">(<%= arrayCarrito.length  %>)</p> 
                                         <h3>Numero de pedidos</h3>     
                                     </div>
                                 </div>
                                 <div class="containerproductoscarrito" style="overflow-y: auto; height: 30em;">
-                                    <%arraycarrito.forEach((elemento,index)=>{%>
-                                    <div class="containerproductocarrito">
+                                    <% const regex = /\$([0-9,]+)/g;%>
+                                    <%arrayCarrito.forEach((elemento,index)=>{%> 
+                                        <% const precio = elemento.producto.precio.match(regex)%>
+                                    <div class="containerproductocarrito" >
                                         <div>
                                             <i class="bi bi-trash-fill iconeliminarproducto"></i>                           
                                             <div>
                                                 <!-- traer info del producto -->
-                                                <p class="nombreproducto"><%= elemento.nombre  %></p> 
+                                                <p class="nombreproducto"><%= elemento.producto.nombre  %></p> 
                                                 <div class="containercantproducto">
                                                     <!-- agregar contador -->
-                                                    <button class="btnmenosproductos minusButton">-</button>
-                                                    <p class="counterNumber"></p>
-                                                    <button class="btnmasproductos plusButton">+</button>
+                                                   <button class="btnmenosproductos minusButton">-</button>
+                                                    <p style="margin-top:0.8em;font-weight:600;" class="counterNumber"><%=elemento.cantidad%></p>
+                                                   <button class="btnmasproductos plusButton">+</button>
                                                     <p>Cantidad</p>
                                                 </div>
                                                 <div class="infoproducto">
                                                     <div class="preciodesc">
-                                                        <% const texto = elemento.precio;  %>
+                                                        <% const texto = elemento.producto.precio;  %>
                                                         <% const regex2 = /(\d+)\s*(?=%)/g;  %>
                                                         <% const descuento = texto.match(regex2); %>
+                              
                                                         <%  if (descuento) {  %>
-                                                            <input type="hidden" class="descuento" value="<%= descuento[0] %>">
-                                                            <input type="hidden" class="descuentoIndex" value="<%= index %>">
-                                                            <p class="precioporcantproducto"><%=precio[0] %></p>
+                                                        <input type="hidden" class="descuento" value="<%= descuento[0] %>">
+                                                        <input type="hidden" class="descuentoIndex" value="<%= index %>">
+                                                        <p class="precioporcantproducto"></p>
+                                                        <p class="preciocondesc"></p>
+                                                        <% } else{%>
+                                                            <p class="precioporcantproducto"></p>
                                                             <p class="preciocondesc"></p>
-                                                        <% } else {%>
-                                                            <p class="preciocondesc"><%= precio[0] %></p>
-                                                        <% } %>
+                                                            <%  }%>
                                                     </div>
                                                     <!-- traer precio producto -->
-                                                    <p>Precio/u <%= elemento.precio.replace(elemento.nombre,'')  %></p> 
+                                                    <p class="precio">Precio/u <%= precio[0]  %></p> 
                                                 </div>
                                             </div>
                                         </div>           
-                                        <img class="imgproducto" src="<%= elemento.imagen  %>" alt="">
+                                        <img class="imgproducto" src="<%= elemento.producto.imagen  %>" alt="">
                                     </div>
                                     <hr class="lineaproductosdos"> <!-- linea se separacion -->
                                     <% }) %>
                                 </div>
-                    </div>
-                </div>
-            </div>
+                 </div>
+             </div>
         </div>
-    </div>
+      </div>
+</div>
