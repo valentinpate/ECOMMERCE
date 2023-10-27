@@ -50,6 +50,7 @@ const createToken=(id)=>{
     })
 }
 
+// Middleware
 module.exports.middleware = {
     middle: (req,res,next)=>{
         if(req.isAuthenticated()){
@@ -76,7 +77,7 @@ module.exports.middleware = {
     }
 }
 
-// se exporta la logica de las rutas a authRoutes
+// CONTROLADORES (se exporta la logica de las rutas a authRoutes)
 
 // SignUp, LogIn y LogOut
 
@@ -123,7 +124,8 @@ module.exports.signOut_get=(req,res)=>{
     res.render("signout",{username})
 }
 
-//agrego la funcion para la page ofertas
+//Renderización de Rutas 
+
 module.exports.ofertas_get= async (req,res)=>{
    miRuta="ofertas"
 
@@ -224,25 +226,6 @@ module.exports.home_get=async(req,res)=>{
     res.render("home",{username, homeofertas,i,j,arrayCarrito,productosrender,a,username,miRuta})
 }
 
-module.exports.agregarAlCarrito=async(req,res)=>{
-    const { cantidad, id } = req.body
-    try{
-        if(!req.isAuthenticated()){
-            res.redirect("signin")
-        }
-        if(req.isAuthenticated()) {
-            console.log(req.user.id)
-            await User.findById(req.user.id) //busca id del usuario
-            const producto= await Productos.findById(id) //busca el id del producto en la base
-            const result= await req.user.agregarAlCarrito(producto,cantidad) //agrega al carrit
-            if(result){
-                res.redirect("/home")
-            }
-        }
-    }
-    catch(err){ console.log (err) }
-}
-
 //agrego la funcion para la page de contacto
 module.exports.contacto_get= async(req,res)=>{
     miRuta="contacto"
@@ -263,6 +246,35 @@ module.exports.miperfil_get= (req,res)=>{
     res.render("miperfil",{username, miRuta, arrayCarrito, incomplete})
 }
 
+module.exports.informacion_get = (req, res)=>{
+    res.render("informacion",{username, arrayCarrito})
+}
+
+// FUNCIONES POST + MÉTODOS DE DB
+
+module.exports.agregarAlCarrito=async(req,res)=>{
+    const { cantidad, id } = req.body
+    try{
+        if(!req.isAuthenticated()){
+            res.redirect("signin")
+        }
+        if(req.isAuthenticated()) {
+            console.log(req.user.id)
+            await User.findById(req.user.id) //busca id del usuario
+            const producto= await Productos.findById(id) //busca el id del producto en la base
+            const result= await req.user.agregarAlCarrito(producto,cantidad) //agrega al carrit
+            if(result){
+                res.redirect("/home")
+            }
+        }
+    }
+    catch(err){ console.log (err) }
+}
+
+module.exports.confirmarCompra=async(req,res)=>{
+
+}
+
 module.exports.editarMiPerfil = async (req,res)=>{
     try{
         const {name,user,phone} = req.body
@@ -277,8 +289,4 @@ module.exports.editarMiPerfil = async (req,res)=>{
         }
     }
     catch(err){ console.log (err) }
-}
-
-module.exports.informacion_get = (req, res)=>{
-    res.render("informacion",{username, arrayCarrito})
 }

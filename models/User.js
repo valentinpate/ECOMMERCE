@@ -51,7 +51,14 @@ const UserSchema= new mongoose.Schema({
             },
         }],
         precioTotal:Number,
-    }
+    },
+    misCompras:[{
+        id:new mongoose.Types.ObjectId(),
+        fecha: Date,
+        productos:[{
+        }],
+        estado:true,
+    }]
 })
 
 

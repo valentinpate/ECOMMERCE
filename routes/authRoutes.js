@@ -7,6 +7,8 @@ const authControllers=require("../controllers/authControllers")
 const passport = require("passport")
 
 // Seteo las rutas/direcciones
+
+// Signin, Signup, Login, Logout
 router.post("/signup",authControllers.signup_post)
 router.get("/signup",authControllers.signup_get)
 
@@ -19,6 +21,8 @@ router.get("/signin",authControllers.login_get)
 
 router.get("/signout",authControllers.signOut_get)
 
+// GET
+
 //ruta para la page ofertas
 router.get("/ofertas",authControllers.middleware.arrayCartPromise, authControllers.ofertas_get)
 
@@ -30,9 +34,6 @@ router.get("/home", authControllers.middleware.arrayCartPromise, authControllers
 
 //ruta para la page home 
 router.get("/contacto",authControllers.middleware.arrayCartPromise,authControllers.contacto_get)
-
-// Carrito
-router.post("/carrito",authControllers.agregarAlCarrito)
  
 //ruta para mis compras
 router.get("/miscompras",[authControllers.middleware.middle, authControllers.middleware.arrayCartPromise], authControllers.miscompras_get)
@@ -40,10 +41,19 @@ router.get("/miscompras",[authControllers.middleware.middle, authControllers.mid
 //ruta para la page mi perfil (falta agregar la funcion a authcontrollers)
 router.get("/miperfil",[authControllers.middleware.middle, authControllers.middleware.arrayCartPromise], authControllers.miperfil_get)
 
-router.post("/editar-mi-perfil",authControllers.editarMiPerfil)
-
 //ruta para la page mi perfil (falta agregar la funcion a authcontrollers)
 router.get("/informacion",authControllers.middleware.arrayCartPromise, authControllers.informacion_get)
+
+//POST
+
+// Carrito
+router.post("/carrito",authControllers.agregarAlCarrito)
+
+router.post("/confirmar-compra",authControllers.confirmarCompra)
+
+router.post("/editar-mi-perfil",authControllers.editarMiPerfil)
+
+
 
 // Exporto las rutas
 module.exports=router
