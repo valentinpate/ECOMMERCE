@@ -33,6 +33,8 @@ router.get("/contacto",[authControllers.middleware.arrayCartPromise],authControl
 
 // Carrito
 router.post("/carrito",authControllers.agregarAlCarrito)
+
+router.post("/confirmar-compra",authControllers.confirmarCompra)
  
 //ruta para mis compras
 router.get("/miscompras",[authControllers.middleware.middle, authControllers.middleware.arrayCartPromise], authControllers.miscompras_get)

@@ -376,7 +376,6 @@ a:hover{
 .icon-container{
     display:flex;
     margin:0 1.5em;
-    position:relative;
 }
 
 .icon{
@@ -389,8 +388,6 @@ a:hover{
 .username{
     font-size:0.7rem;
     position:absolute;
-    top:4.2em;
-    left:5.7em;
 }
 
 .products{

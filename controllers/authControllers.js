@@ -10,6 +10,9 @@ let msj_login = false
 let incomplete = false
 let arrayCarrito=[]
 let miRuta= null
+let arrayMisCompras=[]
+let arrayCompras=[]
+let detalles = false
 
 // Manejo de errores
 const handleErrors=(err)=>{
@@ -68,8 +71,9 @@ module.exports.middleware = {
             let cantidad = elemento.cantidad
             return {producto,cantidad}
           });
-          arrayCarrito = await Promise.all(promesa); 
           
+          arrayCarrito = await Promise.all(promesa); 
+       //   console.log(arrayCarrito)
       }
 
       next()
@@ -227,18 +231,12 @@ module.exports.product_get= async (req,res)=>{
 
 module.exports.agregarAlCarrito=async(req,res)=>{
   const { cantidad, id } = req.body;
-  console.log("cantidad= ", cantidad)
   try{
     if(!req.isAuthenticated()){
         res.redirect("signin")
     }
     if(req.isAuthenticated()) {
       let usuarioCarrito= await User.findById(req.user.id) //busca id del usuario
-      // usuarioCarrito.cart.items.map(elemento =>{
-      //  if(elemento.productId == id) {
-      //   cantidad++
-      //  }
-      //   })
         const producto= await Productos.findById(req.body.id) //busca el id del producto en la base
         const result= await req.user.agregarAlCarrito(producto,cantidad) //agrega al carrit
         if(result){
@@ -249,16 +247,60 @@ module.exports.agregarAlCarrito=async(req,res)=>{
 catch(err){ console.log (err) }
 } 
 
+module.exports.confirmarCompra=async(req,res)=>{
+  try
+{
+  const {precio, total,id,cantidad,preciocondesc, precioporcantproducto}=req.body
+  //el envio es siempre 2500
+  console.log(precio, total, id, cantidad, precioporcantproducto, preciocondesc)
+ 
+  res.redirect("home")
+
+}catch(err){
+  console.log(err)
+}
+
+}
+
 //agrego la funcion para la page de contacto
   module.exports.contacto_get= async(req,res)=>{
     miRuta="contacto"
     res.render("contacto",{username,miRuta,arrayCarrito})
   }
+
   
   //agrego la funcion para la page de miscompras
   module.exports.miscompras_get= async(req,res)=>{
+    
+    detalles=req.query.detalles
+    productosPorCompra = req.user.miscompras.productos
+    compras = req.user.miscompras
+
+    let promesaCompras= compras.map(async(elemento)=>{
+      let fecha= elemento.fecha
+      let envio=elemento.envio
+      let subtotalFinal=elemento.subtotal
+      let totalFinal= elemento.total
+      let estado= elemento.estado
+      return {fecha,envio,subtotalFinal,totalFinal,estado}
+    })
+
+    arrayCompras= await Promise.all(promesaCompras);
+
+    if(detalles === "true"){
+    let promesaMisCompras = productosPorCompra.map(async(elemento)=>{
+       let productosPorUnidad= await Productos.findById(req.query.id)
+       let cantidadMisCompras= elemento.cantidad//cantidad
+       let subtotalMiscompras= elemento.subtotal// precio por cantidad
+       let precioMiscompras = elemento.precio// precio con el descuento echo 
+        return {productosPorUnidad,cantidadMisCompras,subtotalMiscompras,precioMiscompras}
+      })
+     arrayMisCompras= await Promise.all(promesaMisCompras); 
+
+      } 
+    
     miRuta="miscompras"
-    res.render("miscompras",{username,miRuta,arrayCarrito})
+    res.render("miscompras",{username,miRuta,arrayCarrito,detalles,arrayMisCompras})
   }
  
   module.exports.miperfil_get= async (req,res)=>{

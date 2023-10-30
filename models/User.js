@@ -86,13 +86,9 @@ UserSchema.methods.agregarAlCarrito = function (producto,cantidad){
     } else{
             
         const existe = carrito.items.findIndex(objeto => {
-            console.log("id del producto que ya tengo",new String (objeto.productId).trim())
-            console.log("id del producto que busco",new String (producto._id).trim())
             return new String (objeto.productId).trim()  == new String (producto._id).trim()
             })
-        console.log("existe= ",existe)
         if(existe == -1){
-            console.log("paso por -1")
             carrito.items.push({productId:producto._id,cantidad:cantidad})
             let numero=  producto.precio.match(regex);
             let precio = parseFloat(numero[0].replace(/\$|,/g, '')).toFixed(2);
@@ -102,7 +98,6 @@ UserSchema.methods.agregarAlCarrito = function (producto,cantidad){
         }else{
             let productoQueExiste = carrito.items[existe]
             productoQueExiste.cantidad++
-            console.log("despues es= ",productoQueExiste.cantidad)
             let numero=  producto.precio.match(regex);
             let precio = parseFloat(numero[0].replace(/\$|,/g, '')).toFixed(2);
             precio= (precio/100).toFixed(2);

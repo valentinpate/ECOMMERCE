@@ -155,6 +155,13 @@
     width: 85%;
     margin: 0 auto;
 }
+.infopago #promocion{
+    display: none;
+    justify-content: center;
+    justify-content: space-between;
+    width: 85%;
+    margin: 0 auto;
+}
 .infopago .precioproductos{
     margin-bottom: .5rem;
 }

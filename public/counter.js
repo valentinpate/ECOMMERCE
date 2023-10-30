@@ -69,16 +69,18 @@ deshabilitarInicio(i)
 
 // Eventos
 
-menos[i].addEventListener("click",()=>{
+menos[i].addEventListener("click",(event)=>{
     llaveContador=true
     variables[i]--
     deshabilitarMenos(i)
+    event.preventDefault();
 })
 
-mas[i].addEventListener("click",()=>{
+mas[i].addEventListener("click",(event)=>{
     llaveContador=true
     variables[i]++
     deshabilitarMas(i)
+    event.preventDefault();
 })
 }
 for (let j = 0; j < anadir.length;j++ ){//hago un nuevo for para los botones añadir carrito, ya que al renderizar productos en el carrito el numcantidad aumenta y la variable i del primer for toma un valor mas alto de los botones añadircarrito que hay, entonces cuando no habia productos en carrito andaba bien y cuando ponias productos en carrito ya no!

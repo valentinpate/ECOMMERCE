@@ -7,36 +7,44 @@
                                     <div class="tituloinfopago">
                                         <h3>Información del pago</h3>
                                     </div>
+                            <form action="/confirmar-compra" method="post">
                                     <div class="infopago">
                                         <p class="subtituloinfopago">Código de descuento</p>
                                         <div class="containercodedescuento">
-                                            <button class="btnconfirmarcodedescuento">Confirmar</button>
-                                            <input class="inputcodedescuento" type="text" placeholder="Introduce el código">
+                                            <button id="buttonPromo" class="btnconfirmarcodedescuento">Confirmar</button>
+                                            <input id="inputPromocion" class="inputcodedescuento" type="text" placeholder="Introduce el código">
                                         </div>
                                         <hr class="lineaproductosuno"> <!-- linea se separacion -->
                                         <div class="containergastos precioproductos">
                                            
-                                            <p><strong>$600</strong></p>
-                                            <p>precio</p>
+                                            <p ><strong id="preciototal"></strong></p>
+                                            <input type="hidden" name="precio" id="inputPrecio">
+                                            <p>Precio</p>
                                             
                                         </div>
                                         <div class="containergastos">
-                                            <p><strong>$150</strong></p>
+                                            <p><strong id="envio">$2500</strong></p>
                                             <p>Envio</p>
                                         </div>
+                                        <div id="promocion">
+                                            <p><strong id="descuentoPromo">-20%</strong></p>
+                                            <p>Descuento</p>
+                                        </div>
+                                       
                                         <hr class="lineaproductosuno">  <!-- linea se separacion -->
                                         <div class="containergastos">
-                                            <p><strong>$750</strong></p>
+                                            <p><strong  id="total"></strong></p>
+                                            <input type="hidden" name="total" id="inputTotal">
                                             <p>Total</p>
                                         </div>
                                         <div class="containerconfirmarpago">
                                             <i class="bi bi-check-circle-fill iconcheck"></i>
                                             <p>Pago al recibir</p>
                                         </div>
-                                        <button class="btnconfirmarpedido">Confirmar pedido</button>
+                                        <button type="submit" class="btnconfirmarpedido">Confirmar pedido</button>
                                     </div>
-                     </div>
-                     <div>
+                                </div>
+                                <div>
                                     <div class="productoscarrito">
                                         <p class="eliminarproductos">Eliminar todo</p>
                                         <div class="containernumerodepedidos">
@@ -54,10 +62,12 @@
                                                 <div>
                                                     <!-- traer info del producto -->
                                                     <p class="nombreproducto"><%= elemento.producto.nombre  %></p> 
+                                                    <input type="hidden" name="id"  value="<%=elemento.producto.id %>">
                                                     <div class="containercantproducto">
                                                         <!-- agregar contador -->
                                                        <button class="btnmenosproductos minusButton">-</button>
                                                         <p class="counterNumber" style="margin-top:0.8em;font-weight:600;"><%= elemento.cantidad %></p>
+                                                        <input type="hidden" name="cantidad" class="inputCantidad" value="<%= elemento.cantidad %>">
                                                        <button class="btnmasproductos plusButton">+</button>
                                                         <p>Cantidad</p>
                                                     </div>
@@ -68,14 +78,18 @@
                                                             <% const descuento = texto.match(regex2); %>
                                   
                                                             <%  if (descuento) {  %>
-                                                            <input type="hidden" class="descuento" value="<%= descuento[0] %>">
-                                                            <input type="hidden" class="descuentoIndex" value="<%= index %>">
-                                                            <p class="precioporcantproducto"></p>
-                                                            <p class="preciocondesc"></p>
+                                                                <input type="hidden" class="descuento" value="<%= descuento[0] %>">
+                                                                <input type="hidden" class="descuentoIndex" value="<%= index %>">
+                                                                <p class="precioporcantproducto"></p>
+                                                                <input type="hidden" name="precioporcantproducto" class="inputPrecioporcantproducto">
+                                                                <p class="preciocondesc"></p>
+                                                                <input type="hidden" name="preciocondesc" class="inputPreciocondesc">
                                                             <% } else{%>
                                                                 <p class="precioporcantproducto"></p>
+                                                                <input type="hidden" name="precioporcantproducto" class="inputPrecioporcantproducto">
                                                                 <p class="preciocondesc"></p>
-                                                                <%  }%>
+                                                                <input type="hidden" name="preciocondesc" class="inputPreciocondesc">
+                                                            <%  }%>
                                                         </div>
                                                         <!-- traer precio producto -->
                                                         <p class="precio">Precio/u <%= precio[0]  %></p> 
@@ -87,6 +101,7 @@
                                         <hr class="lineaproductosdos"> <!-- linea se separacion -->
                                         <% }) %>
                                     </div>
+                            </form>
                      </div>
                  </div>
             </div>
