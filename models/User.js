@@ -53,11 +53,29 @@ const UserSchema= new mongoose.Schema({
         precioTotal:Number,
     },
     misCompras:[{
-        id:new mongoose.Types.ObjectId(),
-        fecha: Date,
-        productos:[{
+        pedidos:[{
+            _id: false,
+            pedidoId:{
+                type:mongoose.Types.ObjectId,
+                required:true,
+            },
+            cantidad:{
+                type:Number,
+                required:true,
+            },
+            precioPorCantProducto:{
+                type:Number,
+                required:true,
+            },
+            precioConDesc:{
+                type:Number,
+                required:true,
+            },
         }],
-        estado:true,
+        fecha: Date,
+        precio: Number,
+        total: Number,
+        estado: Boolean,
     }]
 })
 
@@ -118,6 +136,38 @@ UserSchema.methods.agregarAlCarrito = function(producto,cantidad){
     }
     console.log("Usuario en esquema: ", this)
     return this.save()
+}
+
+UserSchema.methods.confirmarCompra = function(precio, total, id, cantidad, precioporcantproducto, preciocondesc){
+    this.skipPreSave = true
+    let carrito = this.cart
+    let compras = this.misCompras
+    let pedidos = compras.pedidos
+    if(pedidos == undefined){
+        pedidos = []
+    }
+    function pedidosPusheados(){
+        for(let i = 0; i < id.length; i++){
+            if(precioporcantproducto[i] == ""){
+                precioporcantproducto[i] = 0
+            }
+            if(preciocondesc[i] == ""){
+                preciocondesc[i] = 0
+            }
+            pedidos.push({pedidoId:id[i],cantidad:cantidad[i],precioPorCantProducto:precioporcantproducto[i],precioConDesc:preciocondesc[i]})
+        }
+        return pedidos //el return afuera del for porque sino el bucle se para. Retorna pedidos que es el array que contiene todos los valores.
+    }
+    compras.push({pedidos:pedidosPusheados(),fecha:new Date,precio:precio,total:total,estado:true})
+    console.log("Mis compras: ", compras)
+    console.log("Mis pedidos: ", pedidos)
+    const guardado = this.save()
+    const promesa = guardado instanceof Promise
+    if(promesa){
+        carrito.items = []
+        carrito.precioTotal = 0
+    }
+    return guardado
 }
 
 // Introduzco el esquema dentro una tabla en mongo

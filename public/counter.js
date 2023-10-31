@@ -54,7 +54,7 @@ for (let i = 0; i < numCantidad.length;i++ ){
         if(variables[i]!=numCantidad[i].innerHTML && llaveContador){
             numCantidad[i].innerHTML=variables[i]
             cantidad = numCantidad[i].innerHTML
-            const evento = new CustomEvent('valorCambiado', { detail: cantidad });
+            const evento = new CustomEvent('valorCambiado', { detail: cantidad }); //se crea un nuevo evento "valorCambiado", su detalle es el valor de la cantidad
             document.dispatchEvent(evento);
             llaveContador = false
             return cantidad
@@ -68,16 +68,18 @@ for (let i = 0; i < numCantidad.length;i++ ){
 
 // Eventos
 
-menos[i].addEventListener("click",()=>{
+menos[i].addEventListener("click",(event)=>{
     llaveContador = true
     variables[i]--
     deshabilitarMenos()
+    event.preventDefault()
 })
 
-mas[i].addEventListener("click",()=>{
+mas[i].addEventListener("click",(event)=>{
     llaveContador = true
     variables[i]++
     deshabilitarMas()
+    event.preventDefault()
 })
 
 }
