@@ -238,7 +238,7 @@ module.exports.agregarAlCarrito=async(req,res)=>{
     }
     if(req.isAuthenticated()) {
 
-      if (arrayId.length > 0) {
+      if (arrayId != undefined && arrayId.length > 0) {
         for (const e of arrayId) {
           let usuarioCarrito = await User.findById(req.user.id); // Busca id del usuario
           const producto = await Productos.findById(e); // Busca el id del producto en la base
