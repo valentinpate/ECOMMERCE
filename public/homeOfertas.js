@@ -5,12 +5,12 @@ let enviar = document.getElementById("post")
 let arrayId=[]
 let buclePrincipal=[...comprar].forEach((elemento)=>{
 
-    console.log(elemento)
+   // console.log(elemento)
     elemento.addEventListener('click', (e)=>{
         e.preventDefault()
       
       if(elemento.style.backgroundColor == "orange"){
-        elemento.style.backgroundColor ="blue"
+        elemento.style.backgroundColor ="transparent"
         arrayId = arrayId.filter(function(item) {
           return item !== e.target.id;
         });

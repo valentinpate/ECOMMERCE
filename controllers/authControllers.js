@@ -72,11 +72,8 @@ module.exports.middleware = {
             let cantidad = elemento.cantidad
             return {producto,cantidad}
           });
-          
           arrayCarrito = await Promise.all(promesa); 
-       //   console.log(arrayCarrito)
       }
-
       next()
   }
 }
@@ -124,8 +121,14 @@ module.exports.login_get=(req,res)=>{
 }
 
 module.exports.signOut_get=(req,res)=>{
-  let username = null
-  res.render("signout",{username})
+  username = null
+   req.logout(function(err) {
+    if (err) { 
+      return next(err); 
+    }
+    res.render("signout",{username})
+   })
+  
 }
 
 //agrego la funcion para la page ofertas
@@ -240,14 +243,15 @@ module.exports.agregarAlCarrito=async(req,res)=>{
 
       if (arrayId != undefined && arrayId.length > 0) {
         for (const e of arrayId) {
-          let usuarioCarrito = await User.findById(req.user.id); // Busca id del usuario
+          await User.findById(req.user.id); // Busca id del usuario
           const producto = await Productos.findById(e); // Busca el id del producto en la base
           const result = await req.user.agregarAlCarrito(producto, cantidad); // Agrega al carrito
         }
-        res.redirect("/home");
+          res.redirect("/home")
+      
       } else {
         
-        let usuarioCarrito= await User.findById(req.user.id) //busca id del usuario
+        await User.findById(req.user.id) //busca id del usuario
         const producto= await Productos.findById(req.body.id) //busca el id del producto en la base
         const result= await req.user.agregarAlCarrito(producto,cantidad) //agrega al carrit
         if(result){
@@ -260,14 +264,38 @@ module.exports.agregarAlCarrito=async(req,res)=>{
 catch(err){ console.log (err) }
 } 
 
+module.exports.eliminarDelCarrito=async(req,res)=>{
+  const id = req.params.id
+  let carritoItems = req.user.cart.items
+  const index = carritoItems.findIndex(objeto => objeto.productId == id)
+  let busqueda = carritoItems[index]
+  await User.updateOne({_id:req.user.id},{$pull:{"cart.items": {productId: busqueda.productId}}}).then((resolve,reject)=>{
+      if(resolve){
+          console.log("Resuelto:", resolve)
+      }else{
+          console.log("Error: ", reject)
+      }})
+  res.end()
+}
+
+module.exports.eliminarTodo=async(req,res)=>{
+  await User.updateOne({_id:req.user.id}, {$pull:{"cart.items":{}}}).then((resolve,reject)=>{
+      if(resolve){
+          //arrayCarrito.length = 0
+          res.end()
+      }else{
+          console.log("Error:", reject)
+          res.end()
+      }
+  })
+}
 module.exports.confirmarCompra=async(req,res)=>{
   try{
     const {precio, total,id,cantidad, precioporcantproducto, preciocondesc}=req.body
-    //el envio es siempre 2500
-    //console.log(precio, total, id, cantidad, precioporcantproducto, preciocondesc)
     const result= await req.user.confirmarCompra(precio,total,id,cantidad,precioporcantproducto,preciocondesc)
     if(result){
-      res.redirect("home")
+      arrayCarrito=[]
+      res.redirect("miscompras")
     }else{
       res.redirect("informacion")
     }
