@@ -44,7 +44,7 @@ router.get("/miperfil",[authControllers.middleware.middle, authControllers.middl
 //ruta para la page mi perfil (falta agregar la funcion a authcontrollers)
 router.get("/informacion",authControllers.middleware.arrayCartPromise, authControllers.informacion_get)
 
-//POST
+// POST
 
 // Carrito
 router.post("/carrito",authControllers.agregarAlCarrito)
@@ -53,7 +53,11 @@ router.post("/confirmar-compra",authControllers.confirmarCompra)
 
 router.post("/editar-mi-perfil",authControllers.editarMiPerfil)
 
+// DELETE
 
+router.delete("/eliminar-producto/:id",authControllers.middleware.arrayCartPromise, authControllers.eliminarDelCarrito)
+
+router.delete("/eliminar-todo",authControllers.eliminarTodo)
 
 // Exporto las rutas
 module.exports=router

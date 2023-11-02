@@ -16,6 +16,10 @@ let inputTotal= document.getElementById("inputTotal")
 let inputCantidad = document.querySelectorAll(".inputCantidad")
 let inputPrecioporcantproducto = document.querySelectorAll(".inputPrecioporcantproducto")
 let inputPreciocondesc = document.querySelectorAll(".inputPreciocondesc")
+let eliminarTodo = document.querySelector(".eliminarproductos")
+let eliminar = document.querySelectorAll(".iconeliminarproducto")
+let idinp = document.querySelectorAll(".idinp")
+let containerProductoCarrito = document.querySelectorAll(".containerproductocarrito")
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -189,4 +193,38 @@ document.addEventListener('valorCambiado', (event) => { //valorCambiado de count
         })
         
     })
+
+    eliminarTodo.addEventListener("click",async()=>{
+        console.log("eliminar todo")
+        try{
+            const enviarRespuesta = await fetch("/eliminar-todo",{
+                method:"DELETE",
+            })
+            if(enviarRespuesta.ok){
+                for(let productoCarrito of containerProductoCarrito){
+                    productoCarrito.style.display="none"
+                }
+                console.log("todos los productos fueron eliminados")
+            }
+        }
+        catch(err){ console.log(err) }
+    })
+
+    for(let i = 0; i < eliminar.length; i++){
+        eliminar[i].addEventListener("click",async()=>{
+            const id = idinp[i].value
+            console.log("ID:",id)
+            try{
+                const enviarRespuesta = await fetch(`/eliminar-producto/${id}`,{
+                    method:"DELETE"
+                })
+                console.log("ID NUEVO:", {id:id})
+                if(enviarRespuesta.ok){
+                    containerProductoCarrito[i].style.display="none"
+                    console.log("producto eliminado")
+                }
+            }
+            catch(err){ console.log(err) }
+        })
+    }
 })

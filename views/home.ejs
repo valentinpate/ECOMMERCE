@@ -53,7 +53,7 @@
   </section>
     <div class="offer-header">
       <a href="" class="orange-href">Ver todo</a>
-      <button style="font-size:1.1rem;box-shadow:1px 1px 3px black;">Agregar al Carrito <span>(2)</span></button>
+      <button id="post" style="font-size:1.1rem;box-shadow:1px 1px 3px black;">Agregar al Carrito <span id="cantidadOfertasCarrito">(0)</span></button>
       <p>Ofertas de hoy</p>
     </div>
 
@@ -73,7 +73,7 @@
                 <div class="mb-1 text-body-secondary">
                 <p class="card-text mb-auto"><%= elemento.precio.replace(elemento.nombre,'')  %></p>
                 </div>
-                <button href="#" class="buy-btn icon-link gap-1 icon-link-hover stretched-link btn btn-primary rounded-pill">
+                <button id="<%= elemento.id %>" class="buy-btn icon-link gap-1 icon-link-hover stretched-link btn btn-primary rounded-pill">
                   COMPRAR
                 </button>
               </div>
@@ -116,7 +116,7 @@
                   <div class="mb-1 text-body-secondary">
                   <p class="card-text mb-auto"><%= elemento.precio.replace(elemento.nombre,'')  %></p>
                   </div>
-                  <button href="#" class="buy-btn icon-link gap-1 icon-link-hover stretched-link btn btn-primary rounded-pill">
+                  <button id="<%= elemento.id %>" class="buy-btn icon-link gap-1 icon-link-hover stretched-link btn btn-primary rounded-pill">
                     COMPRAR
                   </button>
                 </div>

@@ -27,7 +27,7 @@ app.use(express.json())
 app.set("view engine","ejs")
 
 //middelware para leer lo datos del front
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({extended:true}))
 
 //configuracion de cookie-parser
 app.use(cookieParser(process.env.SECRETO_A));

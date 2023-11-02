@@ -13,193 +13,95 @@
             <option value="opcion4">Opción 4</option>
             </select>
         </div>
-        <div class="container-detalles-pedidos">
-            <div class="detalles-del-pedido">
-                <strong><p>Detalles del pedido</p></strong>
-                <button class="btn-ver-detalles">Ver</button>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Número de items</p></strong>
-                <p>3 Productos</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Fecha</p></strong>
-                <p>22/07/2023</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Precio</p></strong>
-                <p>$800</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Estado del pedido</p></strong>
-                <p class="estado-pedido-confirmado">El pedido ha sido confirmado</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Número de orden</p></strong>
-                <p>#fa124428</p>
-            </div>
-        </div>
-        <div class="container-detalles-pedidos">
-            <div class="detalles-del-pedido">
-                <strong><p>Detalles del pedido</p></strong>
-                <button class="btn-ver-detalles">Ver</button>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Número de items</p></strong>
-                <p>3 Productos</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Fecha</p></strong>
-                <p>22/07/2023</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Precio</p></strong>
-                <p>$800</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Estado del pedido</p></strong>
-                <p class="estado-pedido-rechazado">El pedido ha sido rechazado</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Número de orden</p></strong>
-                <p>#fa124428</p>
-            </div>
-        </div>
-        <div class="container-detalles-pedidos">
-            <div class="detalles-del-pedido">
-                <strong><p>Detalles del pedido</p></strong>
-                <button class="btn-ver-detalles">Ver</button>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Número de items</p></strong>
-                <p>3 Productos</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Fecha</p></strong>
-                <p>22/07/2023</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Precio</p></strong>
-                <p>$800</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Estado del pedido</p></strong>
-                <p class="estado-pedido-enviado">El pedido ha sido enviado</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Número de orden</p></strong>
-                <p>#fa124428</p>
-            </div>
-        </div>
-        <div class="container-detalles-pedidos">
-            <div class="detalles-del-pedido">
-                <strong><p>Detalles del pedido</p></strong>
-                <button class="btn-ver-detalles">Ver</button>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Número de items</p></strong>
-                <p>3 Productos</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Fecha</p></strong>
-                <p>22/07/2023</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Precio</p></strong>
-                <p>$800</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Estado del pedido</p></strong>
-                <p class="estado-pedido-proceso">La entrega está en progreso</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Número de orden</p></strong>
-                <p>#fa124428</p>
-            </div>
-        </div>
-
-    </section>
-    <section class="muestra-detalles-del-pedido">
-        <div class="container-detalles-pedidos container-muestra-detalles-pedidos">
-            <div class="detalles-del-pedido">
-                <strong><p>Número de items</p></strong>
-                <p>3 Productos</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Fecha</p></strong>
-                <p>22/07/2023</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Precio</p></strong>
-                <p>$800</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Estado del pedido</p></strong>
-                <p class="estado-pedido-proceso">La entrega está en progreso</p>
-            </div>
-            <div class="detalles-del-pedido">
-                <strong><p>Número de orden</p></strong>
-                <p>#fa124428</p>
-            </div>
-        </div>
-        <div class="container-resumen-detalles">
-                <div class="infopago resumen-pedido">  
-                    <p class="titulo-resumen"><strong>Resumen de costos del pedido</strong></p>
-                    <div class="containergastos precioproductos">
-                        <p><strong>$600</strong></p>
-                        <p>Precio</p>
-                    </div>
-                    <div class="containergastos">
-                        <p><strong>$150</strong></p>
-                        <p>Envio</p>
-                    </div>
-                    <hr class="lineaproductosuno">  <!-- linea se separacion -->
-                    <div class="containergastos">
-                        <p><strong>$750</strong></p>
-                        <p>Total</p>
-                    </div>
+        <%arrayMisCompras.forEach((e)=>{ %>
+            <div class="container-detalles-pedidos">
+                <div class="detalles-del-pedido">
+                    <strong><p>Detalles del pedido</p></strong>
+                    <a class="link" href="/miscompras?detalles&&id"><button  id="<%=e.id%>" class="btn-ver-detalles">Ver</button></a>
                 </div>
-            <div class="container-detalles-productos-pedidos">
-                <div class="container-btn-detalles">
-                    <button class="btn-eliminar-detalles">Eliminar todo</button>
-                    <h3>Detalles del pedido</h3>
+                <div class="detalles-del-pedido">
+                    <strong><p>Número de items</p></strong>
+                    <p><%= e.pedidos.length %> Productos</p>
                 </div>
-                
-                <div class="containerproductoscarrito container-productos-detalles">
-                    <div class="containerproductocarrito">
-                        <div class="container-info-producto">                         
-                            <!-- traer info del producto -->
-                            <p class="nombreproducto">Pepsi 2.25 Lts</p> 
-                            <div class="infoproducto">
-                                <div class="preciodesc container-precio-total">
-                                    <p>TOTAL:</p>
-                                    <p class="preciocondesc">$900</p>
-                                </div>
-                                <p>2 cajas de Pepsi</p> 
-                            </div>  
-                        </div>           
-                        <img class="imgproducto-detalles" src="./images/pepsi.png" alt="">
-                    </div>
-                    <hr class="linea-productos-detalles"> <!-- linea se separacion -->
-                    <div class="containerproductocarrito">
-                        <div class="container-info-producto">                         
-                            <p class="nombreproducto">Pepsi 2.25 Lts</p> 
-                            <div class="infoproducto">
-                                <div class="preciodesc container-precio-total">
-                                    <p>TOTAL:</p>
-                                    <p class="preciocondesc">$900</p>  
-                                </div>
-                                <p>2 cajas de Pepsi</p>
-                            </div>                        
-                        </div>           
-                        <img class="imgproducto-detalles" src="./images/pepsi.png" alt="">
-                    </div>
+                <div class="detalles-del-pedido">
+                    <strong><p>Fecha</p></strong>
+                    <p><%= e.fecha %></p>
                 </div>
-                
+                <div class="detalles-del-pedido">
+                    <strong><p>Precio</p></strong>
+                    <p>$<%= e.totalFinal %></p>
+                </div>
+                <div class="detalles-del-pedido">
+                    <strong><p>Estado del pedido</p></strong>
+                   <% if(e.estado){ %>
+                    <p class="estado-pedido-confirmado">El pedido ha sido confirmado</p>
+                    <% }else{  %>
+                        <p class="estado-pedido-confirmado">Pedido completado</p>
+                   <% } %>
+                </div>
+                <div class="detalles-del-pedido">
+                    <strong><p>Número de orden</p></strong>
+                    <p><%= e.id %></p>
+                </div>
             </div>
             
-        </div>
-    </section>   
-</section>
-
-<%- include("partials/footer") -%>
+        </section>
+       <% if(detalles==="true" && e.id == idQuery){ %>
+        
+            <section class="muestra-detalles-del-pedido">
+                <div class="container-resumen-detalles">
+                        <div class="infopago resumen-pedido">  
+                            <p class="titulo-resumen"><strong>Resumen de costos del pedido</strong></p>
+                            <div class="containergastos precioproductos">
+                                <p><strong>$ <%= e.subtotalFinal %></strong></p>
+                                <p>Precio</p>
+                            </div>
+                            <div class="containergastos">
+                                <p><strong>$2500</strong></p>
+                                <p>Envio</p>
+                            </div>
+                            <hr class="lineaproductosuno">  <!-- linea se separacion -->
+                            <div class="containergastos">
+                                <p><strong>$ <%= e.totalFinal %></strong></p>
+                                <p>Total</p>
+                            </div>
+                        </div>
+                    
+                    <div class="container-detalles-productos-pedidos">
+                        <div class="container-btn-detalles">
+                            <button class="btn-eliminar-detalles">Eliminar todo</button>
+                            <h3>Detalles del pedido</h3>
+                        </div>
+                        
+                        <div class="containerproductoscarrito container-productos-detalles" style="overflow-y: auto; height: 30em;">
+                            <%if(arrayProductos.length > 0){%>
+                            <%arrayProductos[0].forEach((elemento)=>{ %>
+                            <div class="containerproductocarrito" >
+                                <div class="container-info-producto">                         
+                                    <!-- traer info del producto -->
+                                    <p class="nombreproducto"> <%= elemento.nombreProducto %></p> 
+                                    <div class="infoproducto">
+                                        <div class="preciodesc container-precio-total">
+                                            <p>TOTAL:</p>
+                                            <p class="preciocondesc">$<%= elemento.precioMiscompras %></p>
+                                        </div>
+                                        <p>Cantidad <%= elemento.cantidadMisCompras %></p> 
+                                    </div>  
+                                </div>           
+                                <img class="imgproducto-detalles" src="<%= elemento.imagenProducto %>" alt="">
+                            </div>
+                            <hr class="linea-productos-detalles"> <!-- linea se separacion -->
+                            <%}) %>
+                            <%}%>
+                        </div>
+                        
+                    </div>
+                   
+                </div>
+            </section> 
+        <% } %>
+        <%})%><!-- cierra arraymiscompras -->
+        
+    </section>
+    
+    <%- include("partials/footer") -%>

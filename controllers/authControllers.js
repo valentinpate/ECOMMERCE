@@ -11,8 +11,8 @@ let incomplete = false
 let arrayCarrito=[]
 let miRuta= null
 let arrayMisCompras=[]
-let arrayProductos=[]
 let detalles = false
+let arrayProductos=[]
 
 // Manejo de errores
 const handleErrors=(err)=>{
@@ -237,42 +237,42 @@ module.exports.contacto_get= async(req,res)=>{
 module.exports.miscompras_get= async(req,res)=>{
     detalles=req.query.detalles
     compras = req.user.misCompras
+    idQuery= req.query.id
 
     let promesaCompras= compras.map(async(elemento)=>{
-        //let pedidos = elemento.pedidos
+        let pedidos = elemento.pedidos
         let fecha= elemento.fecha
         let envio=2500
         let subtotalFinal=elemento.precio
         let totalFinal= elemento.total
         let estado= elemento.estado
         let id= elemento._id
-        return {fecha,envio,subtotalFinal,totalFinal,estado, id}
+        return {fecha,envio,subtotalFinal,totalFinal,estado, id, pedidos}
     })
 
     arrayMisCompras= await Promise.all(promesaCompras);
-console.log("mis compras= ",arrayMisCompras)
-     if(detalles === "true"){
+    console.log("mis compras= ",arrayMisCompras)
+    if(detalles === "true"){
      
-console.log("id del usuario= ",req.user.id)
-     let idCompra= User.findOne( { _id: req.user.id, misCompras: { $elemMatch: { id: arrayMisCompras[0].id } } });
-     //let idCompra= await User.find(arrayMisCompras[0].id)
-      console.log("idCompra= ",idCompra)
-      //  let promesaProductos= idCompra.pedidos.map(async(elemento)=>{
-      //     let productoPorUnidad = await User.findById(elemento.pedidoId)
-      //     productoPorUnidad.map(async(e)=>{
-      //       let nombreProducto=e.nombre
-      //       let imagenProducto=e.imagen
-      //       return {nombreProducto,imagenProducto}
-      //     })
-      //   let cantidadMisCompras= elemento.cantidad//cantidad
-      //   let subtotalMiscompras= elemento.precioPorCantProducto// precio por cantidad
-      //   let precioMiscompras = elemento.precioConDesc// precio con el descuento echo 
-      //    return {nombreProducto,imagenProducto,cantidadMisCompras,subtotalMiscompras,precioMiscompras}
-      //  })
-     // arrayProductos= await Promise.all(promesaProductos); 
-     // console.log("arrayProductos= ",arrayProductos)
-
-    } 
+    let promesaSecundaria= arrayMisCompras.map(async(e)=>{
+        if(e.id == idQuery){
+            let promesaInicial= e.pedidos.map(async(elemento)=>{
+            let productoPorUnidad = await Productos.findById(elemento.pedidoId)
+            let nombreProducto=productoPorUnidad.nombre
+            let imagenProducto=productoPorUnidad.imagen
+            let cantidadMisCompras= elemento.cantidad//cantidad
+            let subtotalMiscompras= elemento.precioPorCantProducto// precio por cantidad
+            let precioMiscompras = elemento.precioConDesc// precio con el descuento echo 
+            return {nombreProducto,imagenProducto,cantidadMisCompras,subtotalMiscompras,precioMiscompras}
+        })
+            arrayProductos= await Promise.all(promesaInicial);
+            return arrayProductos
+    }
+    })
+        arrayProductos= await Promise.all(promesaSecundaria);
+        arrayProductos= arrayProductos.filter((elemento) => elemento !== undefined);
+    }
+    console.log("arrayProductos3= ",arrayProductos)
 
     miRuta="miscompras"
     res.render("miscompras",{username, miRuta, arrayCarrito,detalles,arrayMisCompras,arrayProductos})
@@ -293,22 +293,57 @@ module.exports.informacion_get = (req, res)=>{
 // FUNCIONES POST + MÉTODOS DE DB
 
 module.exports.agregarAlCarrito=async(req,res)=>{
-    const { cantidad, id } = req.body
+    const { cantidad, arrayId } = req.body
     try{
         if(!req.isAuthenticated()){
             res.redirect("signin")
         }
         if(req.isAuthenticated()) {
-            console.log(req.user.id)
-            await User.findById(req.user.id) //busca id del usuario
-            const producto= await Productos.findById(id) //busca el id del producto en la base
-            const result= await req.user.agregarAlCarrito(producto,cantidad) //agrega al carrit
-            if(result){
-                res.redirect("/home")
+            if(arrayId != undefined && arrayId.length > 0){
+                for (const e of arrayId){
+                    await User.findById(req.user.id); // Busca id del usuario
+                    const producto = await Productos.findById(e)
+                    console.log("Producto: ", producto)
+                    await req.user.agregarAlCarrito(producto, cantidad)
+                }
+                res.redirect("home")
+            }else{
+                await User.findById(req.user.id) //busca id del usuario
+                const producto= await Productos.findById(req.body.id) //busca el id del producto en la base
+                const result= await req.user.agregarAlCarrito(producto,cantidad) //agrega al carrit
+                if(result){
+                    res.redirect("/home")
+                }
             }
         }
     }
     catch(err){ console.log (err) }
+}
+
+module.exports.eliminarDelCarrito=async(req,res)=>{
+    const id = req.params.id
+    let carritoItems = req.user.cart.items
+    const index = carritoItems.findIndex(objeto => objeto.productId == id)
+    let busqueda = carritoItems[index]
+    await User.updateOne({_id:req.user.id},{$pull:{"cart.items": {productId: busqueda.productId}}}).then((resolve,reject)=>{
+        if(resolve){
+            console.log("Resuelto:", resolve)
+        }else{
+            console.log("Error: ", reject)
+        }})
+    res.end()
+}
+
+module.exports.eliminarTodo=async(req,res)=>{
+    await User.updateOne({_id:req.user.id}, {$pull:{"cart.items":{}}}).then((resolve,reject)=>{
+        if(resolve){
+            //arrayCarrito.length = 0
+            res.end()
+        }else{
+            console.log("Error:", reject)
+            res.end()
+        }
+    })
 }
 
 module.exports.confirmarCompra=async(req,res)=>{
@@ -319,7 +354,7 @@ module.exports.confirmarCompra=async(req,res)=>{
         arrayCarrito=[]
         res.redirect("miscompras")
       }else{
-        res.redirect("informacion")
+        res.redirect("home")
       }
     }
     catch(err){
