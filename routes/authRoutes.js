@@ -55,7 +55,7 @@ router.post("/editar-mi-perfil",authControllers.editarMiPerfil)
 
 // DELETE
 
-router.delete("/eliminar-producto/:id",authControllers.middleware.arrayCartPromise, authControllers.eliminarDelCarrito)
+router.delete("/eliminar-producto/:id",authControllers.eliminarDelCarrito)
 
 router.delete("/eliminar-todo",authControllers.eliminarTodo)
 

@@ -121,7 +121,12 @@ module.exports.login_get=(req,res)=>{
 }
 
 module.exports.signOut_get=(req,res)=>{
-    let username = null
+    username = null
+    req.logOut(function(err){
+        if(err){
+            return next(err)
+        }
+    })
     res.render("signout",{username})
 }
 
@@ -337,7 +342,6 @@ module.exports.eliminarDelCarrito=async(req,res)=>{
 module.exports.eliminarTodo=async(req,res)=>{
     await User.updateOne({_id:req.user.id}, {$pull:{"cart.items":{}}}).then((resolve,reject)=>{
         if(resolve){
-            //arrayCarrito.length = 0
             res.end()
         }else{
             console.log("Error:", reject)
