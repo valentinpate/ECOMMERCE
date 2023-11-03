@@ -95,6 +95,11 @@ nav a{
 
 /* Elementos en clases - Productos */
 
+.product{
+    margin-top: 0.5em;
+    transition: 0.4s;
+}
+
 .product-data h2{
     font-size:2.5rem;
     font-weight:400;
@@ -348,6 +353,15 @@ a:hover{
     text-shadow:1px 1px 1px rgb(124, 124, 124);
 }
 
+.buy-btn:hover{
+    border: 1px solid #FB7821;
+    color: #FB7821;
+    background-color: initial;
+}
+
+.product:hover{
+    transform:scale(1.06);
+}
 /* Clases */
 
 .logo{
@@ -412,8 +426,9 @@ a:hover{
 .buy-btn{ 
     width:7.2rem;
     margin-top:0.2em;
+    color: #FB7821;
     border:1px solid #FB7821;
-    background-color:#FB7821;
+    background-color:transparent;
     font-size:1.2rem;
 }
 

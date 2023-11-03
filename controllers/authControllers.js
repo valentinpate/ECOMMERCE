@@ -256,7 +256,7 @@ module.exports.miscompras_get= async(req,res)=>{
     })
 
     arrayMisCompras= await Promise.all(promesaCompras);
-    console.log("mis compras= ",arrayMisCompras)
+    //console.log("mis compras= ",arrayMisCompras)
     if(detalles === "true"){
      
     let promesaSecundaria= arrayMisCompras.map(async(e)=>{
@@ -277,7 +277,7 @@ module.exports.miscompras_get= async(req,res)=>{
         arrayProductos= await Promise.all(promesaSecundaria);
         arrayProductos= arrayProductos.filter((elemento) => elemento !== undefined);
     }
-    console.log("arrayProductos3= ",arrayProductos)
+   // console.log("arrayProductos3= ",arrayProductos)
 
     miRuta="miscompras"
     res.render("miscompras",{username, miRuta, arrayCarrito,detalles,arrayMisCompras,arrayProductos})
@@ -308,7 +308,7 @@ module.exports.agregarAlCarrito=async(req,res)=>{
                 for (const e of arrayId){
                     await User.findById(req.user.id); // Busca id del usuario
                     const producto = await Productos.findById(e)
-                    console.log("Producto: ", producto)
+                    //console.log("Producto: ", producto)
                     await req.user.agregarAlCarrito(producto, cantidad)
                 }
                 res.redirect("home")
