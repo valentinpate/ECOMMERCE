@@ -3,7 +3,7 @@ const User=require("../models/User")
 const jwt=require("jsonwebtoken")
 const Productos=require("../models/Productos")
 const bcrypt=require("bcrypt")
-const passport = require ("passport")
+const passport=require("passport")
 
 let username = null
 let msj_login = false
@@ -13,7 +13,6 @@ let miRuta= null
 let arrayMisCompras=[]
 let detalles = false
 let arrayProductos=[]
-
 
 // Manejo de errores
 const handleErrors=(err)=>{
@@ -54,31 +53,32 @@ const createToken=(id)=>{
     })
 }
 
+// Middleware
 module.exports.middleware = {
-  middle: (req,res,next)=>{
-      if(req.isAuthenticated()){
-          next();
-      }else{
-          res.redirect("signin")
-      }
-  },
-  arrayCartPromise: async (req,res,next) =>{ 
-      if(req.user){
-          username=req.user.user
-          items=req.user.cart.items
-
-          let promesa =  items.map(async(elemento)=> {
+    middle: (req,res,next)=>{
+        if(req.isAuthenticated()){
+            next();
+        }else{
+            res.redirect("signin")
+        }
+    },
+    arrayCartPromise: async (req,res,next) =>{ 
+        if(req.user){
+            username=req.user.user
+            items=req.user.cart.items
+            let promesa =  items.map(async(elemento)=> {
             let producto = await Productos.findById(elemento.productId)
             let cantidad = elemento.cantidad
-            return {producto,cantidad}
-          });
-          arrayCarrito = await Promise.all(promesa); 
-      }
-      next()
-  }
+            return {producto, cantidad}
+            });
+            arrayCarrito = await Promise.all(promesa);
+        }
+        //console.log("productos a renderizar", arrayCarrito)
+        next()
+    }
 }
 
-// se exporta la logica de las rutas a authRoutes
+// CONTROLADORES (se exporta la logica de las rutas a authRoutes)
 
 // SignUp, LogIn y LogOut
 
@@ -90,8 +90,8 @@ module.exports.signup_post= async(req,res)=>{
         const users= await User.create({email,name,user,password,phone,region})
         // Encriptar datos como token
         const token= createToken(users._id,users.email,users.password)
-         res.cookie("jwt",token,{httpOnly:true,maxAge:maxAge*1000})
-         res.status(201).json(users)
+        res.cookie("jwt",token,{httpOnly:true,maxAge:maxAge*1000})
+        res.status(201).json(users)
         username = user
     }
     catch(err){
@@ -105,7 +105,7 @@ module.exports.signup_get=(req,res)=>{
     
 }
 
- module.exports.login_post=async(req,res)=>{
+module.exports.login_post=async(req,res)=>{
     if(req.isAuthenticated()){
         username=req.user.name
         msj_login=false
@@ -116,32 +116,33 @@ module.exports.signup_get=(req,res)=>{
 }
 
 module.exports.login_get=(req,res)=>{
-  let errorText = "Hubo un error en su petición. Por favor, intente más tarde"
-  res.render("signin",{username, msj_login, errorText})
+    let errorText = "Hubo un error en su petición. Por favor, intente más tarde"
+    res.render("signin",{username, msj_login, errorText})
 }
 
 module.exports.signOut_get=(req,res)=>{
-  username = null
-   req.logout(function(err) {
-    if (err) { 
-      return next(err); 
-    }
+    username = null
+    req.logOut(function(err){
+        if(err){
+            return next(err)
+        }
+    })
     res.render("signout",{username})
-   })
-  
 }
 
-//agrego la funcion para la page ofertas
+//Renderización de Rutas 
+
 module.exports.ofertas_get= async (req,res)=>{
-    miRuta="ofertas"
-  //paginacion (primera parte)
+   miRuta="ofertas"
+
+   //paginacion(primera parte)
    let page = req.query.page
    if (page == null){page = 1}
 
-   // llamdos a db
+   //llamados a db
    const productosrender= await Productos.paginate({},{limit:12,page:page})
 
-  ////paginacion (segundaparte)
+  ////funcion que estoy probando
   let a = 5 //catidad de botones visibles
   let llave = req.query.llave
   page = productosrender.page
@@ -151,12 +152,12 @@ module.exports.ofertas_get= async (req,res)=>{
   }else if(llave){   
        a=page+4
     }
-   await res.render("ofertas",{productosrender,a,username,miRuta,arrayCarrito})
+   await res.render("ofertas",{username, productosrender,a, miRuta, arrayCarrito})
 }
 
 //agrego la funcion para la page product
 module.exports.product_get= async (req,res)=>{
-  miRuta="product"
+    miRuta="product"
     const paramid = req.query.id
     const paramcolec = req.query.coleccion
 
@@ -183,43 +184,41 @@ module.exports.product_get= async (req,res)=>{
        a=page+4
     }
  
-    res.render("product",{productrender, productsimilares,a,idproduct, coleccionproduct,miRuta,arrayCarrito})
+    res.render("product",{productrender, productsimilares, a, idproduct, coleccionproduct,miRuta,arrayCarrito})
  }
 
 
 //agrego la funcion para la page home
- module.exports.home_get=async(req,res)=>{
-  miRuta="home"
-  //Buscador
+module.exports.home_get=async(req,res)=>{
+    miRuta="home"
+    //Buscador
     //declaro variable
-    const palabraclave = req.query.palabraclave // el ejs en header esta definimos por un form y lo tengo que capturar con u00n req.query no era req.body
+    const palabraclave = req.query.palabraclave //el ejs en header esta definimos por un form y lo tengo que capturar con u00n req.query no era req.body
     const expresionregular = new RegExp(palabraclave, 'i');//se crea a expresion relugular apartir de la variable palabraclave, la "i" es para que sea insensible a las mayusculas
-  
+
 
     // llamado a db para ofertas
     const homeofertas= await Productos.find({coleccion:"ofertas"})
     let i = 2;
     let j = 5;
 
+//    //llamado para carrito
+//    const arrayCarrito=await Productos.find({})
       //paginacion (primera parte)
       let page = req.query.page
       if (page == null || page == undefined){page = 1}
    
-      
-     // llamdos a db
-     async function llamados (expresionregular,page){
-      if(palabraclave == ""){
-        return productosResponse= await Productos.paginate({},{limit:12,page:page})
-
-      }else{
-        return productosResponse= await Productos.paginate({nombre:{ $regex: expresionregular }},{limit:12,page:page})
+      // llamdos a db
+    async function llamados (expresionregular,page){
+        if(palabraclave == ""){
+            return productosResponse= await Productos.paginate({},{limit:12,page:page})
+        }else{
+            return productosResponse= await Productos.paginate({nombre:{ $regex: expresionregular }},{limit:12,page:page})
+        }
       }
-     
-    }
 
-    let productosrender = await llamados(expresionregular,page);
-    
-
+      let productosrender = await llamados(expresionregular,page);
+   
      ////paginacion (segundaparte)
      let a = 5 //catidad de botones visibles
      let llave = req.query.llave
@@ -230,113 +229,38 @@ module.exports.product_get= async (req,res)=>{
      }else if(llave){   
           a=page+4
        }
-     res.render("home",{homeofertas,i,j,arrayCarrito,productosrender,a,username,miRuta})
-  } 
-
-module.exports.agregarAlCarrito=async(req,res)=>{
-  const { cantidad,arrayId} = req.body;
-  try{
-    if(!req.isAuthenticated()){
-        res.redirect("signin")
-    }
-    if(req.isAuthenticated()) {
-
-      if (arrayId != undefined && arrayId.length > 0) {
-        for (const e of arrayId) {
-          await User.findById(req.user.id); // Busca id del usuario
-          const producto = await Productos.findById(e); // Busca el id del producto en la base
-          const result = await req.user.agregarAlCarrito(producto, cantidad); // Agrega al carrito
-        }
-          res.redirect("/home")
-      
-      } else {
-        
-        await User.findById(req.user.id) //busca id del usuario
-        const producto= await Productos.findById(req.body.id) //busca el id del producto en la base
-        const result= await req.user.agregarAlCarrito(producto,cantidad) //agrega al carrit
-        if(result){
-            res.redirect("/home")
-        }
-      }
-      
-    }
-}
-catch(err){ console.log (err) }
-} 
-
-module.exports.eliminarDelCarrito=async(req,res)=>{
-  const id = req.params.id
-  let carritoItems = req.user.cart.items
-  const index = carritoItems.findIndex(objeto => objeto.productId == id)
-  let busqueda = carritoItems[index]
-  await User.updateOne({_id:req.user.id},{$pull:{"cart.items": {productId: busqueda.productId}}}).then((resolve,reject)=>{
-      if(resolve){
-          console.log("Resuelto:", resolve)
-      }else{
-          console.log("Error: ", reject)
-      }})
-  res.end()
-}
-
-module.exports.eliminarTodo=async(req,res)=>{
-  await User.updateOne({_id:req.user.id}, {$pull:{"cart.items":{}}}).then((resolve,reject)=>{
-      if(resolve){
-          //arrayCarrito.length = 0
-          res.end()
-      }else{
-          console.log("Error:", reject)
-          res.end()
-      }
-  })
-}
-module.exports.confirmarCompra=async(req,res)=>{
-  try{
-    const {precio, total,id,cantidad, precioporcantproducto, preciocondesc}=req.body
-    const result= await req.user.confirmarCompra(precio,total,id,cantidad,precioporcantproducto,preciocondesc)
-    if(result){
-      arrayCarrito=[]
-      res.redirect("miscompras")
-    }else{
-      res.redirect("informacion")
-    }
-  }
-  catch(err){
-    console.log(err)
-  }
+    res.render("home",{username, homeofertas,i,j,arrayCarrito,productosrender,a,username,miRuta})
 }
 
 //agrego la funcion para la page de contacto
-  module.exports.contacto_get= async(req,res)=>{
+module.exports.contacto_get= async(req,res)=>{
     miRuta="contacto"
-    res.render("contacto",{username,miRuta,arrayCarrito})
+    res.render("contacto",{username, miRuta, arrayCarrito})
   }
-
   
   //agrego la funcion para la page de miscompras
-  module.exports.miscompras_get= async(req,res)=>{
-
+module.exports.miscompras_get= async(req,res)=>{
     detalles=req.query.detalles
     compras = req.user.misCompras
     idQuery= req.query.id
 
-     let promesaCompras= compras.map(async(elemento)=>{
-       let pedidos = elemento.pedidos
-       let fecha= elemento.fecha
-       let envio=2500
-       let subtotalFinal=elemento.precio
-       let totalFinal= elemento.total
-       let estado= elemento.estado
-       let id= elemento._id
-       return {fecha,envio,subtotalFinal,totalFinal,estado, id,pedidos}
-     })
+    let promesaCompras= compras.map(async(elemento)=>{
+        let pedidos = elemento.pedidos
+        let fecha= elemento.fecha
+        let envio=2500
+        let subtotalFinal=elemento.precio
+        let totalFinal= elemento.total
+        let estado= elemento.estado
+        let id= elemento._id
+        return {fecha,envio,subtotalFinal,totalFinal,estado, id, pedidos}
+    })
 
     arrayMisCompras= await Promise.all(promesaCompras);
-    console.log("idquery= ",idQuery)
+    console.log("mis compras= ",arrayMisCompras)
     if(detalles === "true"){
      
     let promesaSecundaria= arrayMisCompras.map(async(e)=>{
-
-          if(e.id == idQuery ){
+        if(e.id == idQuery){
             let promesaInicial= e.pedidos.map(async(elemento)=>{
             let productoPorUnidad = await Productos.findById(elemento.pedidoId)
             let nombreProducto=productoPorUnidad.nombre
@@ -345,29 +269,104 @@ module.exports.confirmarCompra=async(req,res)=>{
             let subtotalMiscompras= elemento.precioPorCantProducto// precio por cantidad
             let precioMiscompras = elemento.precioConDesc// precio con el descuento echo 
             return {nombreProducto,imagenProducto,cantidadMisCompras,subtotalMiscompras,precioMiscompras}
-            })
-      arrayProductos= await Promise.all(promesaInicial);
-      return arrayProductos
-      }
-     
+        })
+            arrayProductos= await Promise.all(promesaInicial);
+            return arrayProductos
+    }
     })
-    arrayProductos= await Promise.all(promesaSecundaria);
-    arrayProductos= arrayProductos.filter((elemento) => elemento !== undefined);
-  }
-  console.log("arrayProductos3= ",arrayProductos)
+        arrayProductos= await Promise.all(promesaSecundaria);
+        arrayProductos= arrayProductos.filter((elemento) => elemento !== undefined);
+    }
+    console.log("arrayProductos3= ",arrayProductos)
+
     miRuta="miscompras"
-    res.render("miscompras",{username,miRuta,arrayCarrito,detalles,arrayMisCompras,arrayProductos,idQuery})
+    res.render("miscompras",{username, miRuta, arrayCarrito,detalles,arrayMisCompras,arrayProductos})
   }
- 
-  module.exports.miperfil_get= async (req,res)=>{
+
+module.exports.miperfil_get= (req,res)=>{
     miRuta="miperfil"
     nombre=req.user.name
     username=req.user.user
     telefono = req.user.phone
-    res.render("miperfil",{username,miRuta,arrayCarrito,incomplete})
-  }
+    res.render("miperfil",{username, miRuta, arrayCarrito, incomplete})
+}
 
-  module.exports.editarMiPerfil = async (req,res)=>{
+module.exports.informacion_get = (req, res)=>{
+    res.render("informacion",{username, arrayCarrito})
+}
+
+// FUNCIONES POST + MÉTODOS DE DB
+
+module.exports.agregarAlCarrito=async(req,res)=>{
+    const { cantidad, arrayId } = req.body
+    try{
+        if(!req.isAuthenticated()){
+            res.redirect("signin")
+        }
+        if(req.isAuthenticated()) {
+            if(arrayId != undefined && arrayId.length > 0){
+                for (const e of arrayId){
+                    await User.findById(req.user.id); // Busca id del usuario
+                    const producto = await Productos.findById(e)
+                    console.log("Producto: ", producto)
+                    await req.user.agregarAlCarrito(producto, cantidad)
+                }
+                res.redirect("home")
+            }else{
+                await User.findById(req.user.id) //busca id del usuario
+                const producto= await Productos.findById(req.body.id) //busca el id del producto en la base
+                const result= await req.user.agregarAlCarrito(producto,cantidad) //agrega al carrit
+                if(result){
+                    res.redirect("/home")
+                }
+            }
+        }
+    }
+    catch(err){ console.log (err) }
+}
+
+module.exports.eliminarDelCarrito=async(req,res)=>{
+    const id = req.params.id
+    let carritoItems = req.user.cart.items
+    const index = carritoItems.findIndex(objeto => objeto.productId == id)
+    let busqueda = carritoItems[index]
+    await User.updateOne({_id:req.user.id},{$pull:{"cart.items": {productId: busqueda.productId}}}).then((resolve,reject)=>{
+        if(resolve){
+            console.log("Resuelto:", resolve)
+        }else{
+            console.log("Error: ", reject)
+        }})
+    res.end()
+}
+
+module.exports.eliminarTodo=async(req,res)=>{
+    await User.updateOne({_id:req.user.id}, {$pull:{"cart.items":{}}}).then((resolve,reject)=>{
+        if(resolve){
+            res.end()
+        }else{
+            console.log("Error:", reject)
+            res.end()
+        }
+    })
+}
+
+module.exports.confirmarCompra=async(req,res)=>{
+    try{
+      const {precio, total,id,cantidad, precioporcantproducto, preciocondesc}=req.body
+      const result= await req.user.confirmarCompra(precio,total,id,cantidad,precioporcantproducto,preciocondesc)
+      if(result){
+        arrayCarrito=[]
+        res.redirect("miscompras")
+      }else{
+        res.redirect("home")
+      }
+    }
+    catch(err){
+      console.log(err)
+    }
+}
+
+module.exports.editarMiPerfil = async (req,res)=>{
     try{
         const {name,user,phone} = req.body
         const usuario = req.user.id
@@ -382,8 +381,3 @@ module.exports.confirmarCompra=async(req,res)=>{
     }
     catch(err){ console.log (err) }
 }
-  module.exports.informacion_get=async (req,res)=>{
-    miRuta="informacion"
-    res.render("informacion",{username,arrayCarrito,miRuta})
-  }
-

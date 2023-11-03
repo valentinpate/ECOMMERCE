@@ -82,21 +82,22 @@ const UserSchema= new mongoose.Schema({
 
 // Mensaje de usuario
 UserSchema.pre("save", async function(next){
-
     if (this.skipPreSave) {
         return next(); // No ejecutar el middleware
-      }
+    }
     // encriptar contraseñas
     const salt= await bcrypt.genSalt()
     this.password= await bcrypt.hash(this.password,salt)
+    console.log("el nuevo usuario esta siendo creado y se pasara a guardar",this)
     next()
 })
 
 UserSchema.post("save",function(doc,next){
+    console.log("el nuevo usuario fue creado y guardado",doc)
     next()
 })
 
-UserSchema.methods.agregarAlCarrito = function async (producto,cantidad){
+UserSchema.methods.agregarAlCarrito = function(producto,cantidad){
     this.skipPreSave = true;
     let carrito = this.cart
     const regex = /\$([0-9,]+)/g //caracter $ + ([todos los caracteres del 0 a 9 y comas]el + indica que debe haber más de un dígito o coma) + /g = lo busca de forma global. no se queda en el 1ro
@@ -104,34 +105,39 @@ UserSchema.methods.agregarAlCarrito = function async (producto,cantidad){
     if(carrito.items.length == 0){
         carrito.items.push({productId:producto._id,cantidad:cantidad})
         let numero = producto.precio.match(regex) //me trae el precio del producto que coincide con el regex
-        let precio = parseFloat(numero[0].replace(/\$|,/g, '')).toFixed(2);
+        let precio = parseFloat(numero[0].replace(/\$|,/g, '')) // / $ | , (selecciono todos los carácteres "$" y "," para reemplazarlos por un vacío -> , "")
         precio= (precio/100).toFixed(2);
-        precio = Number(precio); 
+        precio = Number(precio); //Precio lo paso a número
+        console.log("Precio:", precio, "-", typeof(precio))
         carrito.precioTotal = precio
-    } else{
-            
+    }else{
         const existe = carrito.items.findIndex(objeto => {
-            return new String (objeto.productId).trim()  == new String (producto._id).trim()
-            })
+            return new String (objeto.productId).trim() == new String (producto._id).trim()
+        })
+
         if(existe == -1){
             carrito.items.push({productId:producto._id,cantidad:cantidad})
-            let numero=  producto.precio.match(regex);
-            let precio = parseFloat(numero[0].replace(/\$|,/g, '')).toFixed(2);
+            let numero = producto.precio.match(regex)
+            let precio = parseFloat(numero[0].replace(/\$|,/g, '')).toFixed(2)
             precio= (precio/100).toFixed(2);
-            precio = Number(precio); 
+            precio = Number(precio);
+            console.log("Precio:", precio, "-", typeof(precio))
             carrito.precioTotal += precio
         }else{
             let productoQueExiste = carrito.items[existe]
-            productoQueExiste.cantidad++
-            let numero=  producto.precio.match(regex);
-            let precio = parseFloat(numero[0].replace(/\$|,/g, '')).toFixed(2);
+            productoQueExiste.cantidad+1
+            let numero = producto.precio.match(regex)
+            let precio = parseFloat(numero[0].replace(/\$|,/g, '')).toFixed(2)
             precio= (precio/100).toFixed(2);
-            precio = Number(precio); 
+            precio = Number(precio);
+            console.log("Precio:", precio, "-", typeof(precio))
             carrito.precioTotal += precio
         }
     }
+    console.log("Usuario en esquema: ", this)
     return this.save()
 }
+
 UserSchema.methods.confirmarCompra = function(precio, total, id, cantidad, precioporcantproducto, preciocondesc){
     this.skipPreSave = true
     let carrito = this.cart
@@ -150,10 +156,9 @@ UserSchema.methods.confirmarCompra = function(precio, total, id, cantidad, preci
             }
             pedidos.push({pedidoId:id[i],cantidad:cantidad[i],precioPorCantProducto:precioporcantproducto[i],precioConDesc:preciocondesc[i]})
         }
-        return pedidos
+        return pedidos //el return afuera del for porque sino el bucle se para. Retorna pedidos que es el array que contiene todos los valores.
     }
     compras.push({pedidos:pedidosPusheados(),fecha:new Date,precio:precio,total:total,estado:true})
-    //carrito.items = []
     console.log("Mis compras: ", compras)
     console.log("Mis pedidos: ", pedidos)
     const guardado = this.save()

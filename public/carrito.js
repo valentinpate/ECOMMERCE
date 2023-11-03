@@ -100,7 +100,7 @@ precio.forEach((elemento,index)=>{
         }
         //inserto sumaTotal y totalOperacion en el HTML + paso valores a inputPrecio e inputTotal
         precioSumaTotal.innerHTML = '$'+sumaTotal
-        inputPrecio.value= sumaTotal
+        inputPrecio.value = sumaTotal
         total.innerHTML = '$'+ totalOperacion 
         inputTotal.value = totalOperacion
     }
@@ -193,7 +193,7 @@ document.addEventListener('valorCambiado', (event) => { //valorCambiado de count
         })
         
     })
-    
+
     eliminarTodo.addEventListener("click",async()=>{
         console.log("eliminar todo")
         try{

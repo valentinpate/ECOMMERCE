@@ -1,2 +1,9 @@
-<p>mensaje de despedida</p>
-<a href="/home">volver a home</a>
+<%- include ("partials/head") -%>
+<h1>Te deslogueaste, </h1>
+<% if (username){ %>
+    <%= username %>
+<% } else { %>
+    <h1>Usuario</p>
+<% } %>
+<a href="signin"><button>Log</button></a>
+<a href="home"><button>Home</button></a>

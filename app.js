@@ -3,9 +3,9 @@ const express=require("express")
 const cookieParser=require("cookie-parser")
 const session = require("express-session");
 const passport = require("passport");
+const estrategiaLocal = require('./config/passport')
 
-//Importar variables de seguridad
-require("dotenv").config()
+require("dotenv").config() //Importar variables de entorno
 
 // Importo la conexión a la URL
 const connectDB=require("./db/conexion")
@@ -27,26 +27,22 @@ app.use(express.json())
 app.set("view engine","ejs")
 
 //middelware para leer lo datos del front
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({extended:true}))
 
 //configuracion de cookie-parser
-app.use(cookieParser("mi secreto"));
+app.use(cookieParser(process.env.SECRETO_A));
 
 //consgiguracion de express-session
 app.use(session({
-    secret: 'miClaveSecreta',
+    secret: process.env.SECRETO_B,
     resave: false,
     saveUninitialized: true,
   }));
 
-
   // Configurar Passport.js
-const estrategiaLocal = require('./config/passport')
 estrategiaLocal.estrategia(passport);
 app.use(passport.initialize());
 app.use(passport.session());
-
-
 
 // Conexion de la base de datos mongo DB
 const iniciarDB=async()=>{
@@ -63,10 +59,8 @@ const iniciarDB=async()=>{
 // .then((result)=>app.listen(4000))
 // .catch((error)=>console.log(error))
 
-
 // Agrego la primera ruta
 app.get("/",async(req,res)=>{
-
    res.redirect("home")
 })
 

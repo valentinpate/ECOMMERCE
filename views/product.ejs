@@ -9,9 +9,7 @@
 </header> <!-- cabezado c/ dos SVG-->
 <!-- Producto principal -->
 <div class="product-card" style="margin-top: 100px;">
- 
 <% productrender.forEach(function(elemento){   %>
-
     <div class="product-data">
         <h2><%= elemento.nombre %> <span>DISPONIBLE</span></h2>
         <h4><%= elemento.precio.replace(elemento.nombre,"") %>.</h4>
@@ -20,7 +18,7 @@
             <div class="product-total">
                 <div class="product-counter">
                     <button class="counter-button minusButton">-</button>
-                    <p class="counterNumber" style="margin-top:0.5em;">1</p>
+                    <p style="margin-top:0.5em;" class="counterNumber">1</p>
                     <button class="counter-button plusButton">+</button>
                 </div>
                 <p>Total: <span>$800</span></p>
@@ -41,10 +39,10 @@
 <!-- Prodcutos similares -->
 <div class="others" style="margin-top: 2em;">
     <div class="row">
-        <%     productsimilares.docs.forEach(function(elemento){     %>
+        <%     productsimilares.docs.forEach((elemento)=>{     %>
         <div class=" col-md-3 my-4">
                     <div class="position-relative" style="background-color: aliceblue;">
-                        <a href="/<%=miRuta%>?id=<%= elemento.id %>&&coleccion=<%= elemento.coleccion %>"><img src="<%= elemento.imagen  %>" alt=""></a>
+                        <a href="/product?id=<%= elemento.id %>&&coleccion=<%= elemento.coleccion %>"><img src="<%= elemento.imagen %>" alt=""></a>
                         <% const texto = elemento.precio;  %>
                         <% const regex = /(\d+)\s*(?=%)/g;  %>
                         <% const descuento = texto.match(regex); %>
@@ -57,16 +55,15 @@
                     </div>
                     <p class="other-title"><%= elemento.nombre  %></p>
                     <p><%= elemento.precio.replace(elemento.nombre,'')  %></p>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <div style="font-size:1.2rem;" class="product-counter">
-                            <button style="font-size:1.2rem; margin-left:0.8em; margin-right:0.8em;" class="counter-button minusButton">-</button>
-                            <p style="margin-top:0.5em;" class="counterNumber">1</p>
-                            <button style="font-size:1.2rem; margin-left:0.8em; margin-right:0.8em;" class="counter-button plusButton">+</button>
-                        </div>
-                        <p><b>Añadir cantidad</b></p>
+                <div class="d-flex align-items-center justify-content-center">
+                    <div style="font-size:1.2rem;" class="product-counter">
+                        <button style="font-size:1.2rem; margin-left:0.8em; margin-right:0.8em;" class="counter-button minusButton">-</button>
+                        <p style="margin-top:0.5em;" class="counterNumber">1</p>
+                        <button id="<%= elemento.id %>" style="font-size:1.2rem; margin-left:0.8em; margin-right:0.8em;" class="counter-button plusButton">+</button>
                     </div>
-                    <button id="<%= elemento.id %>" style="margin:0;" class="add-to-cart-btn other-add-to-cart-btn anadir">Añadir al carrito</button>
-          
+                    <p><b>Añadir cantidad</b></p>
+                </div>
+                <button style="margin:0;" class="add-to-cart-btn other-add-to-cart-btn anadir">Añadir al carrito</button>
         </div>  
         <% }) %>  
     </div>
@@ -85,7 +82,7 @@
             <span>.</span>
             <% } %>
         <% } %>
-        <li class="page-item"><a class="page-link" href="/<%=miRuta%>?id=<%=idproduct %>&&coleccion=<%= coleccionproduct %>&&page=<%=productsimilares.totalPages%>"><%=   productsimilares.totalPages %></a></li>
+        <li class="page-item"><a class="page-link" href="#"><%=   productsimilares.totalPages %></a></li>
 
     </ul>
 </nav>

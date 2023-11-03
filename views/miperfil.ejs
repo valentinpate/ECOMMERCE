@@ -2,36 +2,36 @@
 <%- include("partials/header") -%>
 <%- include("partials/carrito") -%>
 <body>
-    <div class="account" style="margin:0 auto;display:flex;">
+    <div style="margin:0 auto;display:flex;">
         <div class="my-account">
             <img src="images/blank_user.png" style="margin-bottom:1em;opacity:80%;" alt=""><!-- <=% usuario.imagen propiedad imagen??? \%> -->
             <h2><%=nombre%></h2><!-- <=% usuario.nombre \%> -->
             <div class="my-account-links">
-                <a href="#" class="orange-href" style="text-decoration:none;margin-top:0.5em;padding:1em 0;font-size:1.2rem;">Mi perfil</a>
-                <a href="#" class="orange-href" style="text-decoration:none;padding:1em 0;font-size:1.2rem;">Mi carrito</a>
+                <a href="#" class="orange-href orange-bg" style="text-decoration:none;margin-top:0.5em;padding:1em 0;font-size:1.2rem;">Mi perfil</a>
+                <a href="#" class="orange-href orange-bg" style="text-decoration:none;padding:1em 0;font-size:1.2rem;">Mi carrito</a>
             </div>
         </div>
-        <div class="info" style="margin-top:12.5em">
+        <div class="info" style="margin-top:12.5em;">
             <h2>Mi cuenta personal</h2>
             <form action="/editar-mi-perfil" method="post" class="account-edit">
-                <!-- en los placeholders de estos inputs debería ir <=% usuario.(propiedad) %> (el \ está para que el ejs no lo tome como inclusión)-->
-                <label for="" style="color:#FB7821;font-weight:600;margin:0.5em 0;">Nombre completo:</label>
-                <input type="text" placeholder="<%=nombre%>" style="margin:0.5em 0;" name="name" id="name-input" disabled>
-                <button type="button" class="edit-btn edit-name" style="top:2.3em;right:0.8em;" title="Editar"><i class="bi bi-pencil-square"></i></button>
+                    <!-- en los placeholders de estos inputs debería ir <=% usuario.(propiedad) \%> (el \ está para que el ejs no lo tome como inclusión)-->
+                    <label for="" style="color:#FB7821;font-weight:600;margin:0.5em 0;">Nombre completo:</label>
+                    <input type="text" placeholder="<%=nombre%>" style="margin:0.5em 0;" name="name" id="name-input" disabled>
+                    <button type="button" class="edit-btn edit-name" style="top:2.3em;right:0.8em;" title="Editar"><i class="bi bi-pencil-square"></i></button>
 
-                <!-- los inputs tienen que estar disabled por defecto, para después habilitarse mediante un botón de edición posicionado al final de cada input -->
-                <label for="" style="color:#FB7821;font-weight:600;margin:0.5em 0;">Nombre de usuario:</label>
-                <input type="text" placeholder="<%=username%>" style="margin:0.5em 0;" name="user" id="user-input" disabled>
-                <button type="button" class="edit-btn edit-user" style="top:6.8em;right:0.8em;" title="Editar"><i class="bi bi-pencil-square"></i></button>
+                    <!-- los inputs tienen que estar disabled por defecto, para después habilitarse mediante un botón de edición posicionado al final de cada input -->
+                    <label for="" style="color:#FB7821;font-weight:600;margin:0.5em 0;">Nombre de usuario:</label>
+                    <input type="text" placeholder="<%=username%>" style="margin:0.5em 0;" name="user" id="user-input" disabled>
+                    <button type="button" class="edit-btn edit-user" style="top:6.8em;right:0.8em;" title="Editar"><i class="bi bi-pencil-square"></i></button>
 
-                <label for="" style="color:#FB7821;font-weight:600;margin:0.5em 0;">Número de teléfono:</label>
-                <input type="text" placeholder="<%=telefono%>" style="margin:0.5em 0;" name="phone" id="phone-input" disabled>
-                <button type="button" class="edit-btn edit-phone" style="top:11.1em;right:0.8em;" title="Editar"><i class="bi bi-pencil-square"></i></button>
-                <% if(incomplete){ %>
-                    <p style="color:red;">Hay un campo guardado que no fue editado. Solo edite los datos que quiera modificar y guardar.</p>
-                <% } %>
-                <button style="border-radius:1rem;" class="add-to-cart-btn" id="guardar">Guardar</button>
-        </form>
+                    <label for="" style="color:#FB7821;font-weight:600;margin:0.5em 0;">Número de teléfono:</label>
+                    <input type="text" placeholder="<%=telefono%>" style="margin:0.5em 0;" name="phone" id="phone-input" disabled>
+                    <button type="button" class="edit-btn edit-phone" style="top:11.1em;right:0.8em;" title="Editar"><i class="bi bi-pencil-square"></i></button>
+                    <% if(incomplete){ %>
+                        <p style="color:red;">Hay un campo guardado que no fue editado. Solo edite los datos que quiera modificar y guardar.</p>
+                    <% } %>
+                    <button style="border-radius:1rem;" class="add-to-cart-btn" id="guardar">Guardar</button>
+            </form>
         </div>
     </div>
 <%- include("partials/footer") -%>

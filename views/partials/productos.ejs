@@ -1,7 +1,7 @@
 <div class="others" style="margin-top: 2em;">
     <div class="row">
-        <%      productosrender.docs.forEach(function(elemento){     %>
-        <div class=" col-md-3 my-4 contendorproductos">
+        <%     productosrender.docs.forEach(function(elemento){     %>
+        <div class=" col-md-3 my-4">
                     <div class="position-relative" style="background-color: aliceblue;">
                         <a href="/product?id=<%= elemento.id %>&&coleccion=<%= elemento.coleccion %>"><img src="<%= elemento.imagen  %>" alt=""></a>
                         <% const texto = elemento.precio;  %>
@@ -15,19 +15,19 @@
 
 
                     </div>
-                    <p class="other-title nombreproducto"><%= elemento.nombre  %></p>
-                    <p class="precioproducto"><%= elemento.precio.replace(elemento.nombre,'')  %></p>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <div class="product-counter" style="font-size:1.2rem;">
-                            <button style="font-size:1.2rem; margin-left:0.8em; margin-right:0.8em;" class="counter-button minusButton">-</button>
-                            <p style="margin-top:0.6em;font-weight:600;" class="counterNumber">1</p>
-                            <button style="font-size:1.2rem; margin-left:0.8em; margin-right:0.8em;" class="counter-button plusButton">+</button>
-                        </div>
-                        <p style="margin-top:0.4em;font-weight:700;">Añadir cantidad</p>
+                    <p class="other-title"><%= elemento.nombre  %></p>
+                    <p><%= elemento.precio.replace(elemento.nombre,'')  %></p>
+                <div class="d-flex align-items-center justify-content-center">
+                    <div class="product-counter" style="font-size:1.2rem;">
+                        <button style="font-size:1.2rem; margin-left:0.8em; margin-right:0.8em;" class="counter-button minusButton">-</button>
+                        <p style="margin-top:0.6em;font-weight:600;" class="counterNumber">1</p>
+                        <button style="font-size:1.2rem; margin-left:0.8em; margin-right:0.8em;" class="counter-button plusButton">+</button>
                     </div>
-                <form action="/carrito" class="carritoform">
+                    <p style="margin-top:0.4em;font-weight:700;">Añadir cantidad</p>
+                </div>
+                <form action="/carrito" method="post">
                     <input type="hidden" name="id"  value="<%= elemento.id %>">
-                    <button id="<%= elemento.id %>" class="add-to-cart-btn other-add-to-cart-btn anadir">Añadir al carrito</button>
+                    <button id="<%= elemento.id %>" type="submit" class="add-to-cart-btn other-add-to-cart-btn anadir">Añadir al carrito</button>
                 </form>
         </div>
         <% }) %>
@@ -40,13 +40,12 @@
       </li>
       <% for ( var i = productosrender.page; i < productosrender.totalPages; i++) { %>
         <%  if(i<=a && i != 1){%>
-            
         <li class="page-item"><a class="page-link" href="/<%=miRuta%>?page=<%=i%>&&llave=true&&a=<%=i%>"><%= i %></a></li>
-        <% } else if(i>a && i <  productosrender.totalPages){ %>
+        <% } else if(i>a && i < productosrender.totalPages){ %>
             <span>.</span>
             <% } %>
         <% } %>
-        <li class="page-item"><a class="page-link" href="/<%=miRuta%>?page=<%=productosrender.totalPages%>"><%=   productosrender.totalPages %></a></li>
+        <li class="page-item"><a class="page-link" href="#"><%=  productosrender.totalPages %></a></li>
 
     </ul>
 </nav>

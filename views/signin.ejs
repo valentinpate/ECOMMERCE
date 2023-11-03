@@ -3,24 +3,31 @@
     <div class="signInContainer">
         <img src="./images/pad.jpg" alt="">
         <div class="signForm">
-          
             <form action="/signin" method="post">
                 <div style="padding-top:4em;">
-                    <h1>¡Bienvenido<span><%=username %></span>!</h1>
+                    <% if(username){ %>
+                        <h1>¡Bienvenido <span><%=username %></span>!</h1>
+                    <% } else { %>
+                        <h1>¡Bienvenido!</h1>
+                    <% } %>
                     <h2>Inicia sesión para disfrutar de los beneficios de MOWARDIN.</h2>
-                    <%   if (msj_login){%>
-                        <p>Usuario y/o contraseñas incorrectas</p>
-                        <%  } %>
                 </div>
-                <input type="text" name="username"  placeholder="Nombre de usuario">
+                <input type="text" name="username" placeholder="Nombre de usuario">
                 <div class="name error"></div>
                 <input type="password" name="password" placeholder="Contraseña">
                 <div class="password error"></div>
-                <button class="sign-btn" style="text-decoration:none;cursor:pointer;" type="submit">Iniciar sesión</button>
+                <button class="sign-btn" style="text-decoration:none;cursor:pointer;" type="submit" id="btn">Iniciar sesión</button>
             </form>
+            <% if(msj_login==false){ %>
+                <p style="font-size:1.3rem;font-weight:600;color:rgb(255, 51, 51);" id="error"></p>
+            <% }else{ %>
+                <p style="font-size:1.3rem;font-weight:600;color:rgb(255, 51, 51);"><%=errorText%></p>
+                <% console.log("passportText") %>
+            <% } %>
             <p>¿No tienes una cuenta? <a href="signup" class="orange-href" style="text-decoration:none;font-weight:600;">Crea una nueva</a></p>
         </div>
     </div>
 
+<script src="/msj_log.js"></script>
 </body>
 </html>
