@@ -314,6 +314,16 @@ a:hover{
     border:2px solid #2744ac;
 }
 
+.product:hover{
+    transform:scale(1.06);
+}
+
+.buy-btn:hover{
+    border: 1px solid #FB7821;
+    color: #FB7821;
+    background-color: initial;
+}
+
 .orange-href:hover{
     color:black;
 }
@@ -412,8 +422,9 @@ a:hover{
 .buy-btn{ 
     width:7.2rem;
     margin-top:0.2em;
+    color:#FB7821;
     border:1px solid #FB7821;
-    background-color:#FB7821;
+    background-color:transparent;
     font-size:1.2rem;
 }
 
@@ -424,6 +435,11 @@ a:hover{
 }
 
 /* Clases - Productos */
+
+.product{
+    margin-top: 0.5em;
+    transition: 0.4s;
+}
 
 .product, .product-image{
     position:relative;

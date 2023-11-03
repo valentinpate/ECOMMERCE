@@ -9,15 +9,17 @@ let buclePrincipal=[...comprar].forEach((elemento)=>{
     elemento.addEventListener('click', (e)=>{
         e.preventDefault()
 
-      if(elemento.style.backgroundColor == "orange"){
-        elemento.style.backgroundColor ="blue"
+      if(elemento.style.backgroundColor == "rgb(251, 120, 33)"){
+        elemento.style.backgroundColor ="transparent"
+        elemento.style.color="#FB7821"
         arrayId = arrayId.filter(function(item) {
           return item !== e.target.id;
         });
         cantidad.innerHTML="("+arrayId.length+")"
-        console.log(arrayId)
+        //console.log(arrayId)
        }else{
-        elemento.style.backgroundColor ="orange"
+        elemento.style.backgroundColor ="#FB7821"
+        elemento.style.color="white"
         arrayId.push(e.target.id)
         cantidad.innerHTML="("+arrayId.length+")"
 

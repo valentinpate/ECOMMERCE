@@ -1,1 +1,0 @@
-// botones del front (paginator)
