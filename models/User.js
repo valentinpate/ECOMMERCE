@@ -125,7 +125,7 @@ UserSchema.methods.agregarAlCarrito = function(producto,cantidad){
             carrito.precioTotal += precio
         }else{
             let productoQueExiste = carrito.items[existe]
-            productoQueExiste.cantidad+1
+            productoQueExiste.cantidad = productoQueExiste.cantidad+1
             let numero = producto.precio.match(regex)
             let precio = parseFloat(numero[0].replace(/\$|,/g, '')).toFixed(2)
             precio= (precio/100).toFixed(2);
@@ -147,14 +147,25 @@ UserSchema.methods.confirmarCompra = function(precio, total, id, cantidad, preci
         pedidos = []
     }
     function pedidosPusheados(){
-        for(let i = 0; i < id.length; i++){
-            if(precioporcantproducto[i] == ""){
-                precioporcantproducto[i] = 0
+        console.log(typeof id)
+        if(typeof id=="string"){
+            if(precioporcantproducto == ""){
+                precioporcantproducto = 0
             }
-            if(preciocondesc[i] == ""){
-                preciocondesc[i] = 0
+            if(preciocondesc == ""){
+                preciocondesc = 0
             }
-            pedidos.push({pedidoId:id[i],cantidad:cantidad[i],precioPorCantProducto:precioporcantproducto[i],precioConDesc:preciocondesc[i]})
+            pedidos.push({pedidoId:id,cantidad:cantidad,precioPorCantProducto:precioporcantproducto,precioConDesc:preciocondesc})
+        }else{
+            for(let i = 0; i < id.length; i++){
+                if(precioporcantproducto[i] == ""){
+                    precioporcantproducto[i] = 0
+                }
+                if(preciocondesc[i] == ""){
+                    preciocondesc[i] = 0
+                }
+                pedidos.push({pedidoId:id[i],cantidad:cantidad[i],precioPorCantProducto:precioporcantproducto[i],precioConDesc:preciocondesc[i]})
+            }
         }
         return pedidos //el return afuera del for porque sino el bucle se para. Retorna pedidos que es el array que contiene todos los valores.
     }

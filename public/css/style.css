@@ -4,6 +4,12 @@
     font-family:'Segoe UI', Tahoma, sans-serif;
 }
 
+:root{
+    --main:#FB7821;
+    --bord:#001254;
+    --graytext:#737373;
+}
+
 /* Etiquetas */
 
 header{
@@ -45,12 +51,12 @@ nav a{
 }
 
 .menu nav a{
-    color:#737373;
+    color:var(--graytext);
     margin:0 1.5em;
 }
 
 .product-nav a{
-    color:#737373;
+    color:var(--graytext);
     margin:0 1.2em;
 }
 
@@ -75,17 +81,17 @@ nav a{
 
 .products button, .offer-header button{
     padding:0.8em 1.5em;
-    background-color:#001254;
+    background-color:var(--bord);
     color:white;
     font-weight:400;
-    border:2px solid #001254;
+    border:2px solid var(--bord);
     border-radius:2.5rem;
     transition: background-color 0.5s,
                 border 0.5s;
 }
 
 .orange-href, .offer-header span{
-    color:#FB7821;
+    color:var(--main);
 }
 
 .offer-header span, .offer-header p{
@@ -105,7 +111,7 @@ nav a{
     padding:0.1em 0.2em;
     font-size:1.5rem;
     background-color:#FEE1CD;
-    color:#FB7821;
+    color:var(--main);
     border-radius:0.5rem;
 }
 
@@ -119,7 +125,7 @@ nav a{
     width:60%;
     font-size:1.2rem;
     font-weight:400;
-    color:#737373;
+    color:var(--graytext);
     margin-bottom:2em;
 }
 
@@ -135,7 +141,7 @@ nav a{
 .product-total span{
     font-size:1.8rem;
     margin-left:1em;
-    color:#001254;
+    color:var(--bord);
 }
 
 .product-price p{
@@ -146,7 +152,7 @@ nav a{
 
 .price span{
     margin-right:0.5em;
-    color:gray;
+    color:var(--graytext);
     font-size:0.8em;
     text-decoration:line-through;
 }
@@ -319,8 +325,8 @@ a:hover{
 }
 
 .buy-btn:hover{
-    border: 1px solid #FB7821;
-    color: #FB7821;
+    border: 1px solid var(--main);
+    color: var(--main);
     background-color: initial;
 }
 
@@ -334,17 +340,17 @@ a:hover{
 
 .sign-btn:hover, .add-to-cart-btn:hover{
     background-color:white;
-    color:#FB7821;
+    color:var(--main);
 }
 
 .other-add-to-cart-btn:hover{
-    background-color:#FB7821;
+    background-color:var(--main);
     color:white;
 }
 
 .counter-button:hover{
-    background-color:#001254;
-    border:1px solid #001254;
+    background-color:var(--bord);
+    border:1px solid var(--bord);
     color:white;
 }
 
@@ -422,8 +428,8 @@ a:hover{
 .buy-btn{ 
     width:7.2rem;
     margin-top:0.2em;
-    color:#FB7821;
-    border:1px solid #FB7821;
+    color:var(--main);
+    border:1px solid var(--main);
     background-color:transparent;
     font-size:1.2rem;
 }
@@ -490,7 +496,7 @@ a:hover{
 
 .goBack{
     display:flex;
-    color:#737373;
+    color:var(--graytext);
 }
 
 .product-card{
@@ -539,9 +545,9 @@ a:hover{
     margin-top:1em;
     padding:0.7em 1.1em;
     font-weight:600;
-    background-color:#FB7821;
+    background-color:var(--main);
     color:white;
-    border:2px solid #FB7821;
+    border:2px solid var(--main);
     border-radius:2rem;
     font-size:1.5rem;
     transition: background-color 0.5s,
@@ -551,7 +557,7 @@ a:hover{
 .other-add-to-cart-btn{
     font-size:1rem;
     background-color:white;
-    color:#FB7821;
+    color:var(--main);
     transition: background-color 0.5s,
     color 0.5s;
 }
@@ -631,11 +637,11 @@ a:hover{
 .sign-btn{
     margin:0.5em 0;
     padding:0.7em 1.2em;
-    background-color:#FB7821;
+    background-color:var(--main);
     color:white;
     font-size:1.2rem;
     font-weight:600;
-    border:2px solid #FB7821;
+    border:2px solid var(--main);
     border-radius:0.5rem;
     transition: background-color 0.5s,
                 color 0.5s;
