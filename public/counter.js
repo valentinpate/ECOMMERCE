@@ -3,6 +3,7 @@ let mas = document.querySelectorAll(".plusButton")
 let numCantidad = document.querySelectorAll(".counterNumber")
 let anadir = document.querySelectorAll(".anadir")
 let inputcantidad= document.querySelectorAll(".inputcantidad")
+let page = document.querySelectorAll(".page-item")
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -10,6 +11,7 @@ const variables= []
 let cantidad=1
 let id=null
 let llaveContador = false
+let numPage
 
 // Funciones
 // deshablitar botón -
@@ -102,4 +104,21 @@ for (let j = 0; j < anadir.length;j++ ){//hago un nuevo for para los botones añ
    }
 // Las funciones dentro del addEventListener actualizan el contador en el document por cada click.
 
+   page.forEach((e)=>{
+        e.addEventListener("click",()=>{
+            localStorage.removeItem("paginaActual")
+            let elementoA = e.querySelector("a")
+            numPage = elementoA.innerHTML
+            console.log("este", elementoA.innerHTML)
+            localStorage.setItem("paginaActual", numPage)
+            return numPage
+        })
+
+        numPage = localStorage.getItem("paginaActual")
+        let elementoA = e.querySelector("a")
+        let condicion = elementoA.innerHTML
+        if(numPage != undefined && condicion == numPage){
+            e.classList.add("active")
+        }
+   })
 })

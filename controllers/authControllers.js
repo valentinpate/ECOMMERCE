@@ -10,9 +10,11 @@ let miRuta= null
 let seccion = null
 let productosrender = null
 let palabraclave = null
+
 let detalles = false
 let msj_login = false
 let incomplete = false
+let llave2 = false
 
 let arrayCarrito=[]
 let arrayMisCompras=[]
@@ -139,7 +141,7 @@ module.exports.signOut_get=(req,res)=>{
 module.exports.secciones_get= async (req,res)=>{
    miRuta="secciones"
    seccion = req.query.coleccion
-   let llave2 = req.query.llave2
+   llave2 = req.query.llave2
    //paginacion(primera parte)
    let page = req.query.page
    if (page == null){page = 1}
@@ -161,7 +163,7 @@ module.exports.secciones_get= async (req,res)=>{
   }else if(llave){   
        a=page+4
     }
-   await res.render("secciones",{username, productosrender,a, miRuta, arrayCarrito, seccion, palabraclave})
+   await res.render("secciones",{username, productosrender,a, miRuta, arrayCarrito, seccion, palabraclave, llave2})
 }
 
 //agrego la funcion para la page product
@@ -238,7 +240,7 @@ module.exports.home_get=async(req,res)=>{
      }else if(llave){   
           a=page+4
        }
-    res.render("home",{username, homeofertas,i,j,arrayCarrito,productosrender,a,username,miRuta, seccion, palabraclave})
+    res.render("home",{username, homeofertas,i,j,arrayCarrito,productosrender,a,username,miRuta, seccion, palabraclave,llave2})
 }
 
 //agrego la funcion para la page de contacto

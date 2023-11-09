@@ -39,17 +39,17 @@
 </div>
 <nav aria-label="...">
     <ul class="pagination pagination-sm justify-content-center">
-      <li class="page-item active" aria-current="page">
-        <a class="page-link" href="/<%=miRuta%>?page=1&&a=1&&coleccion=<%=seccion%>&&palabraclave=<%=palabraclave%>">1</a>
+      <li class="page-item" aria-current="page">
+        <a class="page-link" href="/<%=miRuta%>?page=1&&a=1&&coleccion=<%=seccion%>&&palabraclave=<%=palabraclave%>&&llave2=<%=llave2%>">1</a>
       </li>
       <% for ( var i = productosrender.page; i < productosrender.totalPages; i++) { %>
         <%  if(i<=a && i != 1){%>
-        <li class="page-item"><a class="page-link" href="/<%=miRuta%>?page=<%=i%>&&llave=true&&a=<%=i%>&&coleccion=<%=seccion%>&&palabraclave=<%=palabraclave%>"><%= i %></a></li>
+        <li class="page-item"><a class="page-link" href="/<%=miRuta%>?page=<%=i%>&&llave=true&&a=<%=i%>&&coleccion=<%=seccion%>&&palabraclave=<%=palabraclave%>&&llave2=<%=llave2%>"><%= i %></a></li>
         <% } else if(i>a && i < productosrender.totalPages){ %>
             <span>...</span>
             <% break; } %>
         <% } %>
-        <li class="page-item"><a class="page-link" href="/<%=miRuta%>?page=<%= productosrender.totalPages%>&&llave=true&&a=<%=i%>&&coleccion=<%=seccion%>&&palabraclave=<%=palabraclave%>"><%=  productosrender.totalPages %></a></li>
+        <li class="page-item"><a class="page-link" href="/<%=miRuta%>?page=<%= productosrender.totalPages%>&&llave=true&&a=<%=i%>&&coleccion=<%=seccion%>&&palabraclave=<%=palabraclave%>&&llave2=<%=llave2%>"><%=  productosrender.totalPages %></a></li>
 
     </ul>
 </nav>
