@@ -125,7 +125,7 @@ UserSchema.methods.agregarAlCarrito = function(producto,cantidad){
             carrito.precioTotal += precio
         }else{
             let productoQueExiste = carrito.items[existe]
-            productoQueExiste.cantidad = productoQueExiste.cantidad+1
+            productoQueExiste.cantidad = Number(productoQueExiste.cantidad)+Number(cantidad)
             let numero = producto.precio.match(regex)
             let precio = parseFloat(numero[0].replace(/\$|,/g, '')).toFixed(2)
             precio= (precio/100).toFixed(2);

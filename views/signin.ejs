@@ -4,13 +4,13 @@
         <img src="./images/pad.jpg" alt="">
         <div class="signForm">
             <form action="/signin" method="post">
-                <div style="padding-top:4em;">
+                <div style="padding:4em 0 2em 0;">
                     <% if(username){ %>
                         <h1>¡Bienvenido <span><%=username %></span>!</h1>
                     <% } else { %>
                         <h1>¡Bienvenido!</h1>
                     <% } %>
-                    <h2>Inicia sesión para disfrutar de los beneficios de MOWARDIN.</h2>
+                    <h4>Inicia sesión para disfrutar de los beneficios de MOWARDIN.</h4>
                 </div>
                 <input type="text" name="username" placeholder="Nombre de usuario">
                 <div class="name error"></div>

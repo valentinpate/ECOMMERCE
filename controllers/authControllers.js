@@ -6,12 +6,16 @@ const bcrypt=require("bcrypt")
 const passport=require("passport")
 
 let username = null
+let miRuta= null
+let seccion = null
+let productosrender = null
+let palabraclave = null
+let detalles = false
 let msj_login = false
 let incomplete = false
+
 let arrayCarrito=[]
-let miRuta= null
 let arrayMisCompras=[]
-let detalles = false
 let arrayProductos=[]
 
 // Manejo de errores
@@ -127,20 +131,25 @@ module.exports.signOut_get=(req,res)=>{
             return next(err)
         }
     })
-    res.render("signout",{username})
+    res.redirect("home")
 }
 
 //Renderización de Rutas 
 
-module.exports.ofertas_get= async (req,res)=>{
-   miRuta="ofertas"
-
+module.exports.secciones_get= async (req,res)=>{
+   miRuta="secciones"
+   seccion = req.query.coleccion
+   let llave2 = req.query.llave2
    //paginacion(primera parte)
    let page = req.query.page
    if (page == null){page = 1}
 
    //llamados a db
-   const productosrender= await Productos.paginate({},{limit:12,page:page})
+   if(llave2){
+        productosrender= await Productos.paginate({},{limit:12,page:page})
+   }else{
+        productosrender= await Productos.paginate({coleccion:seccion},{limit:12,page:page})
+   }
 
   ////funcion que estoy probando
   let a = 5 //catidad de botones visibles
@@ -152,7 +161,7 @@ module.exports.ofertas_get= async (req,res)=>{
   }else if(llave){   
        a=page+4
     }
-   await res.render("ofertas",{username, productosrender,a, miRuta, arrayCarrito})
+   await res.render("secciones",{username, productosrender,a, miRuta, arrayCarrito, seccion, palabraclave})
 }
 
 //agrego la funcion para la page product
@@ -193,7 +202,7 @@ module.exports.home_get=async(req,res)=>{
     miRuta="home"
     //Buscador
     //declaro variable
-    const palabraclave = req.query.palabraclave //el ejs en header esta definimos por un form y lo tengo que capturar con u00n req.query no era req.body
+    palabraclave = req.query.palabraclave //el ejs en header esta definimos por un form y lo tengo que capturar con u00n req.query no era req.body
     const expresionregular = new RegExp(palabraclave, 'i');//se crea a expresion relugular apartir de la variable palabraclave, la "i" es para que sea insensible a las mayusculas
 
 
@@ -229,7 +238,7 @@ module.exports.home_get=async(req,res)=>{
      }else if(llave){   
           a=page+4
        }
-    res.render("home",{username, homeofertas,i,j,arrayCarrito,productosrender,a,username,miRuta})
+    res.render("home",{username, homeofertas,i,j,arrayCarrito,productosrender,a,username,miRuta, seccion, palabraclave})
 }
 
 //agrego la funcion para la page de contacto

@@ -18,21 +18,30 @@
             <div class="product-total">
                 <div class="product-counter">
                     <button class="counter-button minusButton">-</button>
-                    <p style="margin-top:0.5em;" class="counterNumber"></p>
+                    <p style="margin-top:0.5em;" class="counterNumber">1</p>
                     <button class="counter-button plusButton">+</button>
                 </div>
-                <p>Total: <span>$800</span></p>
-                <button class="add-to-cart-btn anadir">Añadir al carrito</button>
+                <% let subPrecio = elemento.precio.replace(elemento.nombre,"") %>
+                <% let regex = /\$([\d,\.]+)/ %>
+                <% let precio =  subPrecio.match(regex);  %>
+                <p>Total:<span class="total_"></span></p>
+                <button id="<%= elemento.id %>" class="add-to-cart-btn anadir">Añadir al carrito</button>
             </div>
             <div class="product-price">
                 <h3>La cantidad mínima para pedir es de dos cajas.</h3>
-                <p class="price"><span>$800</span> $400</p>
+                <p class="price"><%= precio[0] %></p>
             </div>
         </div>
     </div>
     <div class="product-image">
         <img src="<%= elemento.imagen %>" alt="">
-        <img class="product-card-discount" src="./images/product_discount.png" alt="">
+        <% const texto = elemento.precio;  %>
+        <% const regex2 = /(\d+)\s*(?=%)/g;  %>
+        <% const descuento = texto.match(regex2); %>
+        <% if(descuento){ %>
+            <input type="hidden" value="<%= descuento %>" id="descuentoinp">
+            <img class="product-card-discount" src="./images/product_discount.png" alt="">
+        <% } %>
     </div>
   <% }) %>
 </div>
@@ -58,12 +67,12 @@
                 <div class="d-flex align-items-center justify-content-center">
                     <div style="font-size:1.2rem;" class="product-counter">
                         <button style="font-size:1.2rem; margin-left:0.8em; margin-right:0.8em;" class="counter-button minusButton">-</button>
-                        <p style="margin-top:0.5em;" class="counterNumber"></p>
+                        <p style="margin-top:0.5em;" class="counterNumber">1</p>
                         <button style="font-size:1.2rem; margin-left:0.8em; margin-right:0.8em;" class="counter-button plusButton">+</button>
                     </div>
                     <p><b>Añadir cantidad</b></p>
                 </div>
-                <button style="margin:0;" class="add-to-cart-btn other-add-to-cart-btn anadir">Añadir al carrito</button>
+                <button id="<%= elemento.id %>" style="margin:0;" class="add-to-cart-btn other-add-to-cart-btn anadir">Añadir al carrito</button>
         </div>  
         <% }) %>  
     </div>
@@ -82,7 +91,7 @@
             <span>.</span>
             <% } %>
         <% } %>
-        <li class="page-item"><a class="page-link" href="#"><%=   productsimilares.totalPages %></a></li>
+        <li class="page-item"><a class="page-link" href="/<%=miRuta%>?id=<%=idproduct %>&&coleccion=<%= coleccionproduct %>&&page=<%=productsimilares.totalPages%>&&llave=true&&a=<%=i%>"><%=   productsimilares.totalPages %></a></li>
 
     </ul>
 </nav>

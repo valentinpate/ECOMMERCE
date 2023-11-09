@@ -55,7 +55,7 @@ for (let i = 0; i < numCantidad.length;i++ ){
             numCantidad[i].innerHTML=variables[i]
             cantidad = numCantidad[i].innerHTML
             const evento = new CustomEvent('valorCambiado', { detail: cantidad }); //se crea un nuevo evento "valorCambiado", su detalle es el valor de la cantidad
-            document.dispatchEvent(evento);
+            document.dispatchEvent(evento); //dispatchEvent envía el evento
             llaveContador = false
             return cantidad
         }

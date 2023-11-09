@@ -20,6 +20,7 @@ header{
     position: fixed;
     top: 0;
     z-index: 15;
+    box-shadow: 0 0 10px gray;
 }
 
 footer{
@@ -28,8 +29,8 @@ footer{
     background-repeat: no-repeat; 
     background-position: center center; 
     color: white;
-    padding-top: 6rem;
-    padding-bottom: 0.5rem;
+    padding-top: 5rem;
+    padding-bottom: 0.1rem;
     margin-top: 5rem;
 }
 
@@ -50,6 +51,11 @@ nav a{
     text-decoration:none;
 }
 
+.menu nav{
+    display:flex;
+    flex-direction:row;
+}
+
 .menu nav a{
     color:var(--graytext);
     margin:0 1.5em;
@@ -66,7 +72,23 @@ nav a{
 
 .menu input{
     width:50em;
-    margin:0 1.5em;
+    margin:0 0 0 .4em;
+    border:none;
+    outline:none;
+    background-color:#F9F9FA;
+}
+
+.container-input-buscador{
+    position:relative;
+    border: 1px solid gray;
+    background-color: #F9F9FA;
+    margin: 0 1rem;
+}
+
+.container-input-buscador button{
+    border: none;
+    background-color: #F9F9FA;
+    margin-right: 1rem;
 }
 
 .icons img, .icons svg{
@@ -275,25 +297,28 @@ footer .market{
 footer .market img{
     height: 4rem;
     width: 4rem;
-
 }
 
 footer .copy{
     text-align: center;
     margin-top: 3rem;
-    margin-bottom: 3rem;
+}
+
+footer .copyright{
+    margin-bottom:0;
+    padding-bottom:1rem;
 }
 
 footer .copy div{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: .5rem;
 }
 
 footer .copy .linea{
     width: 60rem;
-    height: 0.5rem;
+    height: 0.3rem;
     background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.053), rgba(255, 255, 255, 0));
 }
 
@@ -355,8 +380,8 @@ a:hover{
 }
 
 .disabled-counter-button:hover{
-    background-color:#737373;
-    border: 1px solid #737373;
+    background-color:var(--graytext);
+    border: 1px solid var(--graytext);
     color:white;
 }
 
@@ -384,8 +409,8 @@ a:hover{
     font-size:1.2rem;
     color:#999999;
     position:absolute;
-    top:0.4em;
-    right:2.5em;
+    top:0.3em;
+    right:0.2em;
     transition: transform 0.5s;
 }
 
@@ -421,7 +446,25 @@ a:hover{
     justify-content:space-around;
 }
 
+.products-header{		
+    margin-left: 4rem;		
+    display: flex;		
+    /* overflow-x: scroll; */		
+    /* overflow: hidden; */		
+    /* white-space: nowrap; */		
+    flex-direction: row;		
+    flex-wrap: nowrap;		
+    overflow: auto;		
+    width: 95%;		
+    overflow: hidden;		
+}		
+		
+.products button{		
+    margin-right: 1em;		
+}
+
 .orange-href{
+    text-decoration:none;
     transition: color 0.5s;
 }
 
@@ -462,6 +505,7 @@ a:hover{
     top:0.8em;
     left:9.5em;
 }
+
 .discount2-pageofertas{
     padding:0.5em;
     background-color:red;
@@ -535,12 +579,6 @@ a:hover{
                 color 0.5s;
 }
 
-/* .other-counter-button{
-    font-size:1.2rem;
-    margin-left:0.8em;
-    margin-right:0.8em;
-} */
-
 .add-to-cart-btn{
     margin-top:1em;
     padding:0.7em 1.1em;
@@ -564,6 +602,15 @@ a:hover{
 
 .others{
     text-align:center;
+    width:88%;
+    margin:0 auto;
+}
+
+.contendorproductos{
+    display:flex;
+    flex-direction:column;
+    width:25%;
+    justify-content:space-between;
 }
 
 .other-cards{
@@ -586,7 +633,14 @@ a:hover{
 .other-title{
     font-size:1.1rem;
     font-weight:600;
-    margin-bottom:0.2em;
+    width:70%;
+    margin:0 auto;
+}
+
+.precioproducto{
+    color:gray;
+    width:85%;
+    margin: 0 auto;
 }
 
 .page-button{
@@ -599,8 +653,8 @@ a:hover{
 /* SignUp - SignIn */
 
 .signUpContainer{
-    width:70%;
-    margin:4em auto 0 auto;
+    width:75%;
+    margin:4em auto;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -609,8 +663,8 @@ a:hover{
 }
 
 .signInContainer{
-    width:70%;
-    margin:4em auto 0 auto;
+    width:75%;
+    margin:4em auto;
     display:flex;
     justify-content:center;
     border-radius:0.5rem;
@@ -635,8 +689,8 @@ a:hover{
 }*/
 
 .sign-btn{
-    margin:0.5em 0;
-    padding:0.7em 1.2em;
+    margin:1em 0;
+    padding:0.5em 1.2em;
     background-color:var(--main);
     color:white;
     font-size:1.2rem;
@@ -692,4 +746,11 @@ a:hover{
 .opacity-755{
     font-size: 1.5rem; 
      color:black;
+}
+
+/* page informacion */
+
+.container-info{
+    width: 90%;
+    margin: 0 auto;
 }

@@ -24,7 +24,7 @@ router.get("/signout",authControllers.signOut_get)
 // GET
 
 //ruta para la page ofertas
-router.get("/ofertas",authControllers.middleware.arrayCartPromise, authControllers.ofertas_get)
+router.get("/secciones",authControllers.middleware.arrayCartPromise, authControllers.secciones_get)
 
 //ruta para la page product
 router.get("/product", authControllers.middleware.arrayCartPromise, authControllers.product_get)
