@@ -126,7 +126,7 @@ module.exports.login_get=(req,res)=>{
     res.render("signin",{username, msj_login, errorText})
 }
 
-module.exports.signOut_get=(req,res)=>{
+module.exports.signOut=(req,res)=>{
     username = null
     req.logOut(function(err){
         if(err){
@@ -375,6 +375,16 @@ module.exports.confirmarCompra=async(req,res)=>{
     catch(err){
       console.log(err)
     }
+}
+
+module.exports.eliminarCompra=async(req,res)=>{
+    const id = req.params.id
+    const misCompras = req.user.misCompras
+    //let index = misCompras.findIndex(num => id == num._id)
+    await User.updateOne({_id:req.user.id},{$pull:{"misCompras":{_id:id}}})
+    console.log(id)
+    console.log(misCompras[0]._id)
+    res.end()
 }
 
 module.exports.editarMiPerfil = async (req,res)=>{

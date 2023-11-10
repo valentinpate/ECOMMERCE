@@ -479,7 +479,9 @@ a:hover{
 
 /* Bootstrap Icons */
 
-.bi-x-lg{
+.bi-x-lg button{
+    border:none;
+    background-color:transparent;
     cursor:pointer;
 }
 

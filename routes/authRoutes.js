@@ -19,7 +19,7 @@ router.post("/signin",passport.authenticate("local",{
 
 router.get("/signin",authControllers.login_get)
 
-router.get("/signout",authControllers.signOut_get)
+router.get("/signout",authControllers.signOut)
 
 // GET
 
@@ -58,6 +58,8 @@ router.post("/editar-mi-perfil",authControllers.editarMiPerfil)
 router.delete("/eliminar-producto/:id",authControllers.eliminarDelCarrito)
 
 router.delete("/eliminar-todo",authControllers.eliminarTodo)
+
+router.delete("/eliminar-compra/:id", authControllers.eliminarCompra)
 
 // Exporto las rutas
 module.exports=router
