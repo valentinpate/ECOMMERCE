@@ -2,54 +2,56 @@
 <body>
 
 <header class="product-header">
-        <div class="goBack">
-         <a href="home"><svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>    Volver a la página principal</a>
-        </div>
-        <a href="home"><svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg></a>
+    <div class="goBack">
+        <a href="home"><svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 448 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>    Volver a la página principal</a>
+    </div>
+    <a href="home"><svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 384 512"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg></a>
 </header> <!-- cabezado c/ dos SVG-->
 <!-- Producto principal -->
-<div class="product-card" style="margin-top: 100px;">
-<% productrender.forEach(function(elemento){   %>
-    <div class="product-data">
-        <h2><%= elemento.nombre %> <span>DISPONIBLE</span></h2>
-        <h4><%= elemento.precio.replace(elemento.nombre,"") %>.</h4>
-        <hr>
-        <div class="product-cart">
-            <div class="product-total">
-                <div class="product-counter">
-                    <button class="counter-button minusButton">-</button>
-                    <p style="margin-top:0.5em;" class="counterNumber">1</p>
-                    <button class="counter-button plusButton">+</button>
+<div class="product-card">
+    <% productrender.forEach(function(elemento){   %>
+        <div class="product-data">
+            <h2><%= elemento.nombre %> <span>DISPONIBLE</span></h2>
+            <h4><%= elemento.precio.replace(elemento.nombre,"") %>.</h4>
+            <hr style="width: 95%;">
+            <div class="product-cart">
+                <div class="product-total">
+                    <div class="product-counter">
+                        <button class="counter-button minusButton">-</button>
+                        <p class="counterNumber">1</p>
+                        <button class="counter-button plusButton">+</button>
+                    </div>
+                    <% let subPrecio = elemento.precio.replace(elemento.nombre,"") %>
+                    <% let regex = /\$([\d,\.]+)/ %>
+                    <% let precio =  subPrecio.match(regex);  %>
+                    <p class="total-product">Total:<span class="total_"></span></p>
+                    <button id="<%= elemento.id %>" style="font-size:1.5rem;" class="add-to-cart-btn anadir">Añadir al carrito</button>
                 </div>
-                <% let subPrecio = elemento.precio.replace(elemento.nombre,"") %>
-                <% let regex = /\$([\d,\.]+)/ %>
-                <% let precio =  subPrecio.match(regex);  %>
-                <p>Total:<span class="total_"></span></p>
-                <button id="<%= elemento.id %>" class="add-to-cart-btn anadir">Añadir al carrito</button>
-            </div>
-            <div class="product-price">
-                <h3>La cantidad mínima para pedir es de dos cajas.</h3>
-                <p class="price"><%= precio[0] %></p>
+                <div class="product-price">
+                    <h3 style="margin: 0;">La cantidad mínima para pedir es de dos cajas.</h3>
+                    <p class="price"><%= precio[0] %></p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="product-image">
-        <img src="<%= elemento.imagen %>" alt="">
-        <% const texto = elemento.precio;  %>
-        <% const regex2 = /(\d+)\s*(?=%)/g;  %>
-        <% const descuento = texto.match(regex2); %>
-        <% if(descuento){ %>
-            <input type="hidden" value="<%= descuento %>" id="descuentoinp">
-            <img class="product-card-discount" src="./images/product_discount.png" alt="">
-        <% } %>
-    </div>
-  <% }) %>
+        <div class="product-image">
+            <img class="img-producto-oferta" src="<%= elemento.imagen %>" alt="">
+            <% const texto = elemento.precio;  %>
+            <% const regex2 = /(\d+)\s*(?=%)/g;  %>
+            <% const descuento = texto.match(regex2); %>
+            <% if(descuento){ %>
+                <input type="hidden" value="<%= descuento %>" id="descuentoinp">
+                <img class="product-card-discount" src="./images/product_discount.png" alt="">
+            <% } %>
+        </div>
+    <% }) %>
 </div>
 <!-- Prodcutos similares -->
-<div class="others" style="margin-top: 2em;">
+<h2 class="title-productos-similares">Otros productos similares</h2>
+<div class="others">
     <div class="row">
         <%     productsimilares.docs.forEach((elemento)=>{     %>
-        <div class=" col-md-3 my-4">
+            <div class="col-md-3 my-4 contendorproductos">
+                <div>
                     <div class="position-relative">
                         <a href="/product?id=<%= elemento.id %>&&coleccion=<%= elemento.coleccion %>"><img src="<%= elemento.imagen %>" alt=""></a>
                         <% const texto = elemento.precio;  %>
@@ -57,45 +59,42 @@
                         <% const descuento = texto.match(regex); %>
 
                         <%  if (descuento) {  %>
-
-                        <p class="discount2-pageofertas"><%= descuento[0]  %>% desc.</p>
+                            <p class="discount2-pageofertas"><%= descuento[0]  %>% desc.</p>
                         <% } else { }  %>
-                       
                     </div>
-                    <p class="other-title"><%= elemento.nombre  %></p>
-                    <p><%= elemento.precio.replace(elemento.nombre,'')  %></p>
-                <div class="d-flex align-items-center justify-content-center">
-                    <div style="font-size:1.2rem;" class="product-counter">
-                        <button style="font-size:1.2rem; margin-left:0.8em; margin-right:0.8em;" class="counter-button minusButton">-</button>
-                        <p style="margin-top:0.5em;" class="counterNumber">1</p>
-                        <button style="font-size:1.2rem; margin-left:0.8em; margin-right:0.8em;" class="counter-button plusButton">+</button>
-                    </div>
-                    <p><b>Añadir cantidad</b></p>
+                        <p class="other-title"><%= elemento.nombre  %></p>
+                        <p><%= elemento.precio.replace(elemento.nombre,'')  %></p>
                 </div>
-                <button id="<%= elemento.id %>" style="margin:0;" class="add-to-cart-btn other-add-to-cart-btn anadir">Añadir al carrito</button>
-        </div>  
+                <div>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <div style="font-size:1.2rem;" class="product-counter">
+                            <button style="font-size:1.2rem; margin:0 0.8em;" class="counter-button minusButton">-</button>
+                            <p class="counterNumber">1</p>
+                            <button style="font-size:1.2rem; margin:0 0.8em;" class="counter-button plusButton">+</button>
+                        </div>
+                        <p><b>Añadir cantidad</b></p>
+                    </div>
+                    <button id="<%= elemento.id %>" style="margin:0;" class="add-to-cart-btn other-add-to-cart-btn anadir">Añadir al carrito</button>
+                </div> 
+            </div>
         <% }) %>  
     </div>
- 
 </div>
 
 <nav aria-label="...">
     <ul class="pagination pagination-sm justify-content-center">
-      <li class="page-item" aria-current="page">
-        <a class="page-link" href="/<%=miRuta%>?id=<%= idproduct %>&&coleccion=<%= coleccionproduct %>&&page=1&&a=1">1</a>
-      </li>
-      <% for ( var i = productsimilares.page; i < productsimilares.totalPages; i++) { %>
+        <li class="page-item" aria-current="page">
+            <a class="page-link" href="/<%=miRuta%>?id=<%= idproduct %>&&coleccion=<%= coleccionproduct %>&&page=1&&a=1">1</a>
+        </li>
+    <% for ( var i = productsimilares.page; i < productsimilares.totalPages; i++) { %>
         <%  if(i<=a && i != 1){%>
-        <li class="page-item"><a class="page-link" href="/<%=miRuta%>?id=<%=idproduct %>&&coleccion=<%= coleccionproduct %>&&page=<%=i%>&&llave=true&&a=<%=i%>"><%= i %></a></li>
+            <li class="page-item"><a class="page-link" href="/<%=miRuta%>?id=<%=idproduct %>&&coleccion=<%= coleccionproduct %>&&page=<%=i%>&&llave=true&&a=<%=i%>"><%= i %></a></li>
         <% } else if(i>a && i <  productsimilares.totalPages){ %>
             <span>.</span>
-            <% } %>
         <% } %>
-        <li class="page-item"><a class="page-link" href="/<%=miRuta%>?id=<%=idproduct %>&&coleccion=<%= coleccionproduct %>&&page=<%=productsimilares.totalPages%>&&llave=true&&a=<%=i%>"><%=   productsimilares.totalPages %></a></li>
-
+    <% } %>
+    <li class="page-item"><a class="page-link" href="/<%=miRuta%>?id=<%=idproduct %>&&coleccion=<%= coleccionproduct %>&&page=<%=productsimilares.totalPages%>&&llave=true&&a=<%=i%>"><%=   productsimilares.totalPages %></a></li>
     </ul>
 </nav>
 </main>
 <%- include("partials/footer") -%>
-</body>
-</html>

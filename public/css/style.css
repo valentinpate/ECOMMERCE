@@ -58,7 +58,7 @@ nav a{
 
 .menu nav a{
     color:var(--graytext);
-    margin:0 1.5em;
+    margin:0 1em;
 }
 
 .product-nav a{
@@ -71,7 +71,7 @@ nav a{
 }
 
 .menu input{
-    width:50em;
+    width:45em;
     margin:0 0 0 .4em;
     border:none;
     outline:none;
@@ -88,7 +88,7 @@ nav a{
 .container-input-buscador button{
     border: none;
     background-color: #F9F9FA;
-    margin-right: 1rem;
+    /*margin-right: 1rem;*/
 }
 
 .icons img, .icons svg{
@@ -101,7 +101,7 @@ nav a{
     padding:0 0.3em;
 }
 
-.products button, .offer-header button{
+.products .btn-all-products, .offer-header button{
     padding:0.8em 1.5em;
     background-color:var(--bord);
     color:white;
@@ -155,12 +155,13 @@ nav a{
     border:1px solid #E6E6E6;
 }
 
-.product-total p{
+.total-product{
     font-weight:600;
     font-size:1.5rem;
+    margin:0;
 }
 
-.product-total span{
+.total-product span{
     font-size:1.8rem;
     margin-left:1em;
     color:var(--bord);
@@ -168,8 +169,13 @@ nav a{
 
 .product-price p{
     float:right;
-    margin-right:0.3em;
     font-size:3rem;
+    margin: 0 .5em 0 0;
+}
+
+.price{
+    display:flex;
+    align-items:center;
 }
 
 .price span{
@@ -340,7 +346,7 @@ a:hover{
     border: 2px solid black;
 }
 
-.products button:hover, .offer-header button:hover{
+.products .btn-all-products:hover, .offer-header button:hover{
     background-color:#2744ac;
     border:2px solid #2744ac;
 }
@@ -393,7 +399,7 @@ a:hover{
 
 .logo{
     width:6em;
-    margin:0 1.5em;
+    margin-right: 1rem;
 }
 
 .menu{
@@ -410,13 +416,13 @@ a:hover{
     color:#999999;
     position:absolute;
     top:0.3em;
-    right:0.2em;
+    right:0.8em;
     transition: transform 0.5s;
 }
 
 .icon-container{
     display:flex;
-    margin:0 1.5em;
+    margin-left: 1.5em;
 }
 
 .icon{
@@ -438,31 +444,28 @@ a:hover{
     justify-content:space-evenly;
 }
 
+.products-header{		
+    margin-left: 4rem;		
+    display: flex;				
+    flex-direction: row;		
+    flex-wrap: nowrap;		
+    overflow: auto;		
+    width: 95%;		
+    overflow: hidden;		
+}	
+
+.products .btn-all-products{		
+    margin-right: 1em;		
+}
+
 .offer-header{
     margin-top:4em;
     margin-bottom:0.5em;
     display:flex;
     align-items:center;
     justify-content:space-around;
-}
-
-.products-header{		
-    margin-left: 4rem;		
-    display: flex;		
-    /* overflow-x: scroll; */		
-    /* overflow: hidden; */		
-    /* white-space: nowrap; */		
-    flex-direction: row;		
-    flex-wrap: nowrap;		
-    overflow: auto;		
-    width: 95%;		
-    overflow: hidden;		
-}		
+}	
 		
-.products button{		
-    margin-right: 1em;		
-}
-
 .orange-href{
     text-decoration:none;
     transition: color 0.5s;
@@ -473,8 +476,15 @@ a:hover{
     margin-top:0.2em;
     color:var(--main);
     border:1px solid var(--main);
-    background-color:transparent;
+    border-radius: 15px;
+    padding: .1rem 0;
     font-size:1.2rem;
+    justify-content: center;
+}
+
+.btn-previous-next{
+    width:3.5rem;
+    height:4rem;
 }
 
 /* Bootstrap Icons */
@@ -495,6 +505,17 @@ a:hover{
 .product, .product-image{
     position:relative;
     margin-bottom:2em;
+}
+
+.img-producto-oferta{
+    width: auto;
+    height: 400px;
+}
+
+.title-productos-similares{
+    margin: 0;
+    padding-top: 3rem;
+    text-align: center;
 }
 
 .discount{
@@ -546,12 +567,15 @@ a:hover{
 }
 
 .product-card{
+    width: 88%;
+    margin:0 auto;
     display:flex;
     justify-content:space-evenly;
+    margin-top: 7rem;
 }
 
 .product-cart{
-    margin:2em;
+    margin:1.5em 2em;
     display:flex;
     justify-content:space-between;
 }
@@ -565,16 +589,15 @@ a:hover{
 
 .product-card-discount{
     position:absolute;
-    right:1em;
+    right:0;
 }
 
 .counter-button, .disabled-counter-button{
     background-color:transparent;
     border:1px solid #999999;
     border-radius:0.5rem;
-    padding:0 0.4em;
-    margin-left:1em;
-    margin-right:1em;
+    padding:0 0.5em;
+    margin:0 1rem;
     font-size:1.5rem;
     transition: background-color 0.5s,
                 border 0.5s,
@@ -583,18 +606,17 @@ a:hover{
 
 .add-to-cart-btn{
     margin-top:1em;
-    padding:0.7em 1.1em;
-    font-weight:600;
+    padding:0.3em 1.1em;
     background-color:var(--main);
     color:white;
     border:2px solid var(--main);
-    border-radius:2rem;
-    font-size:1.5rem;
+    border-radius:1.5rem;
+    font-size:1.05rem;
     transition: background-color 0.5s,
                 color 0.5s;
 }
 
-.other-add-to-cart-btn{
+.other-add-to-cart-btn, .buy-btn{
     font-size:1rem;
     background-color:white;
     color:var(--main);
@@ -643,6 +665,11 @@ a:hover{
     color:gray;
     width:85%;
     margin: 0 auto;
+}
+
+.counterNumber{
+    margin: 0.5em 0;
+    font-weight: 600;
 }
 
 .page-button{
@@ -711,14 +738,41 @@ a:hover{
 } */
 
 .my-account{
-    margin:150px 16em 150px 0;
-    padding:3em 10em 25em 5em;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 2rem;
+    margin-right: 5rem;
+    margin-top: 11rem;
+    padding-bottom: 20rem;
+    margin-bottom: 10rem;
     box-shadow:0 1px 5px #999999;
+}
+
+.my-account-perfil{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .my-account-links{
     display:flex;
     flex-direction:column;
+}
+
+.my-account-links .link-perfil{
+    text-decoration: none;
+    background-color: #FFF0E6;
+    margin-top:0.5em;
+    padding:.8em 2em;
+    font-size:1.2rem;
+}
+
+.my-account-links .link-micarrito{
+    text-decoration: none;
+    padding:.8em 2em;
+    font-size:1.2rem;
 }
 
 .account-edit{
@@ -755,4 +809,11 @@ a:hover{
 .container-info{
     width: 90%;
     margin: 0 auto;
+}
+
+/* page ofertas */
+
+.container-publi-ofertas{
+    width:88%;
+    margin:0 auto;
 }

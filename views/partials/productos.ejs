@@ -10,11 +10,8 @@
                         <% const descuento = texto.match(regex); %>
 
                         <%  if (descuento) {  %>
-
-                        <p class="discount2-pageofertas"><%= descuento[0]  %>% desc.</p>
+                            <p class="discount2-pageofertas"><%= descuento[0]  %>% desc.</p>
                         <% } else { } %>
-
-
                     </div>
                     <p class="other-title nombreproducto"><%= elemento.nombre  %></p>
                     <p class="precioproducto"><%= elemento.precio.replace(elemento.nombre,'')  %></p>
@@ -23,34 +20,33 @@
                     <div class="d-flex align-items-center justify-content-center">
                         <div class="product-counter" style="font-size:1.2rem;">
                             <button style="font-size:1.2rem; margin-left:0.8em; margin-right:0.8em;" class="counter-button minusButton">-</button>
-                            <p style="margin-top:0.6em;font-weight:600;" class="counterNumber">1</p>
+                            <p class="counterNumber">1</p>
                             <button style="font-size:1.2rem; margin-left:0.8em; margin-right:0.8em;" class="counter-button plusButton">+</button>
                         </div>
                         <p style="margin-top:0.4em;font-weight:700;">Añadir cantidad</p>
                     </div>
                     <form action="/carrito" method="post" class="carritoform">
                         <input type="hidden" name="id"  value="<%= elemento.id %>">
-                        <button id="<%= elemento.id %>" type="submit" class="add-to-cart-btn other-add-to-cart-btn anadir">Añadir al carrito</button>
+                        <button id="<%= elemento.id %>" class="add-to-cart-btn other-add-to-cart-btn anadir">Añadir al carrito</button>
                     </form>
                 </div>
-        </div>
+            </div>
         <% }) %>
     </div>
 </div>
 <nav aria-label="...">
     <ul class="pagination pagination-sm justify-content-center">
-      <li class="page-item" aria-current="page">
-        <a class="page-link" href="/<%=miRuta%>?page=1&&a=1&&coleccion=<%=seccion%>&&palabraclave=<%=palabraclave%>&&llave2=<%=llave2%>">1</a>
-      </li>
-      <% for ( var i = productosrender.page; i < productosrender.totalPages; i++) { %>
-        <%  if(i<=a && i != 1){%>
-        <li class="page-item"><a class="page-link" href="/<%=miRuta%>?page=<%=i%>&&llave=true&&a=<%=i%>&&coleccion=<%=seccion%>&&palabraclave=<%=palabraclave%>&&llave2=<%=llave2%>"><%= i %></a></li>
-        <% } else if(i>a && i < productosrender.totalPages){ %>
-            <span>...</span>
+        <li class="page-item" aria-current="page">
+            <a class="page-link" href="/<%=miRuta%>?page=1&&a=1&&coleccion=<%=seccion%>&&palabraclave=<%=palabraclave%>&&llave2=<%=llave2%>">1</a>
+        </li>
+        <% for ( var i = productosrender.page; i < productosrender.totalPages; i++) { %>
+            <%  if(i<=a && i != 1){%>
+                <li class="page-item"><a class="page-link" href="/<%=miRuta%>?page=<%=i%>&&llave=true&&a=<%=i%>&&coleccion=<%=seccion%>&&palabraclave=<%=palabraclave%>&&llave2=<%=llave2%>"><%= i %></a></li>
+            <% } else if(i>a && i < productosrender.totalPages){ %>
+                <span>...</span>
             <% break; } %>
         <% } %>
         <li class="page-item"><a class="page-link" href="/<%=miRuta%>?page=<%= productosrender.totalPages%>&&llave=true&&a=<%=i%>&&coleccion=<%=seccion%>&&palabraclave=<%=palabraclave%>&&llave2=<%=llave2%>"><%=  productosrender.totalPages %></a></li>
-
     </ul>
 </nav>
 
