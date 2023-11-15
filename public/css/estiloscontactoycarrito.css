@@ -11,7 +11,7 @@
     background-size: cover;
 }
 .textoconectate{
-    padding:1.5rem;
+    padding-top:1.5rem;
     padding-right: 1.5rem;
     padding-bottom: .5rem;
     color: white;
@@ -29,8 +29,7 @@
 .ubicacioneinfo .infocontacto{
     background-color: #EEEFEF;
     width: 50%;
-    padding: 1.5rem;  
-    margin-bottom: .2rem;
+    padding: 1.5rem; 
 }
 .infocontacto .tituloinfocontacto{
     padding-bottom: .7rem;
@@ -54,7 +53,6 @@
 .ubicacioneinfo .mapaubicacion{
     width: 50%;
 }
-
 .mapaubicacion iframe{		
     width: 100%;		
     height: 100%;		
@@ -130,7 +128,9 @@
 }
 .infopago .containercodedescuento{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    width: 91%;
+    margin:0 auto;
 }
 .containercodedescuento .btnconfirmarcodedescuento{
     color: #FB6705;
@@ -139,6 +139,7 @@
     padding: .5rem;
     border-radius: 5px;
     cursor: pointer;
+    width: 30%;
 }
 .containercodedescuento .inputcodedescuento{
     padding:.5rem;
@@ -149,7 +150,7 @@
 .infopago .lineaproductosuno{
     width: 80%;
     margin: 1rem 10%;
-    border: 1px solid #F6F6F6;
+    border: 1px solid rgb(168, 167, 167);
 }
 .infopago .containergastos{
     display: flex;
@@ -200,6 +201,9 @@
     align-items: center;
     justify-content: space-between;
 }
+.container-productos-carrito .btn-close-tablet{		
+    display: none;		
+    }
 .productoscarrito .eliminarproductos{
     color: red;
     cursor: pointer;
@@ -291,4 +295,165 @@
     width: 88%;
     margin-left: 3rem;
     border: 1px solid #F6F6F6;
+}
+
+@media screen and (min-width:768px) and (max-width: 1023px){
+
+    /* -------------------carrito------------------ */
+    .modal{
+        --bs-modal-width:80%;
+    }
+    .containercarrito{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .carrito{
+        width: 90%;
+        margin: 0;
+    }
+    
+    .carrito .infopago{
+        margin: 0;
+    }
+    
+    .container-productos-carrito{
+        width: 90%;
+    }
+    .infoproducto{
+        margin-left: 6rem;
+    }
+    
+    .infopago .btnconfirmarpedido{
+        width: 94%;
+    }
+    
+    .carrito .tituloinfopago{
+        margin-right: 0;
+        margin-top: 1.5rem;
+    }
+    .carrito .btn-close-pc{
+        display: none;
+    }
+    .container-productos-carrito .btn-close-tablet{
+        display: block;
+        margin: .5rem 0 .5rem -1.5rem;
+    }
+    
+    .productoscarrito .eliminarproductos{
+        margin-top: 0;
+    }
+    .productoscarrito .containernumerodepedidos{
+        margin-top: 0;
+    }
+    .containerproductocarrito .iconeliminarproducto{
+        margin-left: 6rem;
+    }
+    
+    /* -------------------contacto----------------- */
+    .ubicacioneinfo{
+        flex-direction: column;
+    }
+    .ubicacioneinfo .infocontacto{
+        width: 100%;
+    }
+    .ubicacioneinfo .mapaubicacion{
+        width: 100%;
+        height: 400px;
+    }
+    .headercontactenos{
+        margin-top: 6rem;
+    }
+    
+    
+    }
+    
+@media screen and (min-width:1024px) and (max-width: 1440px){
+    
+    /* ---------------------carrito------------------- */
+    .modal{
+        --bs-modal-width:75%;
+    }
+    .containercarrito{
+        padding-top: 0;
+    }
+    .carrito{
+        width: 60%;
+        margin: 0;
+    }
+    .carrito .tituloinfopago{
+        margin-right: 0;
+    }
+    .carrito .infopago{
+        margin: 0;
+    }
+    .infopago .btnconfirmarpedido{
+        width: 88%;
+        padding: .5rem 0;
+    }
+    .containercodedescuento .btnconfirmarcodedescuento{
+        width: 40%;
+    }
+    .containercodedescuento .inputcodedescuento{
+        width: 55%;
+    }
+    .container-productos-carrito{
+        width: 65%;
+        margin-left: 1rem;
+        margin-top: 1rem;
+    }
+    .infoproducto{
+        margin-left: 6.5rem;
+    }
+    .containerproductocarrito .iconeliminarproducto{
+        font-size:1.2rem;
+        margin-left: 6rem;
+    }
+}
+
+/* -------------media queries(+1920)----------- */
+@media screen and (min-width:1920px){
+
+    /* ---------------------carrito------------------- */
+    .modal-container-carrito{
+        width: 80%;
+    }
+    .containercarrito{
+        padding-top: 0;
+    }
+    .carrito{
+        width: 40%;
+        margin: 0;
+    }
+    .carrito .tituloinfopago{
+        margin-right: 0;
+    }
+    .carrito .infopago{
+        margin: 0;
+    }
+    .infopago .btnconfirmarpedido{ 
+        width: 93%;
+        padding: .5rem 0;
+    }
+    .infopago .containercodedescuento{
+        width: 94%;
+        margin: 0 auto;
+    }
+    .containercodedescuento .btnconfirmarcodedescuento{
+        width: 40%;
+    }
+    .containercodedescuento .inputcodedescuento{
+        width: 55%;
+    }
+    .container-productos-carrito{
+        width: 65%;
+        margin-left: 1rem;
+        margin-top: 1rem;
+    }
+    .containerproductocarrito .iconeliminarproducto{
+        margin-left: 6rem;
+    }
+    .infoproducto{
+        margin-left: 6rem;
+    }
+    
 }

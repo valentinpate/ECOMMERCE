@@ -1,7 +1,7 @@
 <%- include("partials/head") -%>
 <body>
     <div class="signUpContainer">
-        <img src="./images/pad.jpg" alt="">
+        <img class="SignImg" src="./images/pad.jpg" alt="">
         <div class="signForm">
             <form>
                 <a href=""><img class="signLogo" src="/images/logo.png" alt=""></a>
@@ -10,17 +10,11 @@
                     <h4 style="color:gray;">¡Comienza a ordenar productos en un sitio web de proveedores!</h4>
                 </div>
                 <input type="text" name="email" id="" placeholder="E-mail">
-                <div class="email error"></div>
                 <input type="text" name="name" placeholder="Nombre completo">
-                <div class="fullname error"></div>
                 <input type="text" name="user" placeholder="Nombre de usuario">
-                <div class="name error"></div>
                 <input type="password" name="password" placeholder="Contraseña">
-                <div class="password error"></div>
                 <input type="text" name="phone" placeholder="Número de teléfono">
-                <div class="phone error"></div>
                 <input type="text" name="region" placeholder="Región">
-                <div class="region error"></div>
                 <button class="sign-btn" type="submit">Crear una cuenta nueva</button>
             </form>
             <p>¿Ya tienes una cuenta? <a href="/signin" class="orange-href" style="text-decoration:none;font-weight:600;">Inicia sesión</a></p>

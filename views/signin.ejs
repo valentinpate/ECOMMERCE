@@ -1,7 +1,7 @@
 <%- include("partials/head") -%>
 <body>
     <div class="signInContainer">
-        <img class="signinImg" src="./images/pad.jpg" alt="">
+        <img class="SignImg" src="./images/pad.jpg" alt="">
         <div class="signForm">
             <a href=""><img class="signLogo" src="/images/logo.png" alt=""></a>
             <form action="/signin" method="post">
@@ -14,9 +14,7 @@
                     <h4>Inicia sesión para disfrutar de los beneficios de MOWARDIN.</h4>
                 </div>
                 <input type="text" name="username" placeholder="Nombre de usuario">
-                <div class="name error"></div>
                 <input type="password" name="password" placeholder="Contraseña">
-                <div class="password error"></div>
                 <button class="sign-btn" style="text-decoration:none;cursor:pointer;" type="submit" id="btn">Iniciar sesión</button>
             </form>
             <% if(msj_login==false){ %>

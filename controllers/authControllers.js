@@ -109,8 +109,7 @@ module.exports.signup_post= async(req,res)=>{
 }
 
 module.exports.signup_get=(req,res)=>{
-    res.render("signup")
-    
+    res.render("signup",{incomplete})
 }
 
 module.exports.login_post=async(req,res)=>{
@@ -129,6 +128,9 @@ module.exports.login_get=(req,res)=>{
 }
 
 module.exports.signOut=(req,res)=>{
+    if(incomplete){
+        incomplete = false
+    }
     if(sent){
         sent = false
     }
