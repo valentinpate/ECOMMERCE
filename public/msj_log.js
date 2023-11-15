@@ -5,7 +5,6 @@ function msj_log(e){
     let input = document.querySelectorAll("input")
     input.forEach((el)=>{
         let val = el.value
-        console.log(val)
         if(val==""){
             error.innerHTML = "Ingrese todos los datos para poder acceder"
             e.preventDefault()

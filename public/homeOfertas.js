@@ -5,10 +5,9 @@ let enviar = document.getElementById("post")
 let arrayId=[]
 let buclePrincipal=[...comprar].forEach((elemento)=>{
 
-    //console.log(elemento)
     elemento.addEventListener('click', (e)=>{
         e.preventDefault()
-     // console.log(elemento.style.backgroundColor)
+
       if(elemento.style.backgroundColor == "rgb(251, 120, 33)"){
         elemento.style.backgroundColor ="transparent"
         elemento.style.color="#FB7821"
@@ -16,7 +15,6 @@ let buclePrincipal=[...comprar].forEach((elemento)=>{
           return item !== e.target.id;
         });
         cantidad.innerHTML="("+arrayId.length+")"
-       // console.log(arrayId)
        }else{
         elemento.style.backgroundColor ="#FB7821"
         elemento.style.color="white"

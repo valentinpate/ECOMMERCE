@@ -195,7 +195,6 @@ document.addEventListener('valorCambiado', (event) => { //valorCambiado de count
     })
 
     eliminarTodo.addEventListener("click",async()=>{
-        console.log("eliminar todo")
         try{
             const enviarRespuesta = await fetch("/eliminar-todo",{
                 method:"DELETE",
@@ -204,7 +203,6 @@ document.addEventListener('valorCambiado', (event) => { //valorCambiado de count
                 for(let productoCarrito of containerProductoCarrito){
                     productoCarrito.style.display="none"
                 }
-                console.log("todos los productos fueron eliminados")
             }
         }
         catch(err){ console.log(err) }
@@ -213,15 +211,12 @@ document.addEventListener('valorCambiado', (event) => { //valorCambiado de count
     for(let i = 0; i < eliminar.length; i++){
         eliminar[i].addEventListener("click",async()=>{
             const id = idinp[i].value
-            console.log("ID:",id)
             try{
                 const enviarRespuesta = await fetch(`/eliminar-producto/${id}`,{
                     method:"DELETE"
                 })
-                console.log("ID NUEVO:", {id:id})
                 if(enviarRespuesta.ok){
                     containerProductoCarrito[i].style.display="none"
-                    console.log("producto eliminado")
                 }
             }
             catch(err){ console.log(err) }

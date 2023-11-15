@@ -9,7 +9,6 @@ form.addEventListener("click",async (e)=>{
     const password=form.password.value
     const phone=form.phone.value
     const region=form.region.value
-    console.log(email,name,user,password,phone,region)
 
 
     try{

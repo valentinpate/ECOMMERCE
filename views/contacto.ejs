@@ -36,29 +36,34 @@
                 </div>    
             </div>
             <div class="mapaubicacion">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52549.25894892429!2d-58.54501605033875!3d-34.59584924027553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb61afb78c72f%3A0xee2bf1d59ab270cc!2sCarrefour!5e0!3m2!1ses-419!2sar!4v1696006882528!5m2!1ses-419!2sar" width="460" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52549.25894892429!2d-58.54501605033875!3d-34.59584924027553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb61afb78c72f%3A0xee2bf1d59ab270cc!2sCarrefour!5e0!3m2!1ses-419!2sar!4v1696006882528!5m2!1ses-419!2sar" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div> 
 
         </div>
            
     </section>
     <!-- ----------------------------seccion contactanos---------------------------- -->
-    <section class="contactame">
-        <h1 class="titulocontacto">Contactanos</h1>
-        <form class="formcontacto">
-            <label for="">Nombre</label>
-            <input class="inputscontacto" type="text" placeholder="Nombre">
-            <label for="">Email</label>
-            <input class="inputscontacto" type="text" placeholder="Email">
+    <section class="contactame" id="form">
+        <h2 class="titulocontacto">Contactanos</h2>
+        <form class="formcontacto" action="/enviar" method="POST">
+            <label for="nombre">Nombre</label>
+            <input class="inputscontacto" type="text" placeholder="Nombre" name="nombre">
+            <label for="email">Email</label>
+            <input class="inputscontacto" type="text" placeholder="Email" name="email">
             <label for="">Asunto</label>
-            <input class="inputscontacto" type="text" placeholder="Asunto">
-            <label for="">Mensaje</label>
-            <input class="inputscontacto inputmensaje" type="text" placeholder="Mensaje"> 
+            <input class="inputscontacto" type="text" placeholder="Asunto" name="asunto">
+            <label for="mensaje">Mensaje</label>
+            <input class="inputscontacto inputmensaje" type="text" placeholder="Mensaje" name="mensaje"> 
             <div class="contenedorbtn">
-            <button class="btncontacto">Enviar Mensaje</button>
+            <button class="btncontacto" type="submit" value="Enviar">Enviar Mensaje</button>
             </div>
         </form>
-    
+        <% if(incomplete){ %>
+            <p style="color:red;font-size:1.5rem;font-weight:bold;">ERROR: Por favor, rellene todos los campos para que su mail sea enviado.</p>
+        <% } %>
+        <% if(sent){ %>
+            <p style="font-size:1.5rem;font-weight:bold;">Su mensaje ha sido enviado. Muchas gracias por contactarse.</p>
+        <% } %>
     </section>
 
     <%- include("partials/footer") -%>

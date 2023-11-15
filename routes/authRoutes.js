@@ -19,12 +19,12 @@ router.post("/signin",passport.authenticate("local",{
 
 router.get("/signin",authControllers.login_get)
 
-router.get("/signout",authControllers.signOut_get)
+router.get("/signout",authControllers.signOut)
 
 // GET
 
 //ruta para la page ofertas
-router.get("/ofertas",authControllers.middleware.arrayCartPromise, authControllers.ofertas_get)
+router.get("/secciones",authControllers.middleware.arrayCartPromise, authControllers.secciones_get)
 
 //ruta para la page product
 router.get("/product", authControllers.middleware.arrayCartPromise, authControllers.product_get)
@@ -44,6 +44,10 @@ router.get("/miperfil",[authControllers.middleware.middle, authControllers.middl
 //ruta para la page mi perfil (falta agregar la funcion a authcontrollers)
 router.get("/informacion",authControllers.middleware.arrayCartPromise, authControllers.informacion_get)
 
+router.get("/seccion",(req,res)=>{
+    res.render("menu-seccion")
+})
+
 // POST
 
 // Carrito
@@ -53,11 +57,15 @@ router.post("/confirmar-compra",authControllers.confirmarCompra)
 
 router.post("/editar-mi-perfil",authControllers.editarMiPerfil)
 
+router.post("/enviar",authControllers.contacto_post)
+
 // DELETE
 
 router.delete("/eliminar-producto/:id",authControllers.eliminarDelCarrito)
 
 router.delete("/eliminar-todo",authControllers.eliminarTodo)
+
+router.delete("/eliminar-compra/:id", authControllers.eliminarCompra)
 
 // Exporto las rutas
 module.exports=router

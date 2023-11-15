@@ -1,0 +1,21 @@
+<%- include("partials/head") -%>
+<%- include("partials/header") -%>
+<%- include("partials/carrito") -%>
+
+<% if(seccion == "ofertas") {  %>
+    <section class="d-block container-publi-ofertas">
+        <div>
+            <img src="./images/publcidad-celenste.JPG" style="width: 100%;" alt="">
+        </div>
+        <div class="d-flex">
+            <img src="./images/publicidad-rosa.JPG" style="width: 50%;" alt="">
+            <img src="./images/publicidad-azul.JPG" style="width: 50%;" alt="">
+        </div>
+    </section>
+<% }else {%>
+    <img src="./images/<%=seccion%>.webp" alt="" style="margin-top: 180px;">
+<% } %>
+
+<%- include("partials/productos") -%>
+
+<%- include("partials/footer") -%>

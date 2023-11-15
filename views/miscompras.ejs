@@ -3,95 +3,93 @@
 <%- include("partials/carrito") -%>
 
     <section class="container-sections" style="margin-top: 180px;">
-    <section class="pedidos">
-        <div class="container-select">
-            <label for="miInput">Estado del pedido</label>
-            <select id="miInput">
-            <option value="opcion1">Todos</option>
-            <option value="opcion2">Opción 2</option>
-            <option value="opcion3">Opción 3</option>
-            <option value="opcion4">Opción 4</option>
-            </select>
-        </div>
-        <%arrayMisCompras.forEach((e)=>{ %>
-            <div class="container-detalles-pedidos">
-                <div class="detalles-del-pedido">
-                    <strong><p>Detalles del pedido</p></strong>
-                    <a class="link" href="/miscompras?detalles&&id"><button  id="<%=e.id%>" class="btn-ver-detalles">Ver</button></a>
-                </div>
-                <div class="detalles-del-pedido">
-                    <strong><p>Número de items</p></strong>
-                    <p><%= e.pedidos.length %> Productos</p>
-                </div>
-                <div class="detalles-del-pedido">
-                    <strong><p>Fecha</p></strong>
-                    <p><%= e.fecha %></p>
-                </div>
-                <div class="detalles-del-pedido">
-                    <strong><p>Precio</p></strong>
-                    <p>$<%= e.totalFinal %></p>
-                </div>
-                <div class="detalles-del-pedido">
-                    <strong><p>Estado del pedido</p></strong>
-                   <% if(e.estado){ %>
-                    <p class="estado-pedido-confirmado">El pedido ha sido confirmado</p>
-                    <% }else{  %>
-                        <p class="estado-pedido-confirmado">Pedido completado</p>
-                   <% } %>
-                </div>
-                <div class="detalles-del-pedido">
-                    <strong><p>Número de orden</p></strong>
-                    <p><%= e.id %></p>
-                </div>
+        <section class="pedidos">
+            <div class="container-select">
+                <label for="miInput">Estado del pedido</label>
+                <select id="miInput">
+                    <option value="opcion1">Todos</option>
+                    <option value="opcion2">Opción 2</option>
+                    <option value="opcion3">Opción 3</option>
+                    <option value="opcion4">Opción 4</option>
+                </select>
             </div>
-            
+            <%arrayMisCompras.forEach((e)=>{ %>
+                <div class="container-detalles-pedidos">
+                    <div class="detalles-del-pedido">
+                        <strong><p>Detalles del pedido</p></strong>
+                        <a class="link" href="/miscompras?detalles&&id"><button  id="<%=e.id%>" class="btn-ver-detalles">Ver</button></a>
+                    </div>
+                    <div class="detalles-del-pedido">
+                        <strong><p>Número de items</p></strong>
+                        <p><%= e.pedidos.length %> Productos</p>
+                    </div>
+                    <div class="detalles-del-pedido">
+                        <strong><p>Fecha</p></strong>
+                        <p><%= e.fecha %></p>
+                    </div>
+                    <div class="detalles-del-pedido">
+                        <strong><p>Precio</p></strong>
+                        <p>$<%= e.totalFinal %></p>
+                    </div>
+                    <div class="detalles-del-pedido">
+                        <strong><p>Estado del pedido</p></strong>
+                    <% if(e.estado){ %>
+                        <p class="estado-pedido-confirmado">El pedido ha sido confirmado</p>
+                        <% }else{  %>
+                            <p class="estado-pedido-confirmado">Pedido completado</p>
+                    <% } %>
+                    </div>
+                    <div class="detalles-del-pedido">
+                        <strong><p>Número de orden</p></strong>
+                        <p class="orden"><%= e.id %></p>
+                    </div>
+                </div>
         </section>
        <% if(detalles==="true" && e.id == idQuery){ %>
-        
             <section class="muestra-detalles-del-pedido">
                 <div class="container-resumen-detalles">
-                        <div class="infopago resumen-pedido">  
-                            <p class="titulo-resumen"><strong>Resumen de costos del pedido</strong></p>
-                            <div class="containergastos precioproductos">
-                                <p><strong>$ <%= e.subtotalFinal %></strong></p>
-                                <p>Precio</p>
-                            </div>
-                            <div class="containergastos">
-                                <p><strong>$2500</strong></p>
-                                <p>Envio</p>
-                            </div>
-                            <hr class="lineaproductosuno">  <!-- linea se separacion -->
-                            <div class="containergastos">
-                                <p><strong>$ <%= e.totalFinal %></strong></p>
-                                <p>Total</p>
-                            </div>
+                    <div class="infopago resumen-pedido">  
+                        <p class="titulo-resumen"><strong>Resumen de costos del pedido</strong></p>
+                        <div class="containergastos precioproductos">
+                            <p><strong>$ <%= e.subtotalFinal %></strong></p>
+                            <p>Precio</p>
                         </div>
-                    
+                        <div class="containergastos">
+                            <p><strong>$2500</strong></p>
+                            <p>Envio</p>
+                        </div>
+                        <hr class="lineaproductosuno">  <!-- linea se separacion -->
+                        <div class="containergastos">
+                            <p><strong>$ <%= e.totalFinal %></strong></p>
+                            <p>Total</p>
+                        </div>
+                    </div>
                     <div class="container-detalles-productos-pedidos">
                         <div class="container-btn-detalles">
-                            <button class="btn-eliminar-detalles">Eliminar todo</button>
+                            <button class="btn btn-eliminar-detalles eliminarCompra" data-toggle="modal" data-target="#exampleModal">Eliminar todo</button>
+                            <button class="btn-eliminar-detalles cerrar">Cerrar</button>
                             <h3>Detalles del pedido</h3>
                         </div>
-                        
+
                         <div class="containerproductoscarrito container-productos-detalles" style="overflow-y: auto; height: 30em;">
                             <%if(arrayProductos.length > 0){%>
-                            <%arrayProductos[0].forEach((elemento)=>{ %>
-                            <div class="containerproductocarrito" >
-                                <div class="container-info-producto">                         
-                                    <!-- traer info del producto -->
-                                    <p class="nombreproducto"> <%= elemento.nombreProducto %></p> 
-                                    <div class="infoproducto">
-                                        <div class="preciodesc container-precio-total">
-                                            <p>TOTAL:</p>
-                                            <p class="preciocondesc">$<%= elemento.precioMiscompras %></p>
-                                        </div>
-                                        <p>Cantidad <%= elemento.cantidadMisCompras %></p> 
-                                    </div>  
-                                </div>           
-                                <img class="imgproducto-detalles" src="<%= elemento.imagenProducto %>" alt="">
-                            </div>
-                            <hr class="linea-productos-detalles"> <!-- linea se separacion -->
-                            <%}) %>
+                                <%arrayProductos[0].forEach((elemento)=>{ %>
+                                    <div class="containerproductocarrito" >
+                                        <div class="container-info-producto">                         
+                                            <!-- traer info del producto -->
+                                            <p class="nombreproducto"> <%= elemento.nombreProducto %></p> 
+                                            <div class="infoproducto">
+                                                <div class="preciodesc container-precio-total">
+                                                    <p>TOTAL:</p>
+                                                    <p class="preciocondesc">$<%= elemento.precioMiscompras %></p>
+                                                </div>
+                                                <p>Cantidad <%= elemento.cantidadMisCompras %></p> 
+                                            </div>  
+                                        </div>           
+                                        <img class="imgproducto-detalles" src="<%= elemento.imagenProducto %>" alt="">
+                                    </div>
+                                    <hr class="linea-productos-detalles"> <!-- linea se separacion -->
+                                <%}) %>
                             <%}%>
                         </div>
                         
@@ -100,8 +98,27 @@
                 </div>
             </section> 
         <% } %>
-        <%})%><!-- cierra arraymiscompras -->
+            <%})%><!-- cierra arraymiscompras -->
         
     </section>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Eliminar pedido</h5>
+                    <button type="button" style="border:none;background-color:transparent;" class="bi-x-lg" data-dismiss="modal" aria-label="Close">
+                
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ¿Está seguro de que quiere eliminar su compra? No podrá restablecerla una vez que acepte.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary aceptoEliminar">Aceptar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <%- include("partials/footer") -%>
