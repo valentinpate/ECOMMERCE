@@ -4,6 +4,7 @@ let numCantidad = document.querySelectorAll(".counterNumber")
 let anadir = document.querySelectorAll(".anadir")
 let inputcantidad= document.querySelectorAll(".inputcantidad")
 let page = document.querySelectorAll(".page-item")
+let username= document.querySelector(".user")
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -85,31 +86,34 @@ mas[i].addEventListener("click",(event)=>{
 })
 
 }
+
 for (let j = 0; j < anadir.length;j++ ){//hago un nuevo for para los botones añadir carrito, ya que al renderizar productos en el carrito el numcantidad aumenta y la variable i del primer for toma un valor mas alto de los botones añadircarrito que hay, entonces cuando no habia productos en carrito andaba bien y cuando ponias productos en carrito ya no!
 //segundo for para productos con el botón de añadir al carrito. (no toma productos en el popup del carrito.)
     anadir[j].addEventListener('click', async (e) => { //uso un fetch para enviar la info cantidad y el id a carrito
    
-       e.preventDefault()
-       
-      id= anadir[j].id
-           const fer= await fetch("/carrito",{
-               method:"POST",
-               body:JSON.stringify({cantidad,id}),//esta cantidad es la que hay que usar para agregar a DB. Cantidad del contador. Toma su último valor.
-               headers:{"Content-Type":"application/json"}
-           })
-           if(fer.ok){
-               window.location.reload();}
-               else{console.log("no funciono")}
-     });
-   }
-// Las funciones dentro del addEventListener actualizan el contador en el document por cada click.
+            e.preventDefault()
+            if(username.value==""){
+                window.location.href="http://localhost:4000/signin"
+            }else{
+                id= anadir[j].id
+                const fer= await fetch("/carrito",{
+                    method:"POST",
+                    body:JSON.stringify({cantidad,id}),//esta cantidad es la que hay que usar para agregar a DB. Cantidad del contador. Toma su último valor.
+                    headers:{"Content-Type":"application/json"}
+                })
+                if(fer.ok){
+                    window.location.reload();}
+                    else{console.log("no funciono")}
+            } 
+        }
+    );
+}
 
-   page.forEach((e)=>{
+   page.forEach((e)=>{ //forEach para el paginator
         e.addEventListener("click",()=>{
             localStorage.removeItem("paginaActual")
             let elementoA = e.querySelector("a")
             numPage = elementoA.innerHTML
-            console.log("este", elementoA.innerHTML)
             localStorage.setItem("paginaActual", numPage)
             return numPage
         })
@@ -122,3 +126,4 @@ for (let j = 0; j < anadir.length;j++ ){//hago un nuevo for para los botones añ
         }
    })
 })
+// Las funciones dentro del addEventListener actualizan el contador en el document por cada click.

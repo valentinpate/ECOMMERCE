@@ -26,6 +26,7 @@
                         <p style="margin-top:0.4em;font-weight:700;">Añadir cantidad</p>
                     </div>
                     <form action="/carrito" method="post" class="carritoform">
+                        <input type="hidden" value="<%= username %>" name="username" class="user">
                         <input type="hidden" name="id"  value="<%= elemento.id %>">
                         <button id="<%= elemento.id %>" class="add-to-cart-btn other-add-to-cart-btn anadir">Añadir al carrito</button>
                     </form>

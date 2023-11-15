@@ -25,6 +25,7 @@
                     <% let regex = /\$([\d,\.]+)/ %>
                     <% let precio =  subPrecio.match(regex);  %>
                     <p class="total-product">Total:<span class="total_"></span></p>
+                    <input type="hidden" value="<%= username %>" name="username" class="user">
                     <button id="<%= elemento.id %>" style="font-size:1.5rem;" class="add-to-cart-btn anadir">Añadir al carrito</button>
                 </div>
                 <div class="product-price">
@@ -74,6 +75,7 @@
                         </div>
                         <p><b>Añadir cantidad</b></p>
                     </div>
+                    <input type="hidden" value="<%= username %>" name="username" class="user">
                     <button id="<%= elemento.id %>" style="margin:0;" class="add-to-cart-btn other-add-to-cart-btn anadir">Añadir al carrito</button>
                 </div> 
             </div>

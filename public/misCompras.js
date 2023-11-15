@@ -12,14 +12,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         elemento.addEventListener('click', function(e) {
             e.preventDefault(); 
-            // console.log(e.target)
             let id=e.target.id;
-            // console.log("este es el id=",id)
-            //const url = new URL(window.location.href); //copiamos la url
 
             const querys = url.searchParams.get('detalles');//tomo el valor de la query
-            console.log(url.searchParams.size)
-            console.log(querys)
+
             url.searchParams.set('detalles', querys == 'true'? false : true); // Cambiar el valor del parámetro 'detalles' 
             url.searchParams.set('id', id); 
             elemento.href = url;// actualizar el enlace
@@ -29,12 +25,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     cerrar.addEventListener("click",()=>{
         let urlValue = window.location.href
-        const cerrar = urlValue.slice(0,-42)
+        const cerrar = urlValue.slice(0,-42) //slice para acortar url
         window.location.href = cerrar
     })
     
     aceptoEliminar.addEventListener("click",async()=>{
-        let arrayID = Array.from(orden)
+        let arrayID = Array.from(orden) //convierto el nodelist en array
         let urlID = url.searchParams.get("id")
         let index = arrayID.findIndex(element => element.innerHTML===urlID)
         let id = arrayID[index].innerHTML
@@ -44,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     method:"DELETE"
                 })
                 if(enviarRespuesta.ok){
-                    console.log("se mandó")
                     containerPedidos[index].style.display="none"
                     muestraDetalles.style.display="none"
                     aceptoEliminar.toggleAttribute("disabled")

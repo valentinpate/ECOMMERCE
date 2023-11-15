@@ -108,7 +108,6 @@ UserSchema.methods.agregarAlCarrito = function(producto,cantidad){
         let precio = parseFloat(numero[0].replace(/\$|,/g, '')) // / $ | , (selecciono todos los carácteres "$" y "," para reemplazarlos por un vacío -> , "")
         precio= (precio/100).toFixed(2);
         precio = Number(precio); //Precio lo paso a número
-        console.log("Precio:", precio, "-", typeof(precio))
         carrito.precioTotal = precio
     }else{
         const existe = carrito.items.findIndex(objeto => {
@@ -121,7 +120,6 @@ UserSchema.methods.agregarAlCarrito = function(producto,cantidad){
             let precio = parseFloat(numero[0].replace(/\$|,/g, '')).toFixed(2)
             precio= (precio/100).toFixed(2);
             precio = Number(precio);
-            console.log("Precio:", precio, "-", typeof(precio))
             carrito.precioTotal += precio
         }else{
             let productoQueExiste = carrito.items[existe]
@@ -130,11 +128,9 @@ UserSchema.methods.agregarAlCarrito = function(producto,cantidad){
             let precio = parseFloat(numero[0].replace(/\$|,/g, '')).toFixed(2)
             precio= (precio/100).toFixed(2);
             precio = Number(precio);
-            console.log("Precio:", precio, "-", typeof(precio))
             carrito.precioTotal += precio
         }
     }
-    console.log("Usuario en esquema: ", this)
     return this.save()
 }
 
@@ -147,7 +143,6 @@ UserSchema.methods.confirmarCompra = function(precio, total, id, cantidad, preci
         pedidos = []
     }
     function pedidosPusheados(){
-        console.log(typeof id)
         if(typeof id=="string"){
             if(precioporcantproducto == ""){
                 precioporcantproducto = 0
@@ -170,8 +165,6 @@ UserSchema.methods.confirmarCompra = function(precio, total, id, cantidad, preci
         return pedidos //el return afuera del for porque sino el bucle se para. Retorna pedidos que es el array que contiene todos los valores.
     }
     compras.push({pedidos:pedidosPusheados(),fecha:new Date,precio:precio,total:total,estado:true})
-    console.log("Mis compras: ", compras)
-    console.log("Mis pedidos: ", pedidos)
     const guardado = this.save()
     const promesa = guardado instanceof Promise
     if(promesa){

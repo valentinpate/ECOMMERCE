@@ -79,7 +79,6 @@ module.exports.middleware = {
             });
             arrayCarrito = await Promise.all(promesa);
         }
-        //console.log("productos a renderizar", arrayCarrito)
         next()
     }
 }
@@ -195,7 +194,7 @@ module.exports.product_get= async (req,res)=>{
        a=page+4
     }
  
-    res.render("product",{productrender, productsimilares, a, idproduct, coleccionproduct,miRuta,arrayCarrito})
+    res.render("product",{productrender, productsimilares, a, idproduct, coleccionproduct,miRuta,arrayCarrito, username})
  }
 
 
@@ -267,7 +266,6 @@ module.exports.miscompras_get= async(req,res)=>{
     })
 
     arrayMisCompras= await Promise.all(promesaCompras);
-    console.log("mis compras= ",arrayMisCompras)
     if(detalles === "true"){
      
     let promesaSecundaria= arrayMisCompras.map(async(e)=>{
@@ -288,7 +286,6 @@ module.exports.miscompras_get= async(req,res)=>{
         arrayProductos= await Promise.all(promesaSecundaria);
         arrayProductos= arrayProductos.filter((elemento) => elemento !== undefined);
     }
-    console.log("arrayProductos3= ",arrayProductos)
 
     miRuta="miscompras"
     res.render("miscompras",{username, miRuta, arrayCarrito,detalles,arrayMisCompras,arrayProductos})
@@ -311,15 +308,11 @@ module.exports.informacion_get = (req, res)=>{
 module.exports.agregarAlCarrito=async(req,res)=>{
     const { cantidad, arrayId } = req.body
     try{
-        if(!req.isAuthenticated()){
-            res.redirect("signin")
-        }
         if(req.isAuthenticated()) {
             if(arrayId != undefined && arrayId.length > 0){
                 for (const e of arrayId){
                     await User.findById(req.user.id); // Busca id del usuario
                     const producto = await Productos.findById(e)
-                    console.log("Producto: ", producto)
                     await req.user.agregarAlCarrito(producto, cantidad)
                 }
                 res.redirect("home")
@@ -379,11 +372,7 @@ module.exports.confirmarCompra=async(req,res)=>{
 
 module.exports.eliminarCompra=async(req,res)=>{
     const id = req.params.id
-    const misCompras = req.user.misCompras
-    //let index = misCompras.findIndex(num => id == num._id)
     await User.updateOne({_id:req.user.id},{$pull:{"misCompras":{_id:id}}})
-    console.log(id)
-    console.log(misCompras[0]._id)
     res.end()
 }
 

@@ -7,7 +7,6 @@ let match = false
 module.exports.estrategia = async (passport)=>{
     await passport.use(new passportLocal(
     async function(username, password, done) { //parámetros del login, los names de los inputs de signin.ejs. Tienen que coincidir los names y los parámetros si o si.
-        console.log("llego passport")
         const busqueda = await User.findOne({user:username}) //busca nombre de usuario en la base (user) y lo compara con el parámetro de nombre que viene del login (username)
         if(busqueda){
             match = await bcrypt.compare(password,busqueda.password) //compara contraseña ingresada en el signin con contraseña de la base de datos

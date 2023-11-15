@@ -10,9 +10,7 @@ let regex = /\$([\d,.]+)/;
 function regexPrecio(){
     let match = price.innerHTML.match(regex)
     let regexPrecio = match[0].replace(".","")
-    console.log("Regex Antes:", regexPrecio)
     regexPrecio = Number(parseFloat(regexPrecio.replace("$", '')))
-    console.log("Regex Desp:",regexPrecio)
     if(descuentoInp != undefined){
         let descuento = regexPrecio*Number(descuentoInp.value)/100
         let regexDescontado = regexPrecio-descuento

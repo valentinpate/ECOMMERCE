@@ -102,7 +102,7 @@
 
 /* -----------------------------seccion carrito----------------------------------- */
 .modal{
-    --bs-modal-width: 79%;
+    --bs-modal-width: 56%;
 }
 .containercarrito{
     box-shadow: 0 0 5px gray;
