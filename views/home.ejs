@@ -1,7 +1,7 @@
 <%- include("partials/head") -%>
 <%- include("partials/header") -%>
 <%- include("partials/carrito") -%>
-<main style="margin-top: 155px;">
+<main>
     <!-- primer seccion del main PUBLICIDAD -->
   <section class="carrousel-home">
     <div id="myCarousel" class="mt-5 carousel slide mb-6" data-bs-ride="carousel"> <!--esta parte tiene javascript de boostrap no cambiar los id-->
@@ -12,11 +12,11 @@
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active"><!--Imagen publicidad 1 -->
-          <svg class="bd-placeholder-img" width="100%" height="20rem" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <svg class="bd-placeholder-img imagesvg" width="100%" height="20rem" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
             <rect width="100%" height="100%" fill="rgba(255, 0, 0, 0.2)"/> <!--aca le cambiam el color de fondo al slide de publicidad -->
-            <image href="https://kiwikmercadofacil.com/wp-content/uploads/2021/09/productos-slider-600x387.png.webp" x="750" y="20" height="20rem" ></image><!--esta es la imagen del slide para el tamaño y eso hay que borrar wl width y height de la etiqueta image-->
+            <image href="https://kiwikmercadofacil.com/wp-content/uploads/2021/09/productos-slider-600x387.png.webp" class="imageSlide1"></image><!--esta es la imagen del slide para el tamaño y eso hay que borrar wl width y height de la etiqueta image-->
           </svg>
-        <div class="container">
+        <div class="container none">
             <div class="carousel-caption text-start " >
                 <p class="opacity-75">
                   <strong> Con Delivery! </strong><br>
@@ -26,21 +26,21 @@
         </div>
       </div>
       <div class="carousel-item"><!--Imagen publicidad 2 -->
-        <svg class="bd-placeholder-img" width="100%"  height="20rem" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <svg class="bd-placeholder-img imagesvg" width="100%"  height="20rem" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
           <rect width="100%" height="100%" fill="rgba(0, 0, 128, 0.2)"/><!--aca le cambiam el color de fondo al slide de publicidad -->
-          <image href="/images/productocajaamrilla.png" x="50" y="20"height="20rem" /><!--esta es la imagen del slide para el tamaño y eso hay que borrar wl width y height de la etiqueta image-->
+          <image href="/images/productocajaamrilla.png" x="50" y="20"height="20rem" class="imageSlide2"/><!--esta es la imagen del slide para el tamaño y eso hay que borrar wl width y height de la etiqueta image-->
         </svg>
         <div class="container">
-          <div class="container-fluid full-container carousel-caption" >
+          <div class="textSlide container-fluid full-container carousel-caption" >
             <p class="opacity-755" >Muchas ofertas en productos con descuentos. <br>
             Hasta el <span style="color: red;">30%</span> de descuento.</p>
           </div>
         </div>
       </div>
       <div class="carousel-item"> <!--Imagen publicidad 3 -->
-        <svg class="bd-placeholder-img" width="100%" height="20rem" xmlns="http://www.w3.org/2000/svg"   aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <svg class="bd-placeholder-img imagesvg" width="100%" height="20rem" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
           <rect width="100%" height="100%" fill="rgba(0, 0, 128, 0.7)"/> <!--aca le cambiam el color de fondo al slide de publicidad -->
-          <image href="https://m.media-amazon.com/images/I/71FHwK3NbgL._AC_SX522_.jpg" x="750" y="20"  /><!--esta es la imagen del slide para el tamaño y eso hay que borrar wl width y height de la etiqueta image-->
+          <image href="https://m.media-amazon.com/images/I/71FHwK3NbgL._AC_SX522_.jpg" class="imageSlide3"/><!--esta es la imagen del slide para el tamaño y eso hay que borrar wl width y height de la etiqueta image-->
         </svg>
         <div class="container">
           <div class="carousel-caption text-start">

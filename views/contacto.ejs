@@ -43,22 +43,27 @@
            
     </section>
     <!-- ----------------------------seccion contactanos---------------------------- -->
-    <section class="contactame">
+    <section class="contactame" id="form">
         <h2 class="titulocontacto">Contactanos</h2>
         <form class="formcontacto" action="/enviar" method="POST">
             <label for="nombre">Nombre</label>
-            <input class="inputscontacto" type="text" placeholder="Nombre" name="nombre" required>
+            <input class="inputscontacto" type="text" placeholder="Nombre" name="nombre">
             <label for="email">Email</label>
-            <input class="inputscontacto" type="text" placeholder="Email" name="email" required>
+            <input class="inputscontacto" type="text" placeholder="Email" name="email">
             <label for="">Asunto</label>
-            <input class="inputscontacto" type="text" placeholder="Asunto" name="asunto" required>
+            <input class="inputscontacto" type="text" placeholder="Asunto" name="asunto">
             <label for="mensaje">Mensaje</label>
-            <input class="inputscontacto inputmensaje" type="text" placeholder="Mensaje" name="mensaje" required> 
+            <input class="inputscontacto inputmensaje" type="text" placeholder="Mensaje" name="mensaje"> 
             <div class="contenedorbtn">
             <button class="btncontacto" type="submit" value="Enviar">Enviar Mensaje</button>
             </div>
         </form>
-    
+        <% if(incomplete){ %>
+            <p style="color:red;font-size:1.5rem;font-weight:bold;">ERROR: Por favor, rellene todos los campos para que su mail sea enviado.</p>
+        <% } %>
+        <% if(sent){ %>
+            <p style="font-size:1.5rem;font-weight:bold;">Su mensaje ha sido enviado. Muchas gracias por contactarse.</p>
+        <% } %>
     </section>
 
     <%- include("partials/footer") -%>

@@ -53,6 +53,8 @@ router.post("/confirmar-compra",authControllers.confirmarCompra)
 
 router.post("/editar-mi-perfil",authControllers.editarMiPerfil)
 
+router.post("/enviar",authControllers.contacto_post)
+
 // DELETE
 
 router.delete("/eliminar-producto/:id",authControllers.eliminarDelCarrito)

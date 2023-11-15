@@ -23,6 +23,10 @@ header{
     box-shadow: 0 0 10px gray;
 }
 
+main{
+    margin-top: 155px;
+}
+
 footer{
     background-image: url("../images/fotofooter.jpg");
     background-size: cover; 
@@ -403,6 +407,8 @@ a:hover{
 }
 
 .menu{
+    width:90%;
+    margin:0 auto;
     padding:1em 0 1.5em 0;
     display:flex;
     align-items:center;
@@ -631,10 +637,7 @@ a:hover{
 }
 
 .contendorproductos{
-    display:flex;
-    flex-direction:column;
-    width:25%;
-    justify-content:space-between;
+    flex-wrap:wrap;
 }
 
 .other-cards{
@@ -816,4 +819,402 @@ a:hover{
 .container-publi-ofertas{
     width:88%;
     margin:0 auto;
+}
+
+/* Responsive */
+
+.menu-burguer{
+    display: none;
+}
+
+.menu-burguer img{
+    height: 3em;
+}
+
+.imageSlide1{
+    height: 19rem;
+    transform: translateX(990px) translateY(20px);
+}
+
+.imageSlide3{
+    height: 19rem;
+    transform: translateX(990px) translateY(20px);
+}
+.signLogo{
+    display: none;
+}
+.informacion0{
+    margin: 2em;
+}
+.informacion1{
+    margin: 5em;
+}
+.informacion2{
+    margin: 5em;
+    padding: auto;
+}
+
+@media screen and (min-width:768px) and (max-width: 1023px){
+    /* ------------------signup---------------- */
+    .signUpContainer, .signInContainer{
+        height: 87vh;
+    }
+    
+    .signUpContainer .img-mowardin, .signInContainer .img-mowardin{
+        display: none;
+    }
+    
+    .signForm{
+        width: 90%;
+    }
+    
+    .signForm .container-logo-tablet{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .signForm .logo-tablet{
+        display: block;
+        width: 40%;
+    }
+    
+    .signInContainer .signForm .logo-tablet{
+        margin-top: 5rem;
+        margin-bottom: -2rem;
+    }
+
+    
+    
+    /* ----------------home----------------- */
+    .contendorproductos{
+        width: 33.3%;
+    }
+    .nav-paginas-productos{
+        display: none;
+    }
+    
+    
+    .products .container-card-img{
+        width: 50px;
+    }
+    .product-img{
+        padding-top:1em;
+        width: 30%;
+    }
+    
+    
+    
+    /* ----------------product--------------- */
+    
+    .product-card{
+        flex-direction: column-reverse;
+    }
+    
+    .product-image{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .product-card-discount{
+        top: 0;
+    }
+    
+    /* ---------------------informacion-------------------- */
+    .container-info-img{
+        flex-direction: column-reverse;
+    }
+    .container-info-img img{
+        width: 95%;
+        height: 350px;
+    }
+    .container-info-img .container-p-info{
+        padding: 0;
+    }
+    
+    }
+    
+    @media screen and (min-width:1920px){
+    
+    .product-card{
+        justify-content: space-between;
+    }
+    .product-data{
+        width: 60%;
+    }
+    
+}
+
+@media (max-width: 767px){
+    .menu{
+        padding:1em 0 1em 0;
+        justify-content: space-between;
+    }
+    .menu nav a{
+        display: none;
+        margin:0em;
+    }
+    .logo{
+        width:5.5em;
+        margin:0 0.5em;
+    }
+    .menu input{
+        width:27em;
+        margin:0 0.5em;
+        font-size: 1em;
+        display: flex;
+        justify-content: space-between;
+    }
+    .icon-container{
+        display:none;
+    }
+    .search-btn{
+        font-size:1.2rem;
+        top:0.2em;
+        right:0.6em;
+        transition: transform 0.5s;
+    }
+    .menu-burguer{
+        display: block;
+        margin: 0 0.5em;
+    }
+    .products{
+        display: none;
+        padding-bottom: 0;
+    }
+    main{
+        margin-top: 0px;
+    }
+    .none{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    .none p{
+        font-size: 1.5em;
+    }
+    .imageSlide1{
+        height: 12rem;
+        transform: translateX(200px) translateY(80px);
+    }
+    .imageSlide2{
+        height: 12rem;
+        transform: translateX(100px) translateY(80px);
+    }
+    .textSlide{
+        text-align: start;
+    }
+    .imageSlide3{
+        height: 14rem;
+        transform: translateX(250px) translateY(80px);
+    }
+    .imagesvg{
+        height: 30rem;
+    }
+    .offer-header{
+        margin-bottom:2em;
+        font-size: 2rem;
+        display: flex;
+        text-align: center;
+    }
+    .offer-header p{
+        font-size: 2rem;
+    }
+    .paginaNum{
+        flex-wrap: wrap;
+        margin: 1rem;
+    }
+    .paginaNum .page-item .page-link{
+        font-size: 2rem;
+        padding: 1rem;
+    }
+    footer .columnas{
+        flex-wrap: wrap;
+        column-gap: 8rem;
+        justify-content: center;
+        align-items: center;
+    }
+    footer .columna3{
+        margin-top: 5rem;
+    }
+    footer{
+        padding-bottom: 10rem;
+    }
+    footer .copy{
+        margin-top: 2rem;
+        margin-bottom: 0;
+    }
+    footer .copy .linea{
+        width: 100%;
+    }
+    footer .iconos-redes{
+        margin-top: 2rem;
+        margin-left: 0;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        transform: scale(1.5);
+    }
+    .signInContainer{
+        width: 90%;
+        border: none;
+        border-radius:none;
+        box-shadow:none;
+    }
+    .signInContainer .signinImg{
+        display: none;
+    }
+    .signInContainer input{
+        margin-top: 2rem;
+    }
+    .signInContainer .sign-btn{
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    .signInContainer .signLogo{
+        width: 20em;
+        display: flex;
+        justify-content: center;
+    }
+    .signInContainer .signForm a{
+        display: flex;
+        justify-content: center;
+    }
+    .signUpContainer{
+        width: 90%;
+        border: none;
+        border-radius:none;
+        box-shadow:none;
+    }
+    .signUpContainer img{
+        display: none;
+    }
+    .signUpContainer input{
+        margin-top: 2rem;
+    }
+    .signUpContainer .sign-btn{
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    .signUpContainer .signLogo{
+        width: 20em;
+        display: flex;
+        justify-content: center;
+    }
+    .signUpContainer .signForm a{
+        display: flex;
+        justify-content: center;
+    }
+    .contactositioweb .ubicacioneinfo{
+        display: block;
+        flex-wrap: wrap;
+    }
+    .contactositioweb .ubicacioneinfo .infocontacto{
+        width: 100%;
+    }
+    .informacion0{
+        margin: 0;
+        display: block;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+        justify-content: center;
+        text-align: justify;
+    }
+    .informacion1{
+        margin: 0;
+        display: block;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+        justify-content: center;
+        text-align: center;
+    }
+    .informacion2{
+        margin: 0;
+        display: block;
+        flex-wrap: wrap;
+        padding: 0;
+        margin-top: 2rem;
+        justify-content: center;
+        text-align: center;
+    }
+    .imgInformacion{
+        width: 100%;
+        height: 4rem;
+    }
+    
+}
+
+@media (max-width: 590px){
+    .logo{
+        width:5em;
+        margin:0;
+    }
+    .menu input{
+        width:8em;
+        margin:0;
+        font-size: 1em;
+        display: flex;
+        justify-content: space-between;
+    }
+    .imageSlide1{
+        height: 10rem;
+        transform: translateX(50px) translateY(90px);
+    }
+    .imageSlide2{
+        height: 9rem;
+        transform: translateX(10px) translateY(80px);
+    }
+    .none p{
+        font-size: 1em;
+    }
+    .container .textSlide .opacity-755{
+        font-size: 1em;
+    }
+    .paginaNum .page-item .page-link{
+        font-size: 1.4rem;
+        padding: 0.5rem 1rem;
+    }
+    .offer-header{
+        margin-bottom:2em;
+        font-size: 1rem;
+        display: block;
+    }
+    .offer-header button{
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    .offer-header p{
+        font-size: 1rem;
+        display: flex;
+        justify-content: center;
+    }
+    .offer-header a{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+    footer .iconos-redes{
+        margin-top: 2rem;
+        margin-left: 0;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        transform: scale(1);
+    }
+    .signInContainer input{
+        margin-top: 1rem;
+    }
+    .signUpContainer{
+        margin-top: 0;
+        padding-bottom: 4rem;
+    }
+    .signUpContainer input{
+        margin-top: 1rem;
+    }
+    .signUpContainer .sign-btn{
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
 }

@@ -4,6 +4,8 @@ const jwt=require("jsonwebtoken")
 const Productos=require("../models/Productos")
 const bcrypt=require("bcrypt")
 const passport=require("passport")
+const nodemailer = require('nodemailer');
+const { google } = require("googleapis")
 
 let username = null
 let miRuta= null
@@ -14,6 +16,7 @@ let palabraclave = null
 let detalles = false
 let msj_login = false
 let incomplete = false
+let sent = false
 let llave2 = false
 
 let arrayCarrito=[]
@@ -126,6 +129,9 @@ module.exports.login_get=(req,res)=>{
 }
 
 module.exports.signOut=(req,res)=>{
+    if(sent){
+        sent = false
+    }
     username = null
     req.logOut(function(err){
         if(err){
@@ -245,7 +251,7 @@ module.exports.home_get=async(req,res)=>{
 //agrego la funcion para la page de contacto
 module.exports.contacto_get= async(req,res)=>{
     miRuta="contacto"
-    res.render("contacto",{username, miRuta, arrayCarrito})
+    res.render("contacto",{username, miRuta, arrayCarrito, incomplete, sent})
   }
   
   //agrego la funcion para la page de miscompras
@@ -305,6 +311,68 @@ module.exports.informacion_get = (req, res)=>{
 
 // FUNCIONES POST + MÉTODOS DE DB
 
+module.exports.contacto_post = async (req,res)=>{
+    const { nombre, email, asunto, mensaje } = req.body;
+
+    if(nombre == "" || email == "" || asunto == "" || mensaje == ""){
+        incomplete = true
+        sent = false
+        res.redirect("contacto/#form")
+    }else{
+        incomplete = false
+        const CLIENT_ID="776729184857-fdc45f9ljq7755kk2rol10dijeagj344.apps.googleusercontent.com"
+        const CLIENT_SECRET="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"
+        const REDIRECT_URI="https://developers.google.com/oauthplayground"
+        const REFRESH_TOKEN="1//04wImJ_5NwgWTCgYIARAAGAQSNwF-L9IrJX4ucFgaLoMmkAO0c6DWD60UZ0jhdTYMLdojW8E6pn5g5WDCwFY8mVVmwqjIyGIHIZI"
+  
+        const oAuth2Client= new google.auth.OAuth2(
+            CLIENT_ID,
+            CLIENT_SECRET,
+            REDIRECT_URI
+        );
+  
+        oAuth2Client.setCredentials({refresh_token:REFRESH_TOKEN});
+  
+        async function sendMail(){
+            try{
+                const accessToken = await oAuth2Client.getAccessToken();
+                const transporter = nodemailer.createTransport({
+                service:"gmail",
+                auth:{
+                    type:"OAuth2",
+                    user:"mowardin.company@gmail.com",
+                    clientId:CLIENT_ID,
+                    clientSecret:CLIENT_SECRET,
+                    refreshToken:REFRESH_TOKEN,
+                    accessToken:accessToken,
+                },
+                tls:{
+                    rejectUnauthorized: false,
+                }
+                })
+            const mailOptions={
+                from: "Pagina Web Mowardin <mowardin.company@gmail.com>",
+                to: "mowardin.company@gmail.com",
+                subject: asunto,
+                text: `NOMBRE: ${nombre} \nE-MAIL: ${email} \nMENSAJE: ${mensaje}`
+            }
+  
+            const result = await transporter.sendMail(mailOptions)
+            return result
+  
+            }catch(err){
+            console.log(err)
+            }
+        }
+        sendMail()
+        .then((result) => {
+            sent = true
+            res.redirect("contacto/#form")
+        })
+        .catch((error) => console.log(error.message))
+    }
+}
+
 module.exports.agregarAlCarrito=async(req,res)=>{
     const { cantidad, arrayId } = req.body
     try{
@@ -328,6 +396,7 @@ module.exports.agregarAlCarrito=async(req,res)=>{
     }
     catch(err){ console.log (err) }
 }
+
 
 module.exports.eliminarDelCarrito=async(req,res)=>{
     const id = req.params.id
