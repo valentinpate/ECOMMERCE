@@ -207,7 +207,9 @@
 .productoscarrito .eliminarproductos{
     color: red;
     cursor: pointer;
-    margin-top: 2rem;
+    font-weight:bold;
+    margin-top: 2.5rem;
+    margin-left:1rem;
 }
 .productoscarrito .containernumerodepedidos{
     display: flex;
@@ -297,6 +299,50 @@
     border: 1px solid #F6F6F6;
 }
 
+.eliminarproductos:hover{
+    text-decoration:underline;
+}
+
+@media screen and (max-width:767px){
+    .containercarrito{
+        display:flex;
+        flex-direction:column-reverse;
+    }
+    .carrito{
+        width:100%;
+        margin:0;
+    }
+    .container-productos-carrito .btn-close-tablet{
+        display: block;
+        margin: .5rem 0 .5rem -1.5rem;
+    }
+    .productoscarrito .eliminarproductos{
+        margin-top: 2.3rem;
+        margin-left:0;
+    }
+    .containernumerodepedidos h4{
+        font-size:1rem;
+        font-weight:bold;
+    }
+    .container-productos-carrito{
+        width: 90%;
+    }
+    .containerproductocarrito{
+        flex-wrap:wrap;
+    }
+    .containerproductocarrito .imgproducto{
+        width:60%;
+        justify-content:center;
+    }
+    .nombreproducto{
+        font-size:0.9rem;
+        font-weight:bold;
+    }
+    .containerproductocarrito .iconeliminarproducto{
+        margin-left: 10rem;
+    }
+}
+
 @media screen and (min-width:768px) and (max-width: 1023px){
 
     /* -------------------carrito------------------ */
@@ -322,7 +368,6 @@
     .infoproducto{
         margin-left: 6rem;
     }
-    
     .infopago .btnconfirmarpedido{
         width: 94%;
     }
