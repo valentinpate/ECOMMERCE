@@ -51,7 +51,7 @@
     padding-right: 1rem;
 }
 .ubicacioneinfo .mapaubicacion{
-    width: 50%;
+    width: 100%;
 }
 .mapaubicacion iframe{		
     width: 100%;		
@@ -304,7 +304,9 @@
 }
 
 @media (max-width: 590px){
-
+    .carrito{
+        padding-right:2em;
+    }
     .headercontactenos{
         margin-top: 6rem;
         height: 3rem;
@@ -322,13 +324,6 @@
     }
     .infocontacto p{
         font-size: .8rem;
-    }
-    .ubicacioneinfo .mapaubicacion{
-        width: 100%;
-    }
-    .mapaubicacion iframe{
-        width: 100%;
-        height: 200px;
     }
     .titulocontacto{
         font-size: 1.2rem;
@@ -443,6 +438,9 @@
     .ubicacioneinfo .mapaubicacion{
         width: 100%;
         height: 400px;
+    }
+    .mapaubicacion iframe{
+        width: 100%;
     }
     .headercontactenos{
         margin-top: 6rem;

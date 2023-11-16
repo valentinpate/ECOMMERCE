@@ -135,6 +135,7 @@ module.exports.signOut=(req,res)=>{
         sent = false
     }
     username = null
+    arrayCarrito = []
     req.logOut(function(err){
         if(err){
             return next(err)
@@ -309,6 +310,10 @@ module.exports.miperfil_get= (req,res)=>{
 
 module.exports.informacion_get = (req, res)=>{
     res.render("informacion",{username, arrayCarrito})
+}
+
+module.exports.menuSeccion_get = (req,res)=>{
+    res.render("menu-seccion",{username, arrayCarrito})
 }
 
 // FUNCIONES POST + MÉTODOS DE DB

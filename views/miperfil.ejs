@@ -9,11 +9,11 @@
                 <h2><%=nombre%></h2><!-- <=% usuario.nombre \%> -->
             </div>
             <div class="my-account-links">
-                <a href="/miperfil" class="orange-href orange-bg link-perfil" style="text-decoration:none;margin-top:0.5em;padding:1em 0 1em 1em;font-size:1.2rem;">Mi perfil</a>
-                <a href="/miscompras" class="orange-href orange-bg link-micarrito" style="text-decoration:none;padding:1em 0 1em 1em;font-size:1.2rem;">Mis compras</a>
+                <a href="/miperfil" class="orange-href orange-bg link-perfil">Mi perfil</a>
+                <a href="/miscompras" class="orange-href orange-bg link-micarrito">Mis compras</a>
             </div>
         </div>
-        <div class="info" style="margin-top:12.5em;">
+        <div class="info">
             <h2>Mi cuenta personal</h2>
             <form action="/editar-mi-perfil" method="post" class="account-edit">
                 <!-- en los placeholders de estos inputs debería ir <=% usuario.(propiedad) \%> (el \ está para que el ejs no lo tome como inclusión)-->
@@ -32,7 +32,7 @@
                 <% if(incomplete){ %>
                     <p style="color:red;">Hay un campo guardado que no fue editado. Solo edite los datos que quiera modificar y guardar.</p>
                 <% } %>
-                <button style="border-radius:1rem;margin-top:2rem;font-size:1.3rem;" class="add-to-cart-btn" id="guardar" disabled>Guardar</button>
+                <button class="add-to-cart-btn save-profile-btn" id="guardar" disabled>Guardar</button>
             </form>
         </div>
     </div>

@@ -28,7 +28,11 @@
                     <form action="/carrito" method="post" class="carritoform">
                         <input type="hidden" value="<%= username %>" name="username" class="user">
                         <input type="hidden" name="id"  value="<%= elemento.id %>">
-                        <button id="<%= elemento.id %>" class="add-to-cart-btn other-add-to-cart-btn anadir">Añadir al carrito</button>
+                        <% if(username){ %>
+                            <button id="<%= elemento.id %>" class="add-to-cart-btn other-add-to-cart-btn anadir">Añadir al carrito</button>
+                        <% } else { %>
+                            <a href="signin" class="add-to-cart-btn other-add-to-cart-btn" style="text-decoration:none;">Añadir al carrito</a>
+                        <% } %>
                     </form>
                 </div>
             </div>
