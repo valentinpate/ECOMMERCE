@@ -19,7 +19,7 @@ form.addEventListener("click",async (e)=>{
             headers:{"Content-Type":"application/json"}
         })
         if(fer.ok){
-            window.location.href="http://localhost:4000/signin"
+            window.location.href="https://mowardin.onrender.com/signin"
         } else {
             console.log("no funciono")
         }
