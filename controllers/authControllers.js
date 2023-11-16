@@ -327,8 +327,8 @@ module.exports.contacto_post = async (req,res)=>{
         res.redirect("contacto/#form")
     }else{
         incomplete = false
-        const CLIENT_ID="776729184857-fdc45f9ljq7755kk2rol10dijeagj344.apps.googleusercontent.com"
-        const CLIENT_SECRET="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"
+        const CLIENT_ID=process.env.CLIENT_ID
+        const CLIENT_SECRET=process.env.CLIENT_SECRET
         const REDIRECT_URI="https://developers.google.com/oauthplayground"
         const REFRESH_TOKEN="1//04wImJ_5NwgWTCgYIARAAGAQSNwF-L9IrJX4ucFgaLoMmkAO0c6DWD60UZ0jhdTYMLdojW8E6pn5g5WDCwFY8mVVmwqjIyGIHIZI"
   
