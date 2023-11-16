@@ -68,7 +68,7 @@ module.exports.middleware = {
         if(req.isAuthenticated()){
             next();
         }else{
-            res.redirect("signin")
+            res.redirect("/signin")
         }
     },
     arrayCartPromise: async (req,res,next) =>{ 
