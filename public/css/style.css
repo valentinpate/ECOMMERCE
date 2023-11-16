@@ -201,6 +201,13 @@ nav a{
     margin-bottom:0.3em;
 }
 
+.title-ofertas-hoy{
+    margin-top:2em;
+    margin-right:7em;
+    font-weight:bold;
+    text-align:end;
+}
+
 /* Elementos en clases - SignUp / SignIn */
 
 .signUpContainer img, .signInContainer img{
@@ -861,6 +868,15 @@ a:hover{
     padding: auto;
 }
 
+@media screen and (min-width:1920px){
+    .product-card{
+        justify-content: space-between;
+    }
+    .product-data{
+        width: 60%;
+    }   
+}
+
 @media screen and (min-width:1024px) and (max-width:1440px){
     .menu input{
         width:30em;
@@ -960,6 +976,9 @@ a:hover{
     .container-publi-ofertas{
         margin-top: 5rem;
     }
+    .title-ofertas-hoy{
+        margin-right:2.5em;
+    }
     
     /* ----------------product--------------- */
     .product-card{
@@ -999,16 +1018,6 @@ a:hover{
     }
     
 }
-    
-@media screen and (min-width:1920px){
-    .product-card{
-        justify-content: space-between;
-    }
-    .product-data{
-        width: 60%;
-    }   
-}
-    
 
 @media (max-width: 767px){
     .menu{
@@ -1040,8 +1049,15 @@ a:hover{
         transition: transform 0.5s;
     }
     .menu-burguer{
-        display: block;
-        margin: 0 0.5em;
+        display:block;
+        margin: 0;
+    }
+    .container-publi-ofertas{
+        margin-top: 5rem;
+        width: 100%;
+    }
+    .title-ofertas-hoy{
+        margin-right:1.3em;
     }
     .products{
         display: none;
@@ -1222,11 +1238,14 @@ a:hover{
         margin:0;
     }
     .menu input{
-        width:8em;
+        width:100%;
         margin:0;
         font-size: 1em;
         display: flex;
         justify-content: space-between;
+    }
+    .menu-burguer{
+        margin: 0;
     }
     .imageSlide1{
         height: 10rem;
@@ -1265,8 +1284,26 @@ a:hover{
         justify-content: center;
         margin-bottom: 1rem;
     }
+    .contador-productos p{
+        display: none;
+    }
+    .product-counter{
+        display: none;
+    }
+    .others form button{
+        font-size: .8rem;
+    }
+    .others p{
+        font-size: .8rem;
+    }
+    .others img{
+        width:6em;
+    }
+    .discount2-pageofertas{
+        right:2.1em;
+    }
     .contendorproductos{
-        width: 100%;
+        width: 50%;
     }
     footer .iconos-redes{
         margin-top: 2rem;
