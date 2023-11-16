@@ -5,8 +5,8 @@ let muestraDetalles = document.querySelector(".muestra-detalles-del-pedido")
 let orden = document.querySelectorAll(".orden")
 let aceptoEliminar = document.querySelector(".aceptoEliminar")
 
-const url = new URL(window.location.href)
-
+const url = "https://mowardin.onrender.com/"
+console.log(url)
 document.addEventListener("DOMContentLoaded", function() {
     let buclePrincipal = [...link].forEach((elemento)=>{
 
