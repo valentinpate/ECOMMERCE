@@ -44,9 +44,7 @@ router.get("/miperfil",[authControllers.middleware.middle, authControllers.middl
 //ruta para la page mi perfil (falta agregar la funcion a authcontrollers)
 router.get("/informacion",authControllers.middleware.arrayCartPromise, authControllers.informacion_get)
 
-router.get("/seccion",(req,res)=>{
-    res.render("menu-seccion")
-})
+router.get("/seccion", authControllers.middleware.arrayCartPromise, authControllers.menuSeccion_get)
 
 // POST
 

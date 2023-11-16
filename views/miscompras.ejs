@@ -13,21 +13,23 @@
                     <option value="opcion4">Opción 4</option>
                 </select>
             </div>
+        </section>
             <%arrayMisCompras.forEach((e)=>{ %>
+        <section class="pedidos">
                 <div class="container-detalles-pedidos">
                     <div class="detalles-del-pedido">
                         <strong><p>Detalles del pedido</p></strong>
                         <a class="link" href="/miscompras?detalles&&id"><button  id="<%=e.id%>" class="btn-ver-detalles">Ver</button></a>
                     </div>
-                    <div class="detalles-del-pedido">
+                    <div class="detalles-del-pedido pedido-items">
                         <strong><p>Número de items</p></strong>
                         <p><%= e.pedidos.length %> Productos</p>
                     </div>
-                    <div class="detalles-del-pedido">
+                    <div class="detalles-del-pedido pedido-fecha">
                         <strong><p>Fecha</p></strong>
                         <p><%= e.fecha %></p>
                     </div>
-                    <div class="detalles-del-pedido">
+                    <div class="detalles-del-pedido pedido-precio">
                         <strong><p>Precio</p></strong>
                         <p>$<%= e.totalFinal %></p>
                     </div>
@@ -66,7 +68,7 @@
                     </div>
                     <div class="container-detalles-productos-pedidos">
                         <div class="container-btn-detalles">
-                            <button class="btn btn-eliminar-detalles eliminarCompra" data-toggle="modal" data-target="#exampleModal">Eliminar todo</button>
+                            <button class="btn btn-eliminar-detalles eliminarCompra" data-toggle="modal" data-target="#exampleModal">Eliminar pedido</button>
                             <button class="btn-eliminar-detalles cerrar">Cerrar</button>
                             <h3>Detalles del pedido</h3>
                         </div>

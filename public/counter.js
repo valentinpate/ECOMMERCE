@@ -92,9 +92,6 @@ for (let j = 0; j < anadir.length;j++ ){//hago un nuevo for para los botones añ
     anadir[j].addEventListener('click', async (e) => { //uso un fetch para enviar la info cantidad y el id a carrito
    
             e.preventDefault()
-            if(username.value==""){
-                window.location.href="http://localhost:4000/signin"
-            }else{
                 id= anadir[j].id
                 const fer= await fetch("/carrito",{
                     method:"POST",
@@ -104,7 +101,7 @@ for (let j = 0; j < anadir.length;j++ ){//hago un nuevo for para los botones añ
                 if(fer.ok){
                     window.location.reload();}
                     else{console.log("no funciono")}
-            } 
+            
         }
     );
 }

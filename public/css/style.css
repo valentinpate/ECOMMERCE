@@ -201,11 +201,8 @@ nav a{
     margin-bottom:0.3em;
 }
 
-.title-ofertas-hoy{
-    margin-top:2em;
-    margin-right:7em;
-    font-weight:bold;
-    text-align:end;
+.container-info-img img{
+    width: 30em;
 }
 
 /* Elementos en clases - SignUp / SignIn */
@@ -621,7 +618,7 @@ a:hover{
 }
 
 .add-to-cart-btn{
-    margin-top:1em;
+    /*margin-top:1em;*/
     padding:0.3em 1.1em;
     background-color:var(--main);
     color:white;
@@ -640,10 +637,21 @@ a:hover{
     color 0.5s;
 }
 
+.product-btn-font{
+    font-size:1.5rem;
+}
+
 .others{
     text-align:center;
     width:88%;
     margin:0 auto;
+}
+
+.title-ofertas-hoy{
+    margin-top:2em;
+    margin-right:7em;
+    font-weight:bold;
+    text-align:end;
 }
 
 .contendorproductos{
@@ -792,6 +800,11 @@ a:hover{
     font-size:1.2rem;
 }
 
+.info{
+    margin-top:14em;
+    margin-left:2em;
+}
+
 .account-edit{
     margin-top:2em;
     width:30vw;
@@ -807,6 +820,12 @@ a:hover{
     border:none;
     background-color:transparent;
     transition: text-shadow 0.5s;
+}
+
+.save-profile-btn{
+    border-radius:1rem;
+    margin-top:2rem;
+    font-size:1.3rem;
 }
 
 /* Slide publicidad*/
@@ -826,6 +845,9 @@ a:hover{
 .container-info{
     width: 90%;
     margin: 200px auto 0 auto;
+}
+.container-info-img{
+    margin: 3em 0;
 }
 
 /* page ofertas */
@@ -858,13 +880,14 @@ a:hover{
     display: none;
 }
 .informacion0{
-    margin: 2em;
+    margin: 2rem auto;
+    padding: 0;
 }
 .informacion1{
-    margin: 5em;
+    margin: 5em auto;
 }
 .informacion2{
-    margin: 5em;
+    margin: 5em 0;
     padding: auto;
 }
 
@@ -889,6 +912,9 @@ a:hover{
     .products .btn-all-products{
         padding:0.5em 1.2em;
         font-size:0.8rem;
+    }
+    .product-btn-font{
+        font-size:1.25rem;
     }
 }
 
@@ -948,6 +974,9 @@ a:hover{
     .contendorproductos{
         width: 33.3%;
     }
+    .add-to-cart-btn{
+        font-size:1rem;
+    }
     
     /* ------------------header----------------- */
     header .menu-burguer{
@@ -988,6 +1017,9 @@ a:hover{
     .product-data h3{
         font-size:1.3rem;
     }
+    .product-btn-font{
+        font-size:1.2rem;
+    }
     .product-image{
         display: flex;
         justify-content: center;
@@ -1003,18 +1035,26 @@ a:hover{
     }
     .container-info-img{
         flex-direction: column-reverse;
+        margin: 0;
     }
     .container-info-img img{
-        width: 95%;
-        height: 350px;
+        width: 100%;
+        height: 270px;
     }
     .container-info-img .container-p-info{
+        padding: 0;
+    }
+    .informacion0{
+        margin: 1.5em 0;
         padding: 0;
     }
     
     /* -----------------mi perfil----------------- */
     .my-account{
         margin-top: 5rem;
+    }
+    .info{
+        margin-top:12.5em;
     }
     
 }
@@ -1287,8 +1327,27 @@ a:hover{
     .contador-productos p{
         display: none;
     }
+    .product-card{
+        flex-direction:column;
+    }
+    .product-card h2{
+        font-size:2rem;
+    }
+    .product-cart{
+        flex-direction:column;
+    }
+    .dos-cajas{
+        margin-top:1em;
+    }
     .product-counter{
         display: none;
+    }
+    .img-producto-oferta{
+        width:18em;
+        height:18em;
+    }
+    .product-card-discount{
+        right:2em;
     }
     .others form button{
         font-size: .8rem;
@@ -1304,6 +1363,65 @@ a:hover{
     }
     .contendorproductos{
         width: 50%;
+    }
+    .my-account{
+        width:45%;
+        margin-right:0;
+    }
+    .my-account-perfil img{
+        width:3em;
+    }
+    .my-account-perfil h2{
+        font-size:0.8rem;
+        font-weight:bold;
+        margin-left:0.1em;
+    }
+    .my-account-links .link-perfil, .my-account-links .link-micarrito{
+        font-size:0.8rem;
+        padding-left:1em;
+    }
+    .info{
+        margin-top:11em;
+    }
+    .info h2{
+        font-size:1.1rem;
+    }
+    .account-edit label{
+        font-size:0.8rem;
+    }
+    .account-edit input{
+        padding:0.2em;
+        font-size:0.8rem;
+    }
+    .edit-btn{
+        font-size:1.05rem;
+    }
+    .save-profile-btn{
+        margin-top:1rem;
+        font-size:1rem;
+    }
+    .container-info{
+        margin-top: 6rem;
+        width: 95%;
+    }
+    .imgInformacion{
+        height: 3rem;
+    }
+    .informacion0{
+        font-size: 0.8rem;
+        margin: 1.5em 0;
+        padding: 0;
+    }
+    .container-info-img{
+        flex-direction: column-reverse;
+        margin: 0;
+    }
+    .container-info-img img{
+        width: 100%;
+        height: 210px;
+    }
+    .container-info-img .container-p-info p{
+        font-size: .8rem;
     }
     footer .iconos-redes{
         margin-top: 2rem;

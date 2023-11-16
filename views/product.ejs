@@ -24,9 +24,13 @@
                     <% let subPrecio = elemento.precio.replace(elemento.nombre,"") %>
                     <% let regex = /\$([\d,\.]+)/ %>
                     <% let precio =  subPrecio.match(regex);  %>
-                    <p class="total-product">Total:<span class="total_"></span></p>
+                    <p class="total-product" style="margin-bottom:1em;">Total:<span class="total_"></span></p>
                     <input type="hidden" value="<%= username %>" name="username" class="user">
-                    <button id="<%= elemento.id %>" style="font-size:1.5rem;" class="add-to-cart-btn anadir">Añadir al carrito</button>
+                    <% if(username){ %>
+                        <button id="<%= elemento.id %>" class="add-to-cart-btn product-btn-font anadir">Añadir al carrito</button>
+                    <% } else { %>
+                        <a href="signin" class="add-to-cart-btn product-btn-font " style="text-decoration:none;">Añadir al carrito</a>
+                    <% } %>
                 </div>
                 <div class="product-price">
                     <h3 class="dos-cajas">La cantidad mínima para pedir es de dos cajas.</h3>
@@ -76,7 +80,11 @@
                         <p><b>Añadir cantidad</b></p>
                     </div>
                     <input type="hidden" value="<%= username %>" name="username" class="user">
-                    <button id="<%= elemento.id %>" style="margin:0;" class="add-to-cart-btn other-add-to-cart-btn anadir">Añadir al carrito</button>
+                    <% if(username){ %>
+                        <button id="<%= elemento.id %>" style="margin:0;" class="add-to-cart-btn other-add-to-cart-btn anadir">Añadir al carrito</button>
+                    <% } else { %>
+                        <a href="signin" class="add-to-cart-btn other-add-to-cart-btn" style="margin-top:1em;text-decoration:none;">Añadir al carrito</a>
+                    <% } %>
                 </div> 
             </div>
         <% }) %>  
