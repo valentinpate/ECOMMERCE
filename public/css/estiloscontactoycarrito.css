@@ -303,6 +303,45 @@
     text-decoration:underline;
 }
 
+@media (max-width: 590px){
+
+    .headercontactenos{
+        margin-top: 6rem;
+        height: 3rem;
+    }
+    .headercontactenos .textoconectate{
+        padding-top:1rem;
+        padding-right: 1rem;
+        font-size: .8rem;
+    }
+    .contactositioweb .titulocontactossitioweb{
+        font-size: 1.2rem;
+    }
+    .tituloinfocontacto{
+        font-size: 1rem;
+    }
+    .infocontacto p{
+        font-size: .8rem;
+    }
+    .ubicacioneinfo .mapaubicacion{
+        width: 100%;
+    }
+    .mapaubicacion iframe{
+        width: 100%;
+        height: 200px;
+    }
+    .titulocontacto{
+        font-size: 1.2rem;
+    }
+    .formcontacto input{
+        font-size: 1rem;
+    }
+    .contenedorbtn .btncontacto{
+        font-size: 1rem;
+        padding: .5rem 4.5rem;
+    }
+}
+
 @media screen and (max-width:767px){
     .containercarrito{
         display:flex;

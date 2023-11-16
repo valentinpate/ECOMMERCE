@@ -1284,8 +1284,26 @@ a:hover{
         justify-content: center;
         margin-bottom: 1rem;
     }
+    .contador-productos p{
+        display: none;
+    }
+    .product-counter{
+        display: none;
+    }
+    .others form button{
+        font-size: .8rem;
+    }
+    .others p{
+        font-size: .8rem;
+    }
+    .others img{
+        width:6em;
+    }
+    .discount2-pageofertas{
+        right:2.1em;
+    }
     .contendorproductos{
-        width: 100%;
+        width: 50%;
     }
     footer .iconos-redes{
         margin-top: 2rem;
